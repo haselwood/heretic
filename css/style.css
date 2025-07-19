@@ -90,3 +90,10 @@ footer {
   text-align: center;
  padding: 24px;
 }
+
+.manifesto {
+  margin: 5% 25%;
+  padding: 5rem;
+  background-color:  rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+}
