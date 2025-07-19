@@ -1,7 +1,3 @@
-/* styles.css */
-.sparkly {
-  font-size: 20rem;
-  font-weight: bold;
-  background: linear-gradient(90deg, #fffbe7, #ffe066, #fffbe7, #ffd700, #fffbe7);
-  color: mediumseagreen;
+h1 {
+  color: violet;
 }
