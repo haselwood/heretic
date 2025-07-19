@@ -1,7 +1,92 @@
-h1 {
-  color: violet;
+body {
+  background-image: url("../../heretic/img/bg.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin:0;
+  font-family: "Space Mono", monospace;
 }
 
-h2 {
-  color: lightblue;
+header {
+  text-align: center;
+}
+
+nav {
+}
+
+nav ul {
+    list-style:none;
+    padding: 1rem;
+    display:flex;
+    gap: .8rem;
+    justify-content: center;
+}
+
+nav a{
+  padding: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+nav a:hover {
+  background-color: aquamarine;
+  border-radius: 6px;
+}
+
+nav a.active,
+nav a.active:hover {
+  background-color: rgb(159, 244, 253, .8);
+  border-radius: 6px;
+  font-weight: medium;
+}
+
+.hero {
+  text-align: center;
+    background-color:  rgba(255, 255, 255, 0.3);
+    padding: 4rem;
+}
+
+.hero h1 {
+  color: rgb(144, 30, 144);
+  font-size: 8rem;
+  font-weight: lighter;
+    font-family: "Jacquard 12 Charted", system-ui;
+    margin:0 0 24px 0;
+
+}
+
+.hero h2 {
+  color:rgb(33, 116, 144);
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin:0;
+}
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cardlist {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  list-style: none;
+  margin: 4rem auto;     
+  padding: 0;
+  max-width: 80rem;            
+  align-items: center;
+}
+
+.card {
+ background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  height: 16rem;
+}
+
+footer {
+  text-align: center;
+ padding: 24px;
 }
