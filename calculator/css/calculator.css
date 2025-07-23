@@ -54,14 +54,15 @@ body {
 }
 
 .calc-button:last-child {
-    background-color: #df974c;
-    color: white;
+    background-color: aquamarine;
+    color: black;
 }
 
 .calc-button:last-child:hover {
-    background-color:#dfb07e;
+    background-color: mediumaquamarine;
 }
 
 .calc-button:last-child:active {
-    background-color: #dd8d37;
+    background-color: darkcyan;
 }
+
