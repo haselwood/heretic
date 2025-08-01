@@ -22,7 +22,7 @@ function handleSymbol(symbol) {
         handleDivide(symbol);
     } else if (symbol === "×") {
         handleTimes(symbol);
-    } else if (symbol === "-") {
+    } else if (symbol === "−") {
         handleMinus(symbol);
     } else if (symbol === "+") {
         handlePlus(symbol);
