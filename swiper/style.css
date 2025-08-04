@@ -35,6 +35,9 @@
     height: 9rem;
   }
 
+  .caption {
+    font-size: 1rem;
+  }
   .btns {
     width: 100%;
     display: flex;
