@@ -30,6 +30,7 @@ if (galleryImg.length === currentlySelectedimg + 1) {
     currentlySelectedimg = 0;
     currentlySelectedcaption = 0;
     nextBtn.textContent = 'Next';
+    prevBtn.disabled = true; // Keep back button disabled on first image
 } else {
     // Move to next image
     currentlySelectedimg++;

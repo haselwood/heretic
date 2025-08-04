@@ -6,15 +6,18 @@
 
   body {
     background-color: rgb(255, 232, 235);
+    background-image: linear-gradient(45deg, rgb(200, 243, 234), rgb(245, 219, 252));
     margin: 2rem;
+    height: 100vh;
   }
 
   .book-wrapper {
     max-width: 600px;
     justify-content: center;
     margin: 0 auto;
-    background-color: rgb(242, 219, 222);
+    background-color: rgb(251, 241, 243);
     border-radius: 12px;
+    box-shadow: -8px -8px 32px 2px #00ffea58, 8px 8px 32px 8px #e9bbff87;
   }
   .header {
     justify-content: center;
@@ -95,7 +98,7 @@
   }
   
   .btn {
-    background-color: #6a4187;
+    background-color: #7a5ec9;
     color: white;
     font-size: 20px;
     padding: 1rem;
@@ -103,20 +106,26 @@
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    border: none;
   }
   
   .prev {
     margin-right: 15px;
   }
   
+  
   .btn:disabled {
-    background-color: #6a41877d;
+    background-color: #7b5ec97b;
     color: #dbd0e2;
     cursor: default;
     display: none;
   }
 
   .btn:hover:not(:disabled) {
-    background-color: #5a3a7a;
+    background-color:#694eb4;
    
+  }
+
+  .btn:active:not(:disabled) {
+    background-image: linear-gradient(45deg, rgba(42, 143, 121, 0.609), #7a5ec9);
   }
