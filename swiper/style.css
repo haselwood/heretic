@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Oldenburg&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: rgb(255, 232, 235);
+    background-image: linear-gradient(45deg, rgb(200, 243, 234), rgb(245, 219, 252));
+    margin: 2rem;
+    height: 100vh;
+  }
+
+  .gallery-img {
+    max-height: 600px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .image-gallery {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .caption-set {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 9rem;
+  }
+
+  .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 16px;
+    max-width: 600px;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 32px;
+    padding-top: 0;
+  }
+  
+  .btn {
+    background-color: #7a5ec9;
+    color: white;
+    font-size: 20px;
+    padding: 1rem;
+    border-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+  }
+  
+  .prev {
+    margin-right: 15px;
+  }
+  
+  
+  .btn:disabled {
+    background-color: #7b5ec97b;
+    color: #dbd0e2;
+    cursor: default;
+    display: none;
+  }
+
+  .btn:hover:not(:disabled) {
+    background-color:#694eb4;
+   
+  }
+
+  .btn:active:not(:disabled) {
+    background-image: linear-gradient(45deg, rgba(42, 143, 121, 0.609), #7a5ec9);
+  }
+
+  .swiper {
+    width: 1000px;
+    height: 1000px;
+  }
+
+.swiper-button-prev {
+  color: #7a5ec9;
+}
+
+.swiper-button-next {
+  color: #7a5ec9;
+}
