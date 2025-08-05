@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+h1 {
+    color: #333;
+    margin: 1rem 0 1rem 0;
+}
+
+.breeds {
+    display: block;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+    padding: 1rem 2rem;
+    padding-right: 3rem;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.img {
+    width: 100%;
+    margin:0;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.spinner {
+    font-size: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.palette {
+    display: flex;
+    justify-content: center;
+}
+
+.color-swatch {
+    width: 20%;
+    height: 20rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+    cursor: grab;
+}
+
+.color-swatch.dominant {
+    border: 3px solid #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hex-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
