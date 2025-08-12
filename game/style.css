@@ -20,33 +20,37 @@ body {
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .purity-title {
     font-size: 1.5rem;
     font-weight: 900;
-    margin-bottom: .5rem;
+    margin-bottom: .25rem;
     font-family: "Bungee Hairline", sans-serif;
 }
 
 .purity-meter {
     background-color: rgba(255, 255, 255, 0.447);
-    width: 100%;
+    width: 1024px;
     border-radius: 1rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     box-shadow: inset 0 0 12px 2px rgb(230, 250, 253);
 }
 
 .purity-fill {
     background-color: rgb(13, 214, 236);
-    width: 100%;
+    width: 1024px;
     border-radius: 1rem 0 0 1rem;
     text-align: center;
     width: 0;
     padding: 1rem;
     box-shadow: inset 0 0 12px 2px rgba(199, 248, 255, 0.371), 0 0 16px 2px rgba(37, 5, 65, 0.094), 0 0 12px 6px rgb(255, 255, 229);
-    
+}
+
+.purity-fill.full {
+    border-radius: 1rem;
 }
 
 .board {
@@ -54,11 +58,11 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 1024px;
     flex: 1;
     gap: 1rem;
     cursor: url(img/bible-cursor-128.png) 64 64, url(img/bible-cursor-64.png) 32 32, url(img/bible-cursor-32.png) 16 16, auto;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
     background-image: url(img/bg.jpg);
     background-size: cover;
@@ -75,29 +79,41 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     width: 12rem;
     height: 12rem;
 }
 
 .uber-portal {
     background-color: rgb(23, 0, 13);
-    box-shadow: 0 0 16px 4px rgba(255, 39, 169, 0.779), inset 0 0 16px 2px rgb(255, 39, 100);
+    box-shadow: 0 0 16px 4px rgba(180, 18, 115, 0.779), inset 0 0 16px 2px rgb(203, 21, 72);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     width: 12rem;
     height: 12rem;
+    filter: brightness(1.1);
 }
 
+.portal.state-evil:hover,
+.uber-portal.state-evil:hover,
+.portal.state-sad:hover,
+.uber-portal.state-sad:hover {
+    cursor: url(img/bible-slap-cursor-128.png) 64 64, url(img/bible-slap-cursor-64.png) 32 32, url(img/bible-slap-cursor-32.png) 16 16, auto;
+}
+
+.portal.state-evil:active,
+.uber-portal.state-evil:active,
+.portal.state-sad:active,
+.uber-portal.state-sad:active {
+    cursor: url(img/bible-glow-cursor-128.png) 64 64, url(img/bible-glow-cursor-64.png) 32 32, url(img/bible-glow-cursor-32.png) 16 16, auto;
+    filter: saturate(.75) brightness(1.5) hue-rotate(325deg);
+}
 
 .demon {
     width: 10rem;
     height: 10rem;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .pure {
@@ -127,12 +143,26 @@ body {
     display: none;
 }
 
-.sad {
-    filter: invert(.1) hue-rotate(180deg);
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
 
 .win {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    display: none;
+    place-items: center;
+}
+
+.win img.win {
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
