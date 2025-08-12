@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=UnifrakturMaguntia&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: 
+        repeating-linear-gradient(to bottom right, rgba(202, 146, 247, 0.683), rgb(209, 186, 252), #add8e6 ,rgba(0, 255, 255, 0.592));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;}
+
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.purity-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: .5rem;
+    font-family: "Bungee Hairline", sans-serif;
+}
+
+.purity-meter {
+    background-color: rgba(255, 255, 255, 0.447);
+    width: 100%;
+    border-radius: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 0 12px 2px rgb(230, 250, 253);
+}
+
+.purity-fill {
+    background-color: rgb(13, 214, 236);
+    width: 100%;
+    border-radius: 1rem 0 0 1rem;
+    text-align: center;
+    width: 0;
+    padding: 1rem;
+    box-shadow: inset 0 0 12px 2px rgba(199, 248, 255, 0.371), 0 0 16px 2px rgba(37, 5, 65, 0.094), 0 0 12px 6px rgb(255, 255, 229);
+    
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    gap: 1rem;
+    cursor: url(img/bible-cursor-128.png) 64 64, url(img/bible-cursor-64.png) 32 32, url(img/bible-cursor-32.png) 16 16, auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-image: url(img/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 0 0 8px 1px rgb(230, 250, 253), 0 0 8px 1px rgb(230, 250, 253);
+}
+
+.portal {
+    background-color: rgb(6, 3, 42);
+    box-shadow: 0 0 16px 4px rgba(201, 39, 255, 0.497), inset 0 0 16px 2px rgba(39, 158, 255, 0.933);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 12rem;
+    height: 12rem;
+}
+
+.uber-portal {
+    background-color: rgb(23, 0, 13);
+    box-shadow: 0 0 16px 4px rgba(255, 39, 169, 0.779), inset 0 0 16px 2px rgb(255, 39, 100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 12rem;
+    height: 12rem;
+}
+
+
+.demon {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.pure {
+    background-color: rgb(205, 240, 246);
+    box-shadow: 0 0 16px 10px rgb(38, 237, 217), inset 0 0 8px 10px rgb(182, 255, 248) ;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 12rem;
+    height: 12rem;
+}
+
+.uber-pure {
+    background-color: rgb(254, 254, 219);
+    box-shadow: 0 0 16px 10px rgb(255, 217, 79), inset 0 0 12px 10px rgb(255, 254, 235) ;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 12rem;
+    height: 12rem;
+}
+.gone {
+    display: none;
+}
+
+.sad {
+    filter: invert(.1) hue-rotate(180deg);
+}
+
+.win {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
