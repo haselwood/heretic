@@ -10,12 +10,12 @@ let isGameWon = false;
 const getInterval = () =>
   Date.now() + MIN_INTERVAL + Math.floor(Math.random() * MAX_INTERVAL);
 const getSadInterval = () => Date.now() + SAD_INTERVAL;
-const getUberStatus = () => Math.random() > 0.9;
+const getUberStatus = () => Math.random() > 0.8;
 const getEvilInterval = () => Date.now() + EVIL_INTERVAL;
 const getPureInterval = () => Date.now() + PURE_INTERVAL;
 
-// Purity meter helpers
-const PURITY_TARGET = 10; // Full meter and win at 10
+
+const PURITY_TARGET = 20; 
 const purityFillEl = document.querySelector('.purity-fill');
 const winEls = Array.from(document.querySelectorAll('.win'));
 
@@ -43,6 +43,10 @@ const updatePurity = (delta) => {
     const board = document.querySelector('.board');
     if (board instanceof HTMLElement) {
       board.style.display = 'none';
+    }
+    const titleEl = document.querySelector('.purity-title');
+    if (titleEl instanceof HTMLElement) {
+      titleEl.textContent = "You've purified all the demons!";
     }
   }
 };

@@ -45,6 +45,7 @@ body {
     text-align: center;
     width: 0;
     padding: 1rem;
+    transition: width 0.5s ease-in-out;
     box-shadow: inset 0 0 12px 2px rgba(199, 248, 255, 0.371), 0 0 16px 2px rgba(37, 5, 65, 0.094), 0 0 12px 6px rgb(255, 255, 229);
 }
 
