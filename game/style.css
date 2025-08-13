@@ -182,7 +182,7 @@ body {
     color: #222;
     width: min(90vw, 640px);
     border-radius: 12px;
-    padding: 1.25rem 2rem;
+    padding: 2rem 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 0 8px 1px rgb(230, 250, 253);
     text-align: center;
     font-family:Arial, Helvetica, sans-serif;
@@ -196,7 +196,7 @@ body {
 
 .intro-ok-button {
     margin-top: .75rem;
-    padding: .5rem 1rem;
+    padding: 1rem 1rem;
     border: none;
     border-radius: 8px;
     background: hsla(273, 86%, 77%, 0.683);
@@ -204,6 +204,7 @@ body {
     font-weight: 700;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    font-size: 1rem;;
 }
 
 .intro-ok-button:hover {
