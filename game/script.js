@@ -218,4 +218,22 @@ if (boardEl) {
   });
 }
 
+// Intro modal wiring
+(() => {
+  const modal = document.getElementById('intro-modal');
+  const okButton = document.getElementById('intro-ok-button');
+  if (modal && okButton) {
+    const closeModal = () => {
+      modal.style.display = 'none';
+    };
+    okButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
+})();
+
 

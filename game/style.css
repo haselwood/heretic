@@ -6,7 +6,7 @@
 
 body {
     background-image: 
-        repeating-linear-gradient(to bottom right, rgba(202, 146, 247, 0.683), rgb(209, 186, 252), #add8e6 ,rgba(0, 255, 255, 0.592));
+        repeating-linear-gradient(to bottom right, hsla(273, 86%, 77%, 0.683), rgb(209, 186, 252), #add8e6 ,rgba(0, 255, 255, 0.592));
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -165,4 +165,47 @@ body {
     width: auto;
     height: auto;
     object-fit: contain;
+}
+
+/* Intro modal */
+.intro-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+}
+
+.intro-content {
+    background: white;
+    color: #222;
+    width: min(90vw, 640px);
+    border-radius: 12px;
+    padding: 1.25rem 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 0 8px 1px rgb(230, 250, 253);
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+}
+
+.intro-content h1 {
+    margin: 0 0 .5rem 0;
+    font-family: "Bungee Hairline", sans-serif;
+}
+
+.intro-ok-button {
+    margin-top: .75rem;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: hsla(273, 86%, 77%, 0.683);
+    color: #111;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.intro-ok-button:hover {
+    filter: brightness(1.05);
 }
