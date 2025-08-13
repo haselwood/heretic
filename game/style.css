@@ -160,8 +160,6 @@ body {
 
 .win img.win {
     display: block;
-    max-width: 90vw;
-    max-height: 90vh;
     width: auto;
     height: auto;
     object-fit: contain;
