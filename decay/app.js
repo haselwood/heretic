@@ -1033,7 +1033,8 @@ function renderQuestion() {
     container.appendChild(wrapper);
   });
 
-  document.getElementById("prev-btn").disabled = currentIndex === 0;
+  // Only disable back button at the very first question of Act 1
+  document.getElementById("prev-btn").disabled = (currentAct === 1 && currentIndex === 0);
   
   // On last question, change Next button to show it will compute ending
   const isLastQuestion = currentIndex === questions.length - 1;
@@ -1155,7 +1156,13 @@ function initApp() {
     if (document.getElementById("act-complete-block").style.display !== "none") {
       renderQuestion();
     } else if (currentIndex > 0) {
+      // Go back one question within current act
       currentIndex--;
+      renderQuestion();
+    } else if (currentIndex === 0 && currentAct > 1) {
+      // At first question of an act - go back to previous act's last question
+      currentAct--;
+      currentIndex = ACTS[currentAct].length - 1;
       renderQuestion();
     }
   });
