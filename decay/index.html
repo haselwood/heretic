@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decay - Forest Policy Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div>
+      <h1>Decay Game: Ending Simulator</h1>
+      <div class="act-display" id="act-display">Act 1</div>
+      <div class="subtitle">
+        Answer each policy question. Your choices update the 6 alignment axes, and at the end
+        of each act you'll see your ending for that act.
+      </div>
+
+      <div id="question-block">
+        <div class="question-header">
+          <div>
+            <div class="q-number" id="q-number"></div>
+            <div class="q-name" id="q-name"></div>
+          </div>
+          <div class="progress" id="q-progress"></div>
+        </div>
+        <div class="choices" id="choices-container"></div>
+      </div>
+
+      <div id="act-complete-block" style="display: none;">
+        <div class="act-complete-block">
+          <h2>Act Complete!</h2>
+          <div id="act-ending-summary" class="act-ending-summary"></div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="btn-secondary" type="button" id="prev-btn">← Previous</button>
+        <button class="btn-secondary" type="button" id="next-btn">Next →</button>
+        <button class="btn-primary" type="button" id="continue-btn" style="display: none;">Continue to Next Act →</button>
+        <button class="btn-ghost" type="button" id="reset-btn">Reset All</button>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Question 1 of 8</div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="scores-title">Alignment Scores</div>
+      <div class="scores-grid">
+        <div class="score-item">
+          <div class="score-label">Faith (Rational → Spiritual)</div>
+          <div class="score-value" id="score-fa">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Control (Anarchy → Authoritarian)</div>
+          <div class="score-value" id="score-ct">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Economy (Capitalist → Communal)</div>
+          <div class="score-value" id="score-ec">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Openness (Protectionist → Progressive)</div>
+          <div class="score-value" id="score-op">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Progress (Traditional → Innovation)</div>
+          <div class="score-value" id="score-pr">0</div>
+        </div>
+        <div class="score-item">
+          <div class="score-label">Tech (Green → Industrial)</div>
+          <div class="score-value" id="score-te">0</div>
+        </div>
+      </div>
+
+      <div class="trending" id="trending-block">
+        <div class="trending-title">Currently Trending Toward:</div>
+        <div class="trending-name" id="trending-name">—</div>
+        <div class="trending-alignment" id="trending-alignment"></div>
+      </div>
+
+      <div class="result" id="result-block" style="display: none;">
+        <div class="ending-name" id="ending-name"></div>
+        <div class="ending-alignment" id="ending-alignment"></div>
+        <div class="ending-tagline" id="ending-tagline"></div>
+        <div class="debug" id="debug"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
