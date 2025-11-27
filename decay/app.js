@@ -750,13 +750,86 @@ function calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds) {
 }
 
 // === Ending resolver ===
+// REORDERED: Most specific conditions first, general conditions last
 function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
   const thresholds = getThresholds(act);
   const vals = { FA, CT, EC, OP, PR, TE };
   const highPosCount = Object.values(vals).filter(v => isHighPos(v, thresholds)).length;
   const highNegCount = Object.values(vals).filter(v => isHighNeg(v, thresholds)).length;
 
-  // 1. Verdant Theocracy (spiritual leadership)
+  // 10. Sacred Order (High Faith + High Control + Communal) - MOST SPECIFIC
+  if (isHighPos(FA, thresholds) && isHighPos(CT, thresholds) && isHighPos(EC, thresholds)) {
+    const profile = { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 };
+    return {
+      id: 10,
+      name: "The Sacred Order",
+      tagline: "Divine authority guides the community; faith and discipline shape every branch.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "High Faith + High Control + High Communal Economy."
+    };
+  }
+
+  // 8. Primeval Kingdom - check early (specific combo)
+  if (isHighNeg(PR, thresholds) && isHighPos(CT, thresholds) && FA > 0) {
+    const profile = { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 };
+    return {
+      id: 8,
+      name: "The Primeval Kingdom",
+      tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "Strongly Traditional (NEG PR), very high Control, positive Faith (ancestral/spiritual)."
+    };
+  }
+
+  // 9. Ordered Commune - check before general CT checks
+  if (isHighPos(CT, thresholds) && isHighPos(EC, thresholds) && !isHighPos(FA, thresholds) && !isHighNeg(OP, thresholds)) {
+    const profile = { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 };
+    return {
+      id: 9,
+      name: "The Ordered Commune",
+      tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "High Control + High Communal Economy, not HIGH faith, not NEG openness."
+    };
+  }
+
+  // 2. Thorn Regime (authoritarian + closed)
+  if (isHighPos(CT, thresholds) && isHighNeg(OP, thresholds) && PR <= 0) {
+    const profile = { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 };
+    return {
+      id: 2,
+      name: "The Thorn Regime",
+      tagline: "Order at any cost. The forest tightens into a barbed crown.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "High Control, very closed (NEG OP), traditional/non-innovative."
+    };
+  }
+
+  // 3. Free-Root Collective (all 3 conditions HIGH/NEG)
+  if (isHighPos(EC, thresholds) && isHighNeg(CT, thresholds) && isHighPos(OP, thresholds)) {
+    const profile = { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 };
+    return {
+      id: 3,
+      name: "The Free-Root Collective",
+      tagline: "Borders blur, property dissolves, and the forest lives as one vast commune.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "Communal economy (HIGH EC), very free (NEG CT), very open (HIGH OP)."
+    };
+  }
+
+  // 6. Dawnbound Republic - check before Cosmopolitan (more specific)
+  if (isHighPos(PR, thresholds) && isHighPos(OP, thresholds) && isMid(CT, thresholds) && isMid(FA, thresholds)) {
+    const profile = { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 };
+    return {
+      id: 6,
+      name: "The Dawnbound Republic",
+      tagline: "Tradition roots the forest, but new ideas steer its sunlit council.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "High Progress + Openness, mid Control + Faith."
+    };
+  }
+
+  // 1. Verdant Theocracy (spiritual leadership) - moved down to not capture Sacred Order
   if (isHighPos(FA, thresholds) && !isHighNeg(CT, thresholds)) {
     const profile = { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 };
     return {
@@ -768,177 +841,54 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
     };
   }
 
-  // 2. Thorn Regime (authoritarian + closed)
-  if (isHighPos(CT, thresholds) && isHighNeg(OP, thresholds) && PR <= 0) {
-    return {
-      id: 2,
-      name: "The Thorn Regime",
-      tagline: "Order at any cost. The forest tightens into a barbed crown.",
-      debug: "High Control, very closed, traditional/non-innovative."
-    };
-  }
-
-  // 3. Ironbloom Meritocracy (Capitalist + Industrial + Rational)
-  if (isHighNeg(EC, thresholds) && isHighPos(TE, thresholds) && FA < 0 && !isHighNeg(CT, thresholds)) {
-    const profile = { FA: -1, CT: 0, EC: -1, OP: 0, PR: 0, TE: 1 };
-    return {
-      id: 3,
-      name: "The Ironbloom Meritocracy",
-      tagline: "Only the strongest shoots survive; steel and status feed the roots.",
-      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "Economy strongly capitalist, Tech strongly industrial, Faith negative (rational)."
-    };
-  }
-
-  // 4. Free-Root Collective
-  if (isHighPos(EC, thresholds) && isHighNeg(CT, thresholds) && isHighPos(OP, thresholds)) {
+  // 4. Cosmopolitan Grove - moved down to not capture Dawnbound
+  if (isHighPos(OP, thresholds) && isMid(CT, thresholds)) {
+    const profile = { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 };
     return {
       id: 4,
-      name: "The Free-Root Collective",
-      tagline: "Borders blur, property dissolves, and the forest lives as one vast commune.",
-      debug: "Communal economy, very free, very open."
-    };
-  }
-
-  // 5. Cosmopolitan Grove
-  if (isHighPos(OP, thresholds) && isMid(CT, thresholds)) {
-    return {
-      id: 5,
       name: "The Cosmopolitan Grove",
       tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "Openness very high, Control moderate."
     };
   }
 
-  // 6. Shielded Woodland
-  if (isHighNeg(OP, thresholds) && CT >= 0 && PR <= 0) {
-    return {
-      id: 6,
-      name: "The Shielded Woodland",
-      tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion.",
-      debug: "Closed borders, some order, traditional or neutral progress."
-    };
-  }
-
-  // 7. Dawnbound Republic
-  if (isHighPos(PR, thresholds) && isHighPos(OP, thresholds) && isMid(CT, thresholds) && isMid(FA, thresholds)) {
+  // 7. Emerald Symbiosis (Green Tech)
+  if (isHighNeg(TE, thresholds) && PR >= 0 && OP >= 0 && EC >= 0) {
+    const profile = { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 };
     return {
       id: 7,
-      name: "The Dawnbound Republic",
-      tagline: "Tradition roots the forest, but new ideas steer its sunlit council.",
-      debug: "High Progress + Openness, mid Control + Faith."
-    };
-  }
-
-  // 8. Emerald Symbiosis (Green Tech)
-  if (isHighNeg(TE, thresholds) && PR >= 0 && OP >= 0 && EC >= 0) {
-    return {
-      id: 8,
       name: "The Emerald Symbiosis",
       tagline: "Vines and circuits entwine; the forest and its tools become one living system.",
-      debug: "Tech strongly Green (negative TE) with neutral+ PR, OP, EC."
-    };
-  }
-
-  // 9. Ashen Restoration
-  if (isHighPos(PR, thresholds) && FA <= 0 && isMid(TE, thresholds) && EC >= 0) {
-    return {
-      id: 9,
-      name: "The Ashen Restoration",
-      tagline: "With clear eyes and scarred bark, the forest rebuilds from what was burned.",
-      debug: "High Progress, low/neutral Faith, mid Tech, communal/neutral EC."
-    };
-  }
-
-  // 10. Primeval Kingdom
-  if (isHighNeg(PR, thresholds) && isHighPos(CT, thresholds) && FA > 0) {
-    const profile = { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 };
-    return {
-      id: 10,
-      name: "The Primeval Kingdom",
-      tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "Strongly Traditional, very high Control, positive Faith (ancestral/spiritual)."
+      debug: "Tech strongly Green (NEG TE) with neutral+ PR, OP, EC."
     };
   }
 
-  // 11. Great Schism (contradictory choices)
-  if (highPosCount >= 2 && highNegCount >= 2) {
+  // 5. Shielded Woodland
+  if (isHighNeg(OP, thresholds) && CT >= 0 && PR <= 0) {
+    const profile = { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 };
     return {
-      id: 11,
-      name: "The Great Schism",
-      tagline: "Opposing visions tear the forest into irreconcilable factions.",
-      debug: `High positive axes: ${highPosCount}, high negative axes: ${highNegCount}.`
+      id: 5,
+      name: "The Shielded Woodland",
+      tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion.",
+      alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
+      debug: "Closed borders (NEG OP), some order (CT ≥ 0), traditional or neutral progress (PR ≤ 0)."
     };
   }
 
-  // 12. Ascendant Revelation (cult + innovation)
-  if (isHighPos(FA, thresholds) && isHighPos(CT, thresholds) && OP <= (thresholds.HIGH_NEG * 0.8) && isHighPos(PR, thresholds)) {
-    return {
-      id: 12,
-      name: "The Ascendant Revelation",
-      tagline: "A radiant doctrine seizes the forest, promising transcendence through obedience.",
-      debug: "FA and CT very high, OP somewhat closed, PR very high."
-    };
-  }
-
-  // 13. Ordered Commune (High Control + High Economy/Communal, no extreme faith/openness)
-  if (isHighPos(CT, thresholds) && isHighPos(EC, thresholds) && !isHighPos(FA, thresholds) && !isHighNeg(OP, thresholds)) {
-    return {
-      id: 13,
-      name: "The Ordered Commune",
-      tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future.",
-      debug: "High Control + High Communal Economy, balanced faith/openness."
-    };
-  }
-
-  // 14. Sacred Order (High Faith + High Control, communal leaning)
-  if (isHighPos(FA, thresholds) && isHighPos(CT, thresholds) && EC > 0) {
-    return {
-      id: 14,
-      name: "The Sacred Order",
-      tagline: "Divine authority guides the community; faith and discipline shape every branch.",
-      debug: "High Faith + High Control with communal economy."
-    };
-  }
-
-  // 15. Forest Weavers (Balanced) - only if GENUINELY balanced (all scores near zero)
-  // VERY strict requirement: 20% of HIGH threshold, minimum 1
-  const balanceThreshold = Math.max(1, Math.floor(thresholds.HIGH_POS * 0.2)); // 20% of HIGH threshold
-  const isTrulyBalanced = 
-    Math.abs(FA) <= balanceThreshold && 
-    Math.abs(CT) <= balanceThreshold && 
-    Math.abs(EC) <= balanceThreshold &&
-    Math.abs(OP) <= balanceThreshold && 
-    Math.abs(PR) <= balanceThreshold && 
-    Math.abs(TE) <= balanceThreshold;
-  
-  if (isTrulyBalanced) {
-    return {
-      id: 15,
-      name: "The Forest Weavers",
-      tagline: "(Balanced Ending) The forest holds all its tensions in fragile harmony.",
-      debug: `All 6 axes within ±${balanceThreshold} (genuinely balanced - very rare!).`
-    };
-  }
-
-  // Fallback: Find closest matching ending
+  // Fallback: Find closest matching ending (10 endings)
   const allEndings = [
     { id: 1, profile: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 }, name: "The Verdant Theocracy", tagline: "The forest is ruled by roots and rites; law is written in leaf and omen." },
     { id: 2, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Thorn Regime", tagline: "Order at any cost. The forest tightens into a barbed crown." },
-    { id: 3, profile: { FA: -1, CT: 0, EC: -1, OP: 0, PR: 0, TE: 1 }, name: "The Ironbloom Meritocracy", tagline: "Only the strongest shoots survive; steel and status feed the roots." },
-    { id: 4, profile: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 }, name: "The Free-Root Collective", tagline: "Borders blur, property dissolves, and the forest lives as one vast commune." },
-    { id: 5, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }, name: "The Cosmopolitan Grove", tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds." },
-    { id: 6, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Shielded Woodland", tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion." },
-    { id: 7, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }, name: "The Dawnbound Republic", tagline: "Tradition roots the forest, but new ideas steer its sunlit council." },
-    { id: 8, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Emerald Symbiosis", tagline: "Vines and circuits entwine; the forest and its tools become one living system." },
-    { id: 9, profile: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 0 }, name: "The Ashen Restoration", tagline: "With clear eyes and scarred bark, the forest rebuilds from what was burned." },
-    { id: 10, profile: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }, name: "The Primeval Kingdom", tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth." },
-    { id: 11, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 }, name: "The Great Schism", tagline: "Opposing visions tear the forest into irreconcilable factions." },
-    { id: 12, profile: { FA: 1, CT: 1, EC: 0, OP: -1, PR: 1, TE: 0 }, name: "The Ascendant Revelation", tagline: "A radiant doctrine seizes the forest, promising transcendence through obedience." },
-    { id: 13, profile: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Ordered Commune", tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future." },
-    { id: 14, profile: { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Sacred Order", tagline: "Divine authority guides the community; faith and discipline shape every branch." },
-    { id: 15, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 }, name: "The Forest Weavers", tagline: "(Balanced Ending) The forest holds all its tensions in fragile harmony." }
+    { id: 3, profile: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 }, name: "The Free-Root Collective", tagline: "Borders blur, property dissolves, and the forest lives as one vast commune." },
+    { id: 4, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }, name: "The Cosmopolitan Grove", tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds." },
+    { id: 5, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Shielded Woodland", tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion." },
+    { id: 6, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }, name: "The Dawnbound Republic", tagline: "Tradition roots the forest, but new ideas steer its sunlit council." },
+    { id: 7, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Emerald Symbiosis", tagline: "Vines and circuits entwine; the forest and its tools become one living system." },
+    { id: 8, profile: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }, name: "The Primeval Kingdom", tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth." },
+    { id: 9, profile: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Ordered Commune", tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future." },
+    { id: 10, profile: { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Sacred Order", tagline: "Divine authority guides the community; faith and discipline shape every branch." }
   ];
 
   // Calculate distance to each ending profile (normalized by thresholds)
