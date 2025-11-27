@@ -52,7 +52,7 @@ const ACTS = {
       choices: [
         {
           label: "Marry a native",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 2, TE: 0 }
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
         },
         {
           label: "Foreign spouse",
@@ -60,7 +60,7 @@ const ACTS = {
         },
         {
           label: "Stay single",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 2, TE: 0 }
+          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
         },
         {
           label: "Everyone",
@@ -96,7 +96,7 @@ const ACTS = {
       choices: [
         {
           label: "Mediation circles",
-          deltas: { FA: 1, CT: 0, EC: 2, OP: 1, PR: 1, TE: -1 }
+          deltas: { FA: 1, CT: 0, EC: 2, OP: 1, PR: 0, TE: -1 }
         },
         {
           label: "Strict arbiter",
@@ -162,11 +162,11 @@ const ACTS = {
       choices: [
         {
           label: "Send away to a camp",
-          deltas: { FA: -1, CT: 2, EC: 1, OP: -1, PR: -1, TE: -1 }
+          deltas: { FA: -1, CT: 2, EC: 0, OP: -1, PR: -1, TE: -1 }
         },
         {
           label: "Must barter for care based on your resources",
-          deltas: { FA: -1, CT: -1, EC: 2, OP: -1, PR: -1, TE: 1 }
+          deltas: { FA: -1, CT: -1, EC: -2, OP: -1, PR: -1, TE: 1 }
         },
         {
           label: "Establish kingdom healer, available to all",
@@ -184,7 +184,7 @@ const ACTS = {
       choices: [
         {
           label: "It's orgy time",
-          deltas: { FA: 1, CT: -1, EC: 2, OP: 0, PR: 1, TE: -1 }
+          deltas: { FA: 0, CT: -1, EC: 2, OP: 0, PR: 1, TE: -1 }
         },
         {
           label: "Give thanks to the goddess",
@@ -204,198 +204,198 @@ const ACTS = {
   2: [
     {
       id: 10,
-      name: "Education",
+      name: "How should the young learn and grow in your kingdom?",
       choices: [
         {
-          label: "Rational skills",
+          label: "Teach science, math, and practical skills",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Shamanic lessons",
+          label: "Teach shamanic traditions and forest wisdom",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: -1 }
         },
         {
-          label: "Mixed curriculum",
+          label: "A mixed curriculum drawing from all cultures",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Family-led",
+          label: "Let each family teach their own way",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 11,
-      name: "Ritual Presence",
+      name: "What role should spiritual rituals play in your kingdom?",
       choices: [
         {
-          label: "Mandated rituals",
+          label: "All citizens must participate in traditional rituals",
           deltas: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Encouraged rituals",
+          label: "Rituals are encouraged but optional",
           deltas: { FA: 1, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Rituals banned in governance",
+          label: "Keep rituals separate from governance entirely",
           deltas: { FA: -1, CT: 1, EC: 0, OP: 0, PR: 0, TE: 1 }
         },
         {
-          label: "New rituals emerge",
+          label: "Welcome creative new rituals to emerge freely",
           deltas: { FA: 1, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 12,
-      name: "Language Policy",
+      name: "Different species speak different tongues. How will your kingdom communicate?",
       choices: [
         {
-          label: "One common tongue",
+          label: "Mandate one common language for unity",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Preserve dialects",
+          label: "Preserve each clan's ancient dialects",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: -1, TE: 0 }
         },
         {
-          label: "Hybrid language",
+          label: "Create a hybrid language from all tongues",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
         },
         {
-          label: "Silent-sign rituals",
+          label: "Use sacred silent-sign communication",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }
         }
       ]
     },
     {
       id: 13,
-      name: "Art & Culture",
+      name: "Artists wish to create. What forms of expression will you permit?",
       choices: [
         {
-          label: "Traditional art",
+          label: "Only traditional sacred art honoring ancestors",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Free art",
+          label: "All art is permitted; creators are free",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
         },
         {
-          label: "Council-approved art",
+          label: "Art must be reviewed and approved by council",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Ritual-only art",
+          label: "Only ritual art for ceremonies is allowed",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         }
       ]
     },
     {
       id: 14,
-      name: "Species Integration",
+      name: "How should different species live together in your kingdom?",
       choices: [
         {
-          label: "Mixed housing",
+          label: "Integrated housing where all species mix freely",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Clan-only zones",
+          label: "Separate zones for each clan to preserve traditions",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Specialist roles",
+          label: "Assign species to roles based on their strengths",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Random assignments",
+          label: "Randomly assign housing to break down barriers",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 15,
-      name: "Borders & Outsiders",
+      name: "Strangers approach your borders seeking entry. What is your policy?",
       choices: [
         {
-          label: "Open borders",
+          label: "Welcome all; our borders are open",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Restricted entry",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 1 }
+          label: "Strictly control who may enter",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Aid-only entry",
-          deltas: { FA: 1, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
+          label: "Only those seeking aid or sanctuary may enter",
+          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Closed borders",
+          label: "Close the borders; no outsiders allowed",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
         }
       ]
     },
     {
       id: 16,
-      name: "Trade & Ownership",
+      name: "How will goods and resources flow through your kingdom?",
       choices: [
         {
-          label: "Guild markets",
+          label: "Organized guild markets with fair regulations",
           deltas: { FA: 0, CT: 1, EC: -1, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "No currency / sharing",
+          label: "Abolish currency; everything is shared freely",
           deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "Basic goods for all",
+          label: "Guarantee basic goods for everyone",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Free capitalism",
+          label: "Free market capitalism without restrictions",
           deltas: { FA: 0, CT: -1, EC: -1, OP: 0, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 17,
-      name: "Marriage / Bonding",
+      name: "How should romantic bonds and partnerships be formed?",
       choices: [
         {
-          label: "Free-love bonds",
+          label: "Free love; bond with whomever you choose",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Clan-arranged unions",
+          label: "Marriages arranged by clan elders",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Council-recognized unions",
+          label: "Unions must be formally recognized by council",
           deltas: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "No formal bonds",
+          label: "No formal bonds; relationships need no approval",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 18,
-      name: "Historical Records",
+      name: "How should your kingdom preserve its history and stories?",
       choices: [
         {
-          label: "Carve into sacred trees",
+          label: "Carve our history into the sacred trees",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Keep libraries",
+          label: "Build libraries to store written knowledge",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Oral history only",
+          label: "Pass stories orally from generation to generation",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 0, PR: 0, TE: -1 }
         },
         {
-          label: "Let the past fade",
+          label: "Let the past fade; focus on the future",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
@@ -404,176 +404,176 @@ const ACTS = {
   3: [
     {
       id: 19,
-      name: "Famine Response",
+      name: "A harsh winter brings famine. Food stores run dangerously low. How do you respond?",
       choices: [
         {
-          label: "Ration strictly",
+          label: "Impose strict rationing controlled by the council",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Expand foraging",
+          label: "Send foraging parties into uncharted forest",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
         },
         {
-          label: "Trade for food",
+          label: "Trade precious resources with outsiders for food",
           deltas: { FA: 0, CT: 0, EC: -1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Let clans decide",
+          label: "Let each clan manage their own survival",
           deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 20,
-      name: "The Discovery",
+      name: "Deep in the forest, scouts discover a strange glowing artifact of immense power. What do you do?",
       choices: [
         {
-          label: "Study it",
+          label: "Study it scientifically to understand its nature",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Worship it",
+          label: "Build a shrine and worship it as a sacred gift",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Seal it away",
+          label: "Seal it away; some powers are too dangerous",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Use it strategically",
+          label: "Harness its power for the kingdom's advantage",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: 0, TE: 1 }
         }
       ]
     },
     {
       id: 21,
-      name: "Migration Waves",
+      name: "A massive wave of refugees from a destroyed land seeks shelter in your forest. What do you do?",
       choices: [
         {
-          label: "Full welcome",
+          label: "Welcome them all with open arms",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Selective entry",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: 1, PR: 0, TE: 0 }
+          label: "Screen carefully; admit only those who meet criteria",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "Temporary camps",
+          label: "Set up temporary camps outside your borders",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Turn them away",
+          label: "Turn them away; you cannot support more",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 22,
-      name: "Rising Faction",
+      name: "A political faction grows powerful, challenging your authority. How do you respond?",
       choices: [
         {
-          label: "Negotiate power-sharing",
+          label: "Negotiate and share power with them",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Crack down",
+          label: "Crack down and suppress their movement",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Hold open debates",
+          label: "Hold open debates so all voices can be heard",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Let faction self-govern",
+          label: "Grant them autonomy to self-govern their own",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 23,
-      name: "Defense & Security",
+      name: "Your kingdom needs protection from threats. How will you defend your borders?",
       choices: [
         {
-          label: "Citizen-volunteer guard",
+          label: "Organize a citizen-volunteer guard from the community",
           deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "Professional guard",
+          label: "Establish a trained professional military force",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "Ritual guardians",
+          label: "Appoint sacred warriors blessed by ritual",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "No guard",
+          label: "Have no formal guard; trust in openness",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 24,
-      name: "Crime & Sabotage",
+      name: "Someone commits a serious crime, sabotaging vital kingdom infrastructure. How is justice served?",
       choices: [
         {
-          label: "Rehabilitation",
+          label: "Focus on rehabilitation and reintegration",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Punishment",
+          label: "Swift and severe punishment to deter others",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Restorative circles",
+          label: "Gather the community for restorative justice",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Exile",
+          label: "Banish them; exile from the kingdom forever",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 25,
-      name: "Environmental Crisis",
+      name: "A great blight spreads through the forest, killing ancient trees. How do you respond?",
       choices: [
         {
-          label: "Eco-tech fixes",
+          label: "Deploy green technology to combat the blight",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 1, TE: -1 }
         },
         {
-          label: "Ritual intervention",
+          label: "Perform sacred rituals to heal the forest",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "Evacuate",
+          label: "Evacuate the affected areas immediately",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Let nature rebalance",
+          label: "Trust nature to heal itself in time",
           deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 26,
-      name: "Invention vs Tradition",
+      name: "An inventor creates a revolutionary new tool that could change everything. Do you embrace it?",
       choices: [
         {
-          label: "Adopt invention",
+          label: "Yes, adopt the invention immediately",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Delay for council",
+          label: "Wait for council approval before allowing it",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Reject invention",
+          label: "Reject it; the old ways are safer",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: -1, TE: -1 }
         },
         {
-          label: "Public experiments",
+          label: "Let anyone experiment with it freely",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
         }
       ]
@@ -582,132 +582,132 @@ const ACTS = {
   4: [
     {
       id: 27,
-      name: "What Becomes Sacred?",
+      name: "As your kingdom matures, what do your people hold most sacred?",
       choices: [
         {
-          label: "Ancestors",
+          label: "The wisdom and spirits of our ancestors",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Progress",
+          label: "Progress and the pursuit of advancement",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 0 }
         },
         {
-          label: "The Forest",
+          label: "The living forest itself, our eternal home",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }
         },
         {
-          label: "Nothing is sacred",
+          label: "Nothing is sacred; only reason matters",
           deltas: { FA: -1, CT: 1, EC: 0, OP: 0, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 28,
-      name: "Teaching the Next Gen",
+      name: "What lessons will you pass to the next generation as your legacy?",
       choices: [
         {
-          label: "Myths & ritual",
+          label: "Ancient myths, rituals, and sacred stories",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "History & facts",
+          label: "True history and verified facts",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 0 }
         },
         {
-          label: "Future-first innovation",
+          label: "Innovation and building the future",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Each mentor decides",
+          label: "Let each mentor teach their own truth",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 29,
-      name: "Territory Expansion",
+      name: "Your kingdom grows strong. Neighboring lands beckon. How do you handle expansion?",
       choices: [
         {
-          label: "Expand aggressively",
+          label: "Expand aggressively; claim what we need",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Negotiate borders",
+          label: "Negotiate fair borders with neighbors",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Create shared zones",
+          label: "Create shared cooperative zones",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Do not expand",
-          deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
+          label: "Do not expand; be content with what we have",
+          deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         }
       ]
     },
     {
       id: 30,
-      name: "Rebel Faction",
+      name: "A rebel faction threatens to split your kingdom. This is your final test. How do you respond?",
       choices: [
         {
-          label: "Diplomacy",
+          label: "Seek diplomatic resolution and compromise",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Use force",
+          label: "Use military force to crush the rebellion",
           deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "Grant autonomy",
+          label: "Grant them autonomy to govern themselves",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Amnesty",
+          label: "Offer full amnesty and reconciliation",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 31,
-      name: "Final Constitutional Shape",
+      name: "You write your kingdom's permanent constitution. What form of government will endure?",
       choices: [
         {
-          label: "Monarchy / elders",
+          label: "A hereditary monarchy guided by wise elders",
           deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Republic / council",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: 1, PR: 0, TE: 0 }
+          label: "A democratic republic with elected councils",
+          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Collective consensus",
+          label: "Direct democracy through collective consensus",
           deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
         },
         {
-          label: "No government",
+          label: "No formal government; true freedom for all",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         }
       ]
     },
     {
       id: 32,
-      name: "Legacy of the Forest",
+      name: "Your final decree: What is the eternal spirit that will define your forest kingdom for all time?",
       choices: [
         {
-          label: "Eternal tradition",
+          label: "We honor tradition and preserve the old ways",
           deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
         },
         {
-          label: "Eternal innovation",
+          label: "We embrace innovation and endless progress",
           deltas: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
         },
         {
-          label: "Eternal cooperation",
+          label: "We stand together in cooperation and unity",
           deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
         },
         {
-          label: "Eternal freedom",
+          label: "We cherish freedom above all else",
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
         }
       ]
@@ -823,7 +823,7 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
     return {
       id: 6,
       name: "The Dawnbound Republic",
-      tagline: "Tradition roots the forest, but new ideas steer its sunlit council.",
+      tagline: "Innovation and openness guide a forward-thinking council toward a brighter future.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "High Progress + Openness, mid Control + Faith."
     };
@@ -884,7 +884,7 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
     { id: 3, profile: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 }, name: "The Free-Root Collective", tagline: "Borders blur, property dissolves, and the forest lives as one vast commune." },
     { id: 4, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }, name: "The Cosmopolitan Grove", tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds." },
     { id: 5, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Shielded Woodland", tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion." },
-    { id: 6, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }, name: "The Dawnbound Republic", tagline: "Tradition roots the forest, but new ideas steer its sunlit council." },
+    { id: 6, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }, name: "The Dawnbound Republic", tagline: "Innovation and openness guide a forward-thinking council toward a brighter future." },
     { id: 7, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Emerald Symbiosis", tagline: "Vines and circuits entwine; the forest and its tools become one living system." },
     { id: 8, profile: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }, name: "The Primeval Kingdom", tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth." },
     { id: 9, profile: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Ordered Commune", tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future." },
@@ -1092,7 +1092,7 @@ function computeEnding() {
   // Show act complete screen
   document.getElementById("question-block").style.display = "none";
   document.getElementById("act-complete-block").style.display = "block";
-  document.getElementById("prev-btn").style.display = "none";
+  document.getElementById("prev-btn").style.display = "inline-flex"; // Keep back button visible
   document.getElementById("next-btn").style.display = "none";
   document.querySelector(".progress-container").style.display = "none";
   document.getElementById("trending-block").style.display = "none"; // Hide trending when showing actual ending
@@ -1151,7 +1151,10 @@ function resetQuiz() {
 // Initialize the app
 function initApp() {
   document.getElementById("prev-btn").addEventListener("click", () => {
-    if (currentIndex > 0) {
+    // If we're showing the act complete screen, go back to last question
+    if (document.getElementById("act-complete-block").style.display !== "none") {
+      renderQuestion();
+    } else if (currentIndex > 0) {
       currentIndex--;
       renderQuestion();
     }

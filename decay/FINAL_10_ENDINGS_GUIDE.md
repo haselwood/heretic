@@ -532,7 +532,7 @@ Q18: Choice 1 - FA+1, PR-1
 ACT 3:
 Q19: Choice 1 - CT+1, OP-1
 Q20: Choice 2 - FA+1, PR-1
-Q21: Choice 2 - CT+1, OP+1
+Q21: Choice 2 - CT+1
 Q22: Choice 1 - EC+1, OP+1
 Q23: Choice 2 - CT+1
 Q24: Choice 3 - EC+1, OP+1
@@ -545,9 +545,9 @@ Q27: Choice 1 - FA+1, PR-1
 Q28: Choice 1 - FA+1, PR-1
 Q29: Choice 3 - EC+1, OP+1
 Q30: Choice 1 - EC+1, OP+1
-Q31: Choice 2 - CT+1, OP+1
+Q31: Choice 1 - CT+1, PR-1
 Q32: Choice 3 - EC+1, OP+1
-→ FINAL: FA:+22 (HIGH), CT:+12 (HIGH), EC:+25 (HIGH), OP:+12, PR:-5, TE:-8
+→ FINAL: FA:+21 (HIGH), CT:+12 (HIGH), EC:+19 (HIGH), OP:+11, PR:-7, TE:-8
 ```
 **Result:** ✅ **The Sacred Order**
 
