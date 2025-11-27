@@ -176,8 +176,8 @@ Q32: Choice 4 (Eternal freedom) - CT-1, OP+1
 ---
 
 ## Ending 4: The Cosmopolitan Grove
-**Theme:** Open borders cultural crossroads  
-**Goal:** HIGH Openness + MID Control
+**Theme:** Open borders, communal sharing, cultural crossroads  
+**Goal:** HIGH Openness + HIGH Communal + MID Control
 
 ### Complete Path:
 ```
@@ -560,7 +560,7 @@ Q32: Choice 3 - EC+1, OP+1
 | 1. Verdant Theocracy | HIGH Faith | Easy |
 | 2. Thorn Regime | HIGH Control + NEG Openness | Moderate |
 | 3. Free-Root Collective | HIGH Communal + NEG Control + HIGH Openness | Moderate |
-| 4. Cosmopolitan Grove | HIGH Openness + MID Control | Easy |
+| 4. Cosmopolitan Grove | HIGH Openness + HIGH Communal + MID Control | Moderate |
 | 5. Shielded Woodland | NEG Openness + Moderate Control | Moderate |
 | 6. Dawnbound Republic | HIGH Progress + HIGH Openness + MID others | Moderate |
 | 7. Emerald Symbiosis | NEG Tech (Green) | Easy |

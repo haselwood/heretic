@@ -841,15 +841,15 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
     };
   }
 
-  // 4. Cosmopolitan Grove - moved down to not capture Dawnbound
-  if (isHighPos(OP, thresholds) && isMid(CT, thresholds)) {
-    const profile = { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 };
+  // 4. Cosmopolitan Grove - requires HIGH Openness + HIGH Economy
+  if (isHighPos(OP, thresholds) && isHighPos(EC, thresholds) && isMid(CT, thresholds)) {
+    const profile = { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 };
     return {
       id: 4,
       name: "The Cosmopolitan Grove",
       tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "Openness very high, Control moderate."
+      debug: "High Openness + High Communal Economy, moderate Control."
     };
   }
 

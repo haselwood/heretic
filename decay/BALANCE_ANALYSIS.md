@@ -21,9 +21,9 @@ The game features **10 distinct, achievable endings** numbered 1-10 that cover a
 - **Profile:** EC:HIGH, CT:NEG, OP:HIGH
 
 ### 4. The Cosmopolitan Grove
-- **Requirements:** HIGH Openness + MID Control
-- **Theme:** Open borders cultural crossroads
-- **Profile:** OP:HIGH, CT:MID
+- **Requirements:** HIGH Openness + HIGH Communal + MID Control
+- **Theme:** Open borders, communal sharing, cultural crossroads
+- **Profile:** OP:HIGH, EC:HIGH, CT:MID
 
 ### 5. The Shielded Woodland
 - **Requirements:** NEG Openness + CT ≥ 0 + Traditional (PR ≤ 0)
@@ -86,7 +86,7 @@ The endings are checked in this order to prevent more general endings from "capt
 5. **Free-Root Collective** (EC HIGH + CT NEG + OP HIGH) - All 3 conditions
 6. **Dawnbound Republic** (PR+OP HIGH, CT+FA MID) - Multi-condition progressive
 7. **Verdant Theocracy** (FA HIGH) - General faith ending
-8. **Cosmopolitan Grove** (OP HIGH + CT MID) - General openness ending
+8. **Cosmopolitan Grove** (OP HIGH + EC HIGH + CT MID) - Open communal society
 9. **Emerald Symbiosis** (TE NEG + others ≥ 0) - Green tech
 10. **Shielded Woodland** (OP NEG + CT ≥ 0 + PR ≤ 0) - Isolationist fallback
 
@@ -99,14 +99,14 @@ All 10 endings are deliberately designed to be:
 
 ### Difficulty Tiers
 
-**Easy (Single or Dual Axis Focus):**
+**Easy (Single Axis Focus):**
 - 1. Verdant Theocracy (HIGH Faith)
-- 4. Cosmopolitan Grove (HIGH Openness)
 - 7. Emerald Symbiosis (NEG Tech)
 
 **Moderate (Dual/Triple Axis):**
 - 2. Thorn Regime (Control + Closed + Traditional)
 - 3. Free-Root Collective (Communal + Anarchy + Open)
+- 4. Cosmopolitan Grove (Openness + Communal + balanced Control)
 - 5. Shielded Woodland (Closed + Traditional)
 - 6. Dawnbound Republic (Progress + Openness + balanced others)
 
