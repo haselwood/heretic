@@ -955,6 +955,75 @@ const ACT_TAGLINES = {
   4: "What endures forever"
 };
 
+// === DOM Element Cache ===
+// Cache frequently accessed DOM elements for better performance
+const DOM = {
+  actDisplay: null,
+  qNumber: null,
+  qName: null,
+  qProgress: null,
+  choicesContainer: null,
+  progressFill: null,
+  progressText: null,
+  scoreFA: null,
+  scoreCT: null,
+  scoreEC: null,
+  scoreOP: null,
+  scorePR: null,
+  scoreTE: null,
+  trendingName: null,
+  trendingAlignment: null,
+  trendingBlock: null,
+  resultBlock: null,
+  endingName: null,
+  endingAlignment: null,
+  endingTagline: null,
+  debug: null,
+  questionBlock: null,
+  actCompleteBlock: null,
+  actEndingSummary: null,
+  prevBtn: null,
+  nextBtn: null,
+  continueBtn: null,
+  resetBtn: null,
+  progressContainer: null,
+  answerLogContent: null
+};
+
+// Initialize DOM cache
+function initDOMCache() {
+  DOM.actDisplay = document.getElementById("act-display");
+  DOM.qNumber = document.getElementById("q-number");
+  DOM.qName = document.getElementById("q-name");
+  DOM.qProgress = document.getElementById("q-progress");
+  DOM.choicesContainer = document.getElementById("choices-container");
+  DOM.progressFill = document.getElementById("progress-fill");
+  DOM.progressText = document.getElementById("progress-text");
+  DOM.scoreFA = document.getElementById("score-fa");
+  DOM.scoreCT = document.getElementById("score-ct");
+  DOM.scoreEC = document.getElementById("score-ec");
+  DOM.scoreOP = document.getElementById("score-op");
+  DOM.scorePR = document.getElementById("score-pr");
+  DOM.scoreTE = document.getElementById("score-te");
+  DOM.trendingName = document.getElementById("trending-name");
+  DOM.trendingAlignment = document.getElementById("trending-alignment");
+  DOM.trendingBlock = document.getElementById("trending-block");
+  DOM.resultBlock = document.getElementById("result-block");
+  DOM.endingName = document.getElementById("ending-name");
+  DOM.endingAlignment = document.getElementById("ending-alignment");
+  DOM.endingTagline = document.getElementById("ending-tagline");
+  DOM.debug = document.getElementById("debug");
+  DOM.questionBlock = document.getElementById("question-block");
+  DOM.actCompleteBlock = document.getElementById("act-complete-block");
+  DOM.actEndingSummary = document.getElementById("act-ending-summary");
+  DOM.prevBtn = document.getElementById("prev-btn");
+  DOM.nextBtn = document.getElementById("next-btn");
+  DOM.continueBtn = document.getElementById("continue-btn");
+  DOM.resetBtn = document.getElementById("reset-btn");
+  DOM.progressContainer = document.querySelector(".progress-container");
+  DOM.answerLogContent = document.getElementById("answer-log-content");
+}
+
 // === Quiz state ===
 let currentAct = 1;
 let currentIndex = 0;
@@ -977,13 +1046,12 @@ const allAnswers = {
  }
  
  
- function updateAnswerLog() {
-  const logContent = document.getElementById("answer-log-content");
-  logContent.innerHTML = "";
-  
+function updateAnswerLog() {
+  const logContent = DOM.answerLogContent;
+  const fragment = document.createDocumentFragment();
   let hasAnswers = false;
   
-  // Loop through all acts up to current act
+  // Loop through all acts
   for (let act = 1; act <= 4; act++) {
     const actQuestions = ACTS[act];
     const actAnswers = allAnswers[act];
@@ -996,7 +1064,7 @@ const allAnswers = {
     const actHeader = document.createElement("div");
     actHeader.className = "answer-log-act-header";
     actHeader.textContent = `Act ${act}: ${ACT_NAMES[act]}`;
-    logContent.appendChild(actHeader);
+    fragment.appendChild(actHeader);
     
     // Add questions for this act
     actQuestions.forEach((q, qi) => {
@@ -1028,7 +1096,7 @@ const allAnswers = {
       item.appendChild(questionDiv);
       item.appendChild(answerDiv);
       item.appendChild(metaDiv);
-      logContent.appendChild(item);
+      fragment.appendChild(item);
     });
     
     // Add act ending if it exists
@@ -1052,7 +1120,7 @@ const allAnswers = {
       endingDiv.appendChild(endingTitle);
       endingDiv.appendChild(endingName);
       endingDiv.appendChild(endingTagline);
-      logContent.appendChild(endingDiv);
+      fragment.appendChild(endingDiv);
     }
   }
   
@@ -1060,18 +1128,23 @@ const allAnswers = {
     const emptyDiv = document.createElement("div");
     emptyDiv.className = "answer-log-empty";
     emptyDiv.textContent = "No answers yet. Start answering questions to see your choices here.";
-    logContent.appendChild(emptyDiv);
+    fragment.appendChild(emptyDiv);
   }
+  
+  // Single DOM update
+  logContent.innerHTML = "";
+  logContent.appendChild(fragment);
 }
 
 
- function recalcScores() {
+function recalcScores() {
   const totals = { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 };
-   // Sum up all answers from all acts up to and including current act
+  
+  // Sum up all answers from all acts up to and including current act
   for (let act = 1; act <= currentAct; act++) {
     const actQuestions = ACTS[act];
     const actAnswers = allAnswers[act];
-   
+    
     actQuestions.forEach((q, qi) => {
       const choiceIndex = actAnswers[qi];
       if (choiceIndex == null) return;
@@ -1081,105 +1154,107 @@ const allAnswers = {
       }
     });
   }
-   document.getElementById("score-fa").textContent = totals.FA;
-  document.getElementById("score-ct").textContent = totals.CT;
-  document.getElementById("score-ec").textContent = totals.EC;
-  document.getElementById("score-op").textContent = totals.OP;
-  document.getElementById("score-pr").textContent = totals.PR;
-  document.getElementById("score-te").textContent = totals.TE;
-   // Calculate and show trending ending
+  
+  // Update score displays
+  DOM.scoreFA.textContent = totals.FA;
+  DOM.scoreCT.textContent = totals.CT;
+  DOM.scoreEC.textContent = totals.EC;
+  DOM.scoreOP.textContent = totals.OP;
+  DOM.scorePR.textContent = totals.PR;
+  DOM.scoreTE.textContent = totals.TE;
+  
+  // Calculate and show trending ending
   const trendingEnding = resolveEnding(
     totals.FA, totals.CT, totals.EC, totals.OP, totals.PR, totals.TE, currentAct
   );
-  document.getElementById("trending-name").textContent = trendingEnding.name;
-   // Show alignment percentage if available
-  if (trendingEnding.alignmentPercent !== undefined) {
-    document.getElementById("trending-alignment").textContent =
-      `${trendingEnding.alignmentPercent}% aligned with this ending`;
-  } else {
-    document.getElementById("trending-alignment").textContent = "";
-  }
-   // Update answer log
+  DOM.trendingName.textContent = trendingEnding.name;
+  
+  // Show alignment percentage if available
+  DOM.trendingAlignment.textContent = trendingEnding.alignmentPercent !== undefined
+    ? `${trendingEnding.alignmentPercent}% aligned with this ending`
+    : "";
+  
+  // Update answer log
   updateAnswerLog();
   
   return totals;
- }
+}
  
  
- function renderQuestion() {
+function renderQuestion() {
   const questions = getCurrentQuestions();
   const answers = getCurrentAnswers();
   const q = questions[currentIndex];
-   document.getElementById("act-display").textContent = `Act ${currentAct}: ${ACT_TAGLINES[currentAct]}`;
-  document.getElementById("q-number").textContent = `Policy ${q.id}`;
-  document.getElementById("q-name").textContent = q.name;
-  document.getElementById("q-progress").textContent =
-    `Question ${currentIndex + 1} of ${questions.length}`;
-   // Update progress bar
-  const progressPercent = ((currentIndex + 1) / questions.length) * 100;
-  document.getElementById("progress-fill").style.width = `${progressPercent}%`;
-  document.getElementById("progress-text").textContent =
-    `Question ${currentIndex + 1} of ${questions.length}`;
- 
- 
-  const container = document.getElementById("choices-container");
+  const questionNum = currentIndex + 1;
+  const totalQuestions = questions.length;
+  
+  // Update header and question info
+  DOM.actDisplay.textContent = `Act ${currentAct}: ${ACT_TAGLINES[currentAct]}`;
+  DOM.qNumber.textContent = `Policy ${q.id}`;
+  DOM.qName.textContent = q.name;
+  DOM.qProgress.textContent = `Question ${questionNum} of ${totalQuestions}`;
+  
+  // Update progress bar
+  const progressPercent = (questionNum / totalQuestions) * 100;
+  DOM.progressFill.style.width = `${progressPercent}%`;
+  DOM.progressText.textContent = `Question ${questionNum} of ${totalQuestions}`;
+  
+  // Render choices
+  const container = DOM.choicesContainer;
   container.innerHTML = "";
+  const radioName = `q${currentAct}-${currentIndex}`;
+  
   q.choices.forEach((choice, idx) => {
-    const choiceId = `q${currentAct}-${currentIndex}-choice${idx}`;
+    const choiceId = `${radioName}-choice${idx}`;
     const wrapper = document.createElement("div");
     wrapper.className = "choice";
- 
- 
+    
     const input = document.createElement("input");
     input.type = "radio";
-    input.name = `q${currentAct}-${currentIndex}`;
+    input.name = radioName;
     input.id = choiceId;
     input.value = idx;
     if (answers[currentIndex] === idx) input.checked = true;
- 
- 
+    
     input.addEventListener("change", () => {
       allAnswers[currentAct][currentIndex] = idx;
       recalcScores();
     });
- 
- 
+    
     const label = document.createElement("label");
     label.className = "choice-label";
     label.setAttribute("for", choiceId);
     label.textContent = choice.label;
- 
- 
+    
     wrapper.appendChild(input);
     wrapper.appendChild(label);
     container.appendChild(wrapper);
   });
- 
- 
-  // Only disable back button at the very first question of Act 1
-  document.getElementById("prev-btn").disabled = (currentAct === 1 && currentIndex === 0);
-   // On last question, change Next button to show it will compute ending
-  const isLastQuestion = currentIndex === questions.length - 1;
-  const nextBtn = document.getElementById("next-btn");
-   if (isLastQuestion) {
-    nextBtn.textContent = "🔮 View Act Ending →";
-    nextBtn.className = "btn-primary"; // Make it primary/highlighted
+  
+  // Update navigation buttons
+  DOM.prevBtn.disabled = (currentAct === 1 && currentIndex === 0);
+  
+  const isLastQuestion = currentIndex === totalQuestions - 1;
+  if (isLastQuestion) {
+    DOM.nextBtn.textContent = "🔮 View Act Ending →";
+    DOM.nextBtn.className = "btn-primary";
   } else {
-    nextBtn.textContent = "Next →";
-    nextBtn.className = "btn-secondary";
+    DOM.nextBtn.textContent = "Next →";
+    DOM.nextBtn.className = "btn-secondary";
   }
-   // Show/hide UI elements based on state
-  document.getElementById("question-block").style.display = "block";
-  document.getElementById("act-complete-block").style.display = "none";
-  document.getElementById("continue-btn").style.display = "none";
-  document.getElementById("prev-btn").style.display = "inline-flex";
-  document.getElementById("next-btn").style.display = "inline-flex";
-  document.querySelector(".progress-container").style.display = "block";
-  document.getElementById("trending-block").style.display = "block"; // Show trending during questions
- }
+  
+  // Show/hide UI elements
+  DOM.questionBlock.style.display = "block";
+  DOM.actCompleteBlock.style.display = "none";
+  DOM.continueBtn.style.display = "none";
+  DOM.prevBtn.style.display = "inline-flex";
+  DOM.nextBtn.style.display = "inline-flex";
+  DOM.progressContainer.style.display = "block";
+  DOM.trendingBlock.style.display = "block";
+}
  
  
- function computeEnding() {
+function computeEnding() {
   const totals = recalcScores();
   const res = resolveEnding(
     totals.FA,
@@ -1188,35 +1263,39 @@ const allAnswers = {
     totals.OP,
     totals.PR,
     totals.TE,
-    currentAct  // Pass current act for dynamic thresholds
+    currentAct
   );
-   // Store the ending for this act
+  
+  // Store the ending for this act
   actEndings[currentAct] = res;
-   // Update the sidebar and show it
-  document.getElementById("result-block").style.display = "block";
-  document.getElementById("ending-name").textContent = res.name;
-   // Show alignment percentage if available
-  if (res.alignmentPercent !== undefined) {
-    document.getElementById("ending-alignment").textContent =
-      `${res.alignmentPercent}% aligned with this ending`;
-  } else {
-    document.getElementById("ending-alignment").textContent = "";
-  }
-   document.getElementById("ending-tagline").textContent = res.tagline;
-  document.getElementById("debug").textContent =
+  
+  // Update answer log to show the ending
+  updateAnswerLog();
+  
+  // Update the sidebar
+  DOM.resultBlock.style.display = "block";
+  DOM.endingName.textContent = res.name;
+  DOM.endingAlignment.textContent = res.alignmentPercent !== undefined
+    ? `${res.alignmentPercent}% aligned with this ending`
+    : "";
+  DOM.endingTagline.textContent = res.tagline;
+  DOM.debug.textContent = 
     `FA: ${totals.FA}, CT: ${totals.CT}, EC: ${totals.EC}, OP: ${totals.OP}, PR: ${totals.PR}, TE: ${totals.TE}\n` +
     (res.debug || "");
-   // Show act complete screen
-  document.getElementById("question-block").style.display = "none";
-  document.getElementById("act-complete-block").style.display = "block";
-  document.getElementById("prev-btn").style.display = "inline-flex"; // Keep back button visible
-  document.getElementById("next-btn").style.display = "none";
-  document.querySelector(".progress-container").style.display = "none";
-  document.getElementById("trending-block").style.display = "none"; // Hide trending when showing actual ending
-   // Build summary of all acts so far
+  
+  // Show act complete screen
+  DOM.questionBlock.style.display = "none";
+  DOM.actCompleteBlock.style.display = "block";
+  DOM.prevBtn.style.display = "inline-flex";
+  DOM.nextBtn.style.display = "none";
+  DOM.progressContainer.style.display = "none";
+  DOM.trendingBlock.style.display = "none";
+  
+  // Build summary
   let summary = `<strong>${res.name}</strong><br>${res.tagline}`;
-   if (currentAct < 4) {
-    document.getElementById("continue-btn").style.display = "inline-flex";
+  
+  if (currentAct < 4) {
+    DOM.continueBtn.style.display = "inline-flex";
   } else {
     // Final act - show all endings
     summary = "<strong>Your Journey Complete!</strong><br><br>";
@@ -1227,8 +1306,9 @@ const allAnswers = {
       }
     }
   }
-   document.getElementById("act-ending-summary").innerHTML = summary;
- }
+  
+  DOM.actEndingSummary.innerHTML = summary;
+}
  
  
  function continueToNextAct() {
@@ -1243,30 +1323,39 @@ const allAnswers = {
  function resetQuiz() {
   currentAct = 1;
   currentIndex = 0;
-   // Reset all answers
+  
+  // Reset all answers
   for (let act in allAnswers) {
     for (let i = 0; i < allAnswers[act].length; i++) {
       allAnswers[act][i] = null;
     }
   }
-   // Clear endings
+  
+  // Clear endings
   for (let act in actEndings) {
     delete actEndings[act];
   }
-   recalcScores();
-  document.getElementById("result-block").style.display = "none";
-  document.getElementById("ending-name").textContent = "";
-  document.getElementById("ending-tagline").textContent = "";
-  document.getElementById("debug").textContent = "";
+  
+  // Clear result display
+  DOM.resultBlock.style.display = "none";
+  DOM.endingName.textContent = "";
+  DOM.endingTagline.textContent = "";
+  DOM.debug.textContent = "";
+  
   renderQuestion();
- }
+  recalcScores();
+}
  
  
- // Initialize the app
- function initApp() {
-  document.getElementById("prev-btn").addEventListener("click", () => {
+// Initialize the app
+function initApp() {
+  // Initialize DOM element cache
+  initDOMCache();
+  
+  // Set up event listeners
+  DOM.prevBtn.addEventListener("click", () => {
     // If we're showing the act complete screen, go back to last question
-    if (document.getElementById("act-complete-block").style.display !== "none") {
+    if (DOM.actCompleteBlock.style.display !== "none") {
       renderQuestion();
     } else if (currentIndex > 0) {
       // Go back one question within current act
@@ -1279,7 +1368,8 @@ const allAnswers = {
       renderQuestion();
     }
   });
-   document.getElementById("next-btn").addEventListener("click", () => {
+  
+  DOM.nextBtn.addEventListener("click", () => {
     const questions = getCurrentQuestions();
     if (currentIndex < questions.length - 1) {
       currentIndex++;
@@ -1289,13 +1379,14 @@ const allAnswers = {
       computeEnding();
     }
   });
-   document.getElementById("continue-btn").addEventListener("click", continueToNextAct);
-  document.getElementById("reset-btn").addEventListener("click", resetQuiz);
- 
- 
+  
+  DOM.continueBtn.addEventListener("click", continueToNextAct);
+  DOM.resetBtn.addEventListener("click", resetQuiz);
+  
+  // Initial render
   renderQuestion();
   recalcScores();
- }
+}
  
  
  // Run when DOM is ready
