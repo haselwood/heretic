@@ -11,7 +11,7 @@ Players make choices that shape six political/philosophical axes:
 - **CONTROL** (Anarchy → Authoritarian)
 - **ECONOMY** (Capitalist → Communal)
 - **OPENNESS** (Protectionist → Progressive)
-- **PROGRESS** (Traditional → Innovation)
+- **PROGRESS** (Tradition/History → Future/Innovation)
 - **TECH** (Natural → Industrial)
 
 At the end of Act 4, players receive one of 10 unique endings based on their cumulative choices.
@@ -19,41 +19,42 @@ At the end of Act 4, players receive one of 10 unique endings based on their cum
 ---
 
 ## The 10 Endings
+*(Listed in check order - most specific to least specific)*
 
 | # | Name | Theme | Difficulty |
 |---|------|-------|------------|
-| 1 | Verdant Theocracy | Faith-driven governance | ⭐ Easy |
-| 2 | Thorn Regime | Authoritarian isolationist | ⭐⭐ Moderate |
-| 3 | Free-Root Collective | Anarchist commune | ⭐⭐ Moderate |
-| 4 | Cosmopolitan Grove | Open borders crossroads | ⭐ Easy |
-| 5 | Shielded Woodland | Moderate isolationist | ⭐⭐ Moderate |
+| 1 | Sacred Order | Theocratic commune | ⭐⭐⭐⭐ Very Challenging |
+| 2 | Primeval Kingdom | Traditional monarchy | ⭐⭐⭐ Challenging |
+| 3 | Ordered Commune | Structured socialism | ⭐⭐⭐ Challenging |
+| 4 | Thorn Regime | Authoritarian isolationist | ⭐⭐ Moderate |
+| 5 | Free-Root Collective | Natural anarchist commune | ⭐⭐⭐ Challenging |
 | 6 | Dawnbound Republic | Progressive democracy | ⭐⭐ Moderate |
-| 7 | Emerald Symbiosis | Green/natural technology | ⭐ Easy |
-| 8 | Primeval Kingdom | Traditional monarchy | ⭐⭐⭐ Challenging |
-| 9 | Ordered Commune | Structured socialism | ⭐⭐⭐ Challenging |
-| 10 | Sacred Order | Theocratic commune | ⭐⭐⭐ Challenging |
+| 7 | Verdant Theocracy | Nature-worshipping spiritual | ⭐⭐ Moderate |
+| 8 | Cosmopolitan Grove | High-tech metropolis | ⭐⭐⭐⭐ Very Challenging |
+| 9 | Emerald Symbiosis | Green/natural technology | ⭐ Easy |
+| 10 | Shielded Woodland | Moderate isolationist | ⭐⭐ Moderate |
 
 ---
 
 ## Game Structure
 
 ### Acts & Questions
-- **Act 1:** 9 questions (foundation)
-- **Act 2:** 9 questions (culture & policy)
-- **Act 3:** 8 questions (crisis response)
-- **Act 4:** 6 questions (legacy)
+- **Act 1: Emergence** — 10 questions (rising from decay)
+- **Act 2: New Growth** — 8 questions (building culture & society)
+- **Act 3: The Weathering** — 8 questions (enduring trials & crises)
+- **Act 4: Eternal Forest** — 6 questions (defining your legacy)
 
 **Total:** 32 questions across 4 acts
 
 ### Dynamic Thresholds
 Thresholds scale with cumulative questions to maintain balance:
 
-| Act | Questions | HIGH Threshold | Reasoning |
-|-----|-----------|----------------|-----------|
-| 1   | 9         | ±4             | Early choices |
-| 2   | 18        | ±7             | Building momentum |
-| 3   | 26        | ±10            | Solidifying path |
-| 4   | 32        | ±12            | Final result |
+| Act | Name | Questions (Cumulative) | HIGH Threshold |
+|-----|------|------------------------|----------------|
+| 1   | Emergence | 10                     | ±4             |
+| 2   | New Growth | 18 (10 + 8)            | ±7             |
+| 3   | The Weathering | 26 (18 + 8)            | ±10            |
+| 4   | Eternal Forest | 32 (26 + 6)            | ±12            |
 
 ---
 
@@ -109,16 +110,16 @@ Use `FINAL_10_ENDINGS_GUIDE.md` for complete paths to each ending:
 ### Ending Resolution
 Endings are checked in order from most specific to least specific:
 
-1. Sacred Order (3 HIGH axes required)
-2. Primeval Kingdom (specific combination)
-3. Ordered Commune (structured requirements)
-4. Thorn Regime (authoritarian isolationist)
-5. Free-Root Collective (anarchist combo)
-6. Dawnbound Republic (progressive multi-axis)
-7. Verdant Theocracy (faith primary)
-8. Cosmopolitan Grove (openness primary)
-9. Emerald Symbiosis (green tech)
-10. Shielded Woodland (isolationist)
+1. **Sacred Order** - 3 HIGH axes (FA+CT+EC all HIGH)
+2. **Primeval Kingdom** - Traditional monarchy (PR NEG + CT HIGH + FA POS)
+3. **Ordered Commune** - Structured socialism (CT+EC HIGH, not FA HIGH, not OP NEG)
+4. **Thorn Regime** - Authoritarian isolationist (CT HIGH + OP NEG + PR ≤ 0)
+5. **Free-Root Collective** - Natural anarchist commune (EC HIGH + CT NEG + OP HIGH + TE ≤ 0)
+6. **Dawnbound Republic** - Progressive democracy (PR+OP HIGH, CT+FA MID)
+7. **Verdant Theocracy** - Nature worship spiritual (FA HIGH + CT MID + TE ≤ 0)
+8. **Cosmopolitan Grove** - High-tech metropolis (OP HIGH + EC MID + CT MID + TE HIGH + PR ≥ 0)
+9. **Emerald Symbiosis** - Green technology (TE NEG + others ≥ 0)
+10. **Shielded Woodland** - Isolationist fallback (OP NEG + CT ≥ 0 + PR ≤ 0)
 
 ### Fallback System
 If no explicit ending matches, the game calculates Euclidean distance to all ending profiles and assigns the closest match, with an alignment percentage showing fit quality.

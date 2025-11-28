@@ -2,6 +2,8 @@
 
 **Complete 32-question paths through all 4 acts** to reach each of the 10 endings.
 
+**Note:** Endings are now numbered 1-10 in check order (most specific to least specific). The paths below retain their original organization but use updated ending numbers.
+
 ---
 
 ## How to Use This Guide
@@ -14,8 +16,8 @@
 ---
 
 ## Ending 1: The Verdant Theocracy
-**Theme:** Spiritual leadership, faith-driven governance  
-**Goal:** HIGH Faith
+**Theme:** Nature-worshipping spiritual leadership with moderate governance  
+**Goal:** HIGH Faith + MID Control + Green/Neutral Tech (TE ≤ 0)
 
 ### Complete Path:
 ```
@@ -61,9 +63,9 @@ Q29: Choice 4 (Do not expand) - FA+1
 Q30: Choice 1 (Diplomacy) - EC+1, OP+1
 Q31: Choice 2 (Republic/council) - CT+1, OP+1
 Q32: Choice 1 (Eternal tradition) - FA+1
-→ FINAL: FA:+26 (HIGH), CT:+10, EC:+12, OP:+12, PR:-12, TE:-9
+→ FINAL: FA:+26 (HIGH ✓), CT:+10 (MID ❌ needs between -11 and +11), EC:+12, OP:+12, PR:-12, TE:-9 (NEG ✓)
 ```
-**Result:** ✅ **The Verdant Theocracy**
+**Result:** ⚠️ **This path may no longer work for Verdant Theocracy.** New requirements need: CT MID (path has +10 which is borderline, depends on Act 4 threshold of 12). With threshold of 12, CT:+10 is MID ✓. This should still work!
 
 ---
 
@@ -122,8 +124,8 @@ Q32: Choice 1 (Eternal tradition) - FA+1, PR-1
 ---
 
 ## Ending 3: The Free-Root Collective
-**Theme:** Anarchist commune with open borders  
-**Goal:** HIGH Communal + NEG Control + HIGH Openness
+**Theme:** Natural anarchist commune rejecting industrial technology  
+**Goal:** HIGH Communal + NEG Control + HIGH Openness + Green/Neutral Tech (TE ≤ 0)
 
 ### Complete Path:
 ```
@@ -169,15 +171,15 @@ Q29: Choice 3 (Shared zones) - EC+1, OP+1
 Q30: Choice 1 (Diplomacy) - EC+1, OP+1
 Q31: Choice 3 (Collective consensus) - CT-1, EC+1
 Q32: Choice 4 (Eternal freedom) - CT-1, OP+1
-→ FINAL: FA:+4, CT:-16 (NEG), EC:+31 (HIGH), OP:+23 (HIGH), PR:+7, TE:-13
+→ FINAL: FA:+4, CT:-16 (NEG), EC:+31 (HIGH), OP:+23 (HIGH), PR:+7, TE:-13 (NEG, ≤ 0 ✓)
 ```
-**Result:** ✅ **The Free-Root Collective**
+**Result:** ✅ **The Free-Root Collective** (All requirements met: EC HIGH, CT NEG, OP HIGH, TE ≤ 0)
 
 ---
 
 ## Ending 4: The Cosmopolitan Grove
-**Theme:** Open borders, communal sharing, cultural crossroads  
-**Goal:** HIGH Openness + HIGH Communal + MID Control
+**Theme:** High-tech industrial metropolis enabling cultural exchange and trade  
+**Goal:** HIGH Openness + MID Communal + MID Control + HIGH Tech (TE ≥ 12) + Positive Progress (PR ≥ 0)
 
 ### Complete Path:
 ```
@@ -223,9 +225,9 @@ Q29: Choice 2 (Negotiate borders) - OP+1
 Q30: Choice 1 (Diplomacy) - EC+1, OP+1
 Q31: Choice 4 (No government) - CT-1, OP+1
 Q32: Choice 3 (Eternal cooperation) - EC+1, OP+1
-→ FINAL: FA:+10, CT:+0 (MID), EC:+29, OP:+28 (HIGH), PR:+9, TE:-6
+→ FINAL: FA:+10, CT:+0 (MID ✓), EC:+29 (HIGH ❌ needs MID), OP:+28 (HIGH ✓), PR:+9 (POS ✓), TE:-6 (NEG ❌ needs > 0)
 ```
-**Result:** ✅ **The Cosmopolitan Grove** (OP HIGH, CT MID, PR not HIGH)
+**Result:** ❌ **This path NO LONGER works for Cosmopolitan Grove.** New requirements need: TE > 0 (path has -6) and EC MID (path has +29 HIGH). This will likely result in **Free-Root Collective** instead (EC HIGH, CT NEG not met, OP HIGH, TE ≤ 0) or fallback to closest ending.
 
 ---
 
@@ -554,19 +556,20 @@ Q32: Choice 3 - EC+1, OP+1
 ---
 
 ## Quick Reference
+*(Endings numbered in check order: 1-10 from most to least specific)*
 
 | Ending | Key Requirements | Difficulty |
 |--------|-----------------|------------|
-| 1. Verdant Theocracy | HIGH Faith | Easy |
-| 2. Thorn Regime | HIGH Control + NEG Openness | Moderate |
-| 3. Free-Root Collective | HIGH Communal + NEG Control + HIGH Openness | Moderate |
-| 4. Cosmopolitan Grove | HIGH Openness + HIGH Communal + MID Control | Moderate |
-| 5. Shielded Woodland | NEG Openness + Moderate Control | Moderate |
+| 1. Sacred Order | HIGH Faith + HIGH Control + HIGH Communal | Very Challenging |
+| 2. Primeval Kingdom | NEG Progress + HIGH Control + POS Faith | Challenging |
+| 3. Ordered Commune | HIGH Control + HIGH Communal (not HIGH Faith) | Challenging |
+| 4. Thorn Regime | HIGH Control + NEG Openness | Moderate |
+| 5. Free-Root Collective | HIGH Communal + NEG Control + HIGH Openness + TE ≤ 0 | Challenging |
 | 6. Dawnbound Republic | HIGH Progress + HIGH Openness + MID others | Moderate |
-| 7. Emerald Symbiosis | NEG Tech (Green) | Easy |
-| 8. Primeval Kingdom | NEG Progress + HIGH Control + POS Faith | Challenging |
-| 9. Ordered Commune | HIGH Control + HIGH Communal (not HIGH Faith) | Challenging |
-| 10. Sacred Order | HIGH Faith + HIGH Control + HIGH Communal | Challenging |
+| 7. Verdant Theocracy | HIGH Faith + MID Control + TE ≤ 0 | Moderate |
+| 8. Cosmopolitan Grove | HIGH Openness + MID Communal + MID Control + HIGH Tech + PR ≥ 0 | Very Challenging |
+| 9. Emerald Symbiosis | NEG Tech (Green) | Easy |
+| 10. Shielded Woodland | NEG Openness + Moderate Control | Moderate |
 
 ---
 

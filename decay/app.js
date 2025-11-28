@@ -7,20 +7,20 @@ const ACTS = {
       name: "How Shall We Honor the Dead?",
       choices: [
         {
-          label: "Bury under saplings",
-          deltas: { FA: 1, CT: 0, EC: 1, OP: 0, PR: 1, TE: -2 }
+          label: "Bury under saplings so they can return as new life",
+          deltas: { FA: 1, CT: 0, EC: 1, OP: 0, PR: 1, TE: -1 }
         },
         {
           label: "Burn & forge tools",
-          deltas: { FA: -1, CT: 2, EC: 0, OP: 0, PR: 0, TE: 1 }
+          deltas: { FA: -1, CT: 1, EC: 0, OP: 0, PR: 1, TE: 2 }
         },
         {
           label: "Let forest reclaim",
-          deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 1, TE: -2 }
+          deltas: { FA: 0, CT: -1, EC: 1, OP: 0, PR: 0, TE: -2 }
         },
         {
           label: "Mass grave",
-          deltas: { FA: -1, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+          deltas: { FA: -2, CT: 1, EC: 0, OP: 0, PR: 0, TE: -1 }
         }
       ]
     },
@@ -30,19 +30,19 @@ const ACTS = {
       choices: [
         {
           label: "Elders",
-          deltas: { FA: 1, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+          deltas: { FA: 2, CT: 1, EC: 1, OP: -1, PR: -2, TE: 0 }
         },
         {
           label: "Rotate species",
-          deltas: { FA: 0, CT: 0, EC: 2, OP: 1, PR: 1, TE: 0 }
+          deltas: { FA: 0, CT: -1, EC: 2, OP: 1, PR: 1, TE: 1 }
         },
         {
           label: "Consensus rule",
-          deltas: { FA: -1, CT: -1, EC: 2, OP: 1, PR: 1, TE: 0 }
+          deltas: { FA: -1, CT: -1, EC: 2, OP: 1, PR: 2, TE: 1 }
         },
         {
           label: "Just Player",
-          deltas: { FA: 0, CT: 2, EC: 0, OP: -1, PR: -1, TE: 0 }
+          deltas: { FA: 0, CT: 3, EC: -1, OP: -2, PR: -1, TE: 0 }
         }
       ]
     },
@@ -51,20 +51,20 @@ const ACTS = {
       name: "Who shall rule by your side as consort?",
       choices: [
         {
-          label: "Marry a native",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+          label: "Marry a native to preserve our culture",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -2, PR: -2, TE: 0 }
         },
         {
-          label: "Foreign spouse",
-          deltas: { FA: 1, CT: 1, EC: 0, OP: 1, PR: 0, TE: 0 }
+          label: "Foreign spouse to bring new ideas",
+          deltas: { FA: 1, CT: 1, EC: 0, OP: 2, PR: 2, TE: 1 }
         },
         {
           label: "Stay single",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
+          deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: 1, TE: 0 }
         },
         {
-          label: "Everyone",
-          deltas: { FA: 0, CT: -1, EC: 2, OP: 1, PR: 1, TE: -1 }
+          label: "Everyone - you got enough love to pass around",
+          deltas: { FA: 1, CT: -2, EC: 3, OP: 2, PR: 2, TE: 0 }
         }
       ]
     },
@@ -74,19 +74,19 @@ const ACTS = {
       choices: [
         {
           label: "Repurpose metal for tools",
-          deltas: { FA: -1, CT: 0, EC: -1, OP: 1, PR: 1, TE: -1 }
+          deltas: { FA: -1, CT: 0, EC: -2, OP: 0, PR: 1, TE: 2 }
         },
         {
           label: "Keep as a sacred relic",
-          deltas: { FA: 2, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+          deltas: { FA: 3, CT: 1, EC: 1, OP: -1, PR: -2, TE: -1 }
         },
         {
           label: "Destroy it",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -2, PR: -1, TE: -1 }
+          deltas: { FA: 0, CT: 2, EC: 0, OP: -2, PR: 1, TE: -2 }
         },
         {
           label: "Community property",
-          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 1, TE: 0 }
+          deltas: { FA: 1, CT: -2, EC: 2, OP: 1, PR: 1, TE: 1 }
         }
       ]
     },
@@ -96,19 +96,19 @@ const ACTS = {
       choices: [
         {
           label: "Mediation circles",
-          deltas: { FA: 1, CT: 0, EC: 2, OP: 1, PR: 0, TE: -1 }
+          deltas: { FA: 1, CT: -1, EC: 2, OP: 2, PR: 1, TE: -1 }
         },
         {
           label: "Strict arbiter",
-          deltas: { FA: -2, CT: 1, EC: 0, OP: 0, PR: -1, TE: 1 }
+          deltas: { FA: -2, CT: 2, EC: -1, OP: -1, PR: -1, TE: 1 }
         },
         {
           label: "Trial by challenge",
-          deltas: { FA: 0, CT: 1, EC: -1, OP: 0, PR: -1, TE: 0 }
+          deltas: { FA: 0, CT: 1, EC: -2, OP: -1, PR: -1, TE: 0 }
         },
         {
           label: "Natural resolution",
-          deltas: { FA: 0, CT: -2, EC: 0, OP: 0, PR: -1, TE: -2 }
+          deltas: { FA: 1, CT: -2, EC: 1, OP: 0, PR: 0, TE: -1 }
         }
       ]
     },
@@ -118,19 +118,19 @@ const ACTS = {
       choices: [
         {
           label: "Equal rations distributed",
-          deltas: { FA: 0, CT: 1, EC: 2, OP: 0, PR: 1, TE: 0 }
+          deltas: { FA: 0, CT: 1, EC: 2, OP: -1, PR: 1, TE: 0 }
         },
         {
           label: "Free market",
-          deltas: { FA: -1, CT: 1, EC: -2, OP: 0, PR: -1, TE: 1 }
+          deltas: { FA: -1, CT: -1, EC: -3, OP: 0, PR: 0, TE: 1 }
         },
         {
           label: "Gather your own",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 0, TE: -2 }
+          deltas: { FA: 0, CT: -2, EC: 1, OP: 1, PR: 0, TE: -1 }
         },
         {
           label: "Communal meals served",
-          deltas: { FA: 1, CT: 1, EC: 2, OP: 1, PR: 1, TE: 0 }
+          deltas: { FA: 1, CT: 1, EC: 2, OP: 0, PR: 0, TE: 0 }
         }
       ]
     },
@@ -140,19 +140,19 @@ const ACTS = {
       choices: [
         {
           label: "Communal longhouses",
-          deltas: { FA: 1, CT: 0, EC: 2, OP: 1, PR: 0, TE: -1 }
+          deltas: { FA: 1, CT: 1, EC: 2, OP: 1, PR: -1, TE: -1 }
         },
         {
           label: "Everyone stakes a claim and builds their own",
-          deltas: { FA: -1, CT: -1, EC: -1, OP: 0, PR: 0, TE: 1 }
+          deltas: { FA: -1, CT: -2, EC: -2, OP: 1, PR: 1, TE: 1 }
         },
         {
           label: "Assign dens by need",
-          deltas: { FA: 0, CT: 1, EC: 2, OP: 1, PR: 1, TE: 1 }
+          deltas: { FA: 1, CT: 1, EC: 2, OP: 2, PR: 2, TE: 0 }
         },
         {
           label: "Districts based on job and role",
-          deltas: { FA: -1, CT: 1, EC: -1, OP: -1, PR: -1, TE: 2 }
+          deltas: { FA: -1, CT: 2, EC: -2, OP: -1, PR: -1, TE: 1 }
         }
       ]
     },
@@ -162,137 +162,159 @@ const ACTS = {
       choices: [
         {
           label: "Send away to a camp",
-          deltas: { FA: -1, CT: 2, EC: 0, OP: -1, PR: -1, TE: -1 }
+          deltas: { FA: -1, CT: 2, EC: 1, OP: -2, PR: -2, TE: -1 }
         },
         {
           label: "Must barter for care based on your resources",
-          deltas: { FA: -1, CT: -1, EC: -2, OP: -1, PR: -1, TE: 1 }
+          deltas: { FA: -1, CT: -1, EC: -2, OP: -1, PR: 0, TE: 2 }
         },
         {
           label: "Establish kingdom healer, available to all",
-          deltas: { FA: 2, CT: 0, EC: 2, OP: 1, PR: 1, TE: -1 }
+          deltas: { FA: 2, CT: -1, EC: 3, OP: 1, PR: 2, TE: 0 }
         },
         {
           label: "You're on your own",
-          deltas: { FA: -1, CT: -2, EC: -1, OP: 0, PR: 0, TE: -1 }
+          deltas: { FA: -1, CT: -2, EC: -3, OP: 0, PR: -1, TE: -1 }
         }
       ]
     },
     {
       id: 9,
-      name: "Plan a festival – how should the kingdom celebrate?",
+      name: "How should the people form romantic partnerships?",
+      choices: [
+        {
+          label: "Free love; form bonds and procreate with whomever you choose",
+          deltas: { FA: 0, CT: -2, EC: 1, OP: 1, PR: 2, TE: 0 }
+        },
+        {
+          label: "Marriages arranged by clan elders",
+          deltas: { FA: 2, CT: 2, EC: 1, OP: -1, PR: -2, TE: 0 }
+        },
+        {
+          label: "Unions can form on their own but must be formally recognized by council",
+          deltas: { FA: 0, CT: 1, EC: 1, OP: 0, PR: -1, TE: 0 }
+        },
+        {
+          label: "No formal bonds between partners should exist.",
+          deltas: { FA: -1, CT: -1, EC: 1, OP: 1, PR: 1, TE: 0 }
+        }
+      ]
+    },
+    {
+      id: 10,
+      name: "Plan a festival – how should the new kingdom celebrate?",
       choices: [
         {
           label: "It's orgy time",
-          deltas: { FA: 0, CT: -1, EC: 2, OP: 0, PR: 1, TE: -1 }
+          deltas: { FA: 1, CT: -3, EC: 2, OP: 2, PR: 2, TE: -1 }
         },
         {
           label: "Give thanks to the goddess",
-          deltas: { FA: 2, CT: 0, EC: 1, OP: 0, PR: -1, TE: -1 }
+          deltas: { FA: 3, CT: 1, EC: 1, OP: 0, PR: -1, TE: -1 }
         },
         {
           label: "Everyone gives gifts to loved ones",
-          deltas: { FA: -1, CT: 0, EC: -2, OP: 0, PR: -1, TE: 1 }
+          deltas: { FA: -1, CT: 0, EC: -3, OP: 0, PR: -1, TE: 1 }
         },
         {
           label: "Glorious leader day",
-          deltas: { FA: 0, CT: 2, EC: 0, OP: -1, PR: -1, TE: 1 }
+          deltas: { FA: 1, CT: 3, EC: 1, OP: -2, PR: -2, TE: 0 }
         }
       ]
     }
   ],
   2: [
     {
-      id: 10,
-      name: "How should the young learn and grow in your kingdom?",
+      id: 11,
+      name: "What type of knowledge should we prioritize for the young?",
       choices: [
         {
-          label: "Teach science, math, and practical skills",
-          deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 1 }
+          label: "Science, math, and practical skills",
+          deltas: { FA: -2, CT: 0, EC: 0, OP: 0, PR: 1, TE: 2 }
         },
         {
-          label: "Teach shamanic traditions and forest wisdom",
-          deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: -1 }
+          label: "Shamanic traditions and forest wisdom",
+          deltas: { FA: 2, CT: 1, EC: 1, OP: -1, PR: -2, TE: -2 }
         },
         {
           label: "A mixed curriculum drawing from all cultures",
-          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
+          deltas: { FA: -1, CT: 0, EC: 1, OP: 2, PR: 2, TE: 1 }
         },
         {
           label: "Let each family teach their own way",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
-        }
-      ]
-    },
-    {
-      id: 11,
-      name: "What role should spiritual rituals play in your kingdom?",
-      choices: [
-        {
-          label: "All citizens must participate in traditional rituals",
-          deltas: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
-        },
-        {
-          label: "Rituals are encouraged but optional",
-          deltas: { FA: 1, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
-        },
-        {
-          label: "Keep rituals separate from governance entirely",
-          deltas: { FA: -1, CT: 1, EC: 0, OP: 0, PR: 0, TE: 1 }
-        },
-        {
-          label: "Welcome creative new rituals to emerge freely",
-          deltas: { FA: 1, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
+          deltas: { FA: 0, CT: -2, EC: -1, OP: 1, PR: -1, TE: 0 }
         }
       ]
     },
     {
       id: 12,
-      name: "Different species speak different tongues. How will your kingdom communicate?",
+      name: "What role should The Goddess play in your kingdom?",
       choices: [
         {
-          label: "Mandate one common language for unity",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+          label: "You can worship any deity as long as its The Goddess",
+          deltas: { FA: 2, CT: 3, EC: 0, OP: -2, PR: -2, TE: 0 }
         },
         {
-          label: "Preserve each clan's ancient dialects",
-          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: -1, TE: 0 }
+          label: "The Kingdom's official patron is the Goddess, but worship is optional",
+          deltas: { FA: 1, CT: 1, EC: 0, OP: 1, PR: -1, TE: 0 }
         },
         {
-          label: "Create a hybrid language from all tongues",
-          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
+          label: "Keep Goddess worship separate from governance entirely",
+          deltas: { FA: -2, CT: -1, EC: -2, OP: 1, PR: 1, TE: 0 }
         },
         {
-          label: "Use sacred silent-sign communication",
-          deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }
+          label: "You may pray to any (or none of) the Gods however you see fit",
+          deltas: { FA: 1, CT: -1, EC: 0, OP: 2, PR: 1, TE: 0 }
         }
       ]
     },
     {
       id: 13,
-      name: "Artists wish to create. What forms of expression will you permit?",
+      name: "Different species live side-by-side andspeak different tongues. How will your kingdom officially communicate?",
       choices: [
         {
-          label: "Only traditional sacred art honoring ancestors",
-          deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
+          label: "Mandate the majority language as the official language",
+          deltas: { FA: 0, CT: 2, EC: 1, OP: -1, PR: 0, TE: 0 }
         },
         {
-          label: "All art is permitted; creators are free",
-          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
+          label: "Preserve each clan's ancient dialects with translation orbs",
+          deltas: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 1, TE: 1 }
         },
         {
-          label: "Art must be reviewed and approved by council",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+          label: "Create a hybrid language from all tongues",
+          deltas: { FA: 0, CT: 1, EC: 1, OP: 1, PR: 1, TE: 1 }
         },
         {
-          label: "Only ritual art for ceremonies is allowed",
-          deltas: { FA: 1, CT: 0, EC: 0, OP: 0, PR: -1, TE: 0 }
+          label: "Do nothing - Let the natural course of history decide",
+          deltas: { FA: -1, CT: -2, EC: 0, OP: 1, PR: 1, TE: -1 }
         }
       ]
     },
     {
       id: 14,
-      name: "How should different species live together in your kingdom?",
+      name: "An artist society has formed, and some paintings are critical of your reign. What do you do?",
+      choices: [
+        {
+          label: "Decree only traditional sacred art is allowed",
+          deltas: { FA: 3, CT: 2, EC: 1, OP: -2, PR: -1, TE: -1 }
+        },
+        {
+          label: "All art is permitted; creators are free",
+          deltas: { FA: 0, CT: -3, EC: -2, OP: 2, PR: 1, TE: 1 }
+        },
+        {
+          label: "Art must be reviewed and approved by council before being displayed, but creators are free to create whatever they want",
+          deltas: { FA: 0, CT: 2, EC: 1, OP: -1, PR: -1, TE: 0 }
+        },
+        {
+          label: "Flood the zone with commisioned art praising your glory",
+          deltas: { FA: 0, CT: 0, EC: 1, OP: -1, PR: -1, TE: 0 }
+        }
+      ]
+    },
+    {
+      id: 15,
+      name: "Two species have formed a rivalry. What do you do?",
       choices: [
         {
           label: "Integrated housing where all species mix freely",
@@ -313,7 +335,7 @@ const ACTS = {
       ]
     },
     {
-      id: 15,
+      id: 16,
       name: "Strangers approach your borders seeking entry. What is your policy?",
       choices: [
         {
@@ -335,7 +357,7 @@ const ACTS = {
       ]
     },
     {
-      id: 16,
+      id: 17,
       name: "How will goods and resources flow through your kingdom?",
       choices: [
         {
@@ -353,28 +375,6 @@ const ACTS = {
         {
           label: "Free market capitalism without restrictions",
           deltas: { FA: 0, CT: -1, EC: -1, OP: 0, PR: 0, TE: 0 }
-        }
-      ]
-    },
-    {
-      id: 17,
-      name: "How should romantic bonds and partnerships be formed?",
-      choices: [
-        {
-          label: "Free love; bond with whomever you choose",
-          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
-        },
-        {
-          label: "Marriages arranged by clan elders",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
-        },
-        {
-          label: "Unions must be formally recognized by council",
-          deltas: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }
-        },
-        {
-          label: "No formal bonds; relationships need no approval",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
         }
       ]
     },
@@ -403,7 +403,7 @@ const ACTS = {
   ],
   3: [
     {
-      id: 19,
+      id: 20,
       name: "A harsh winter brings famine. Food stores run dangerously low. How do you respond?",
       choices: [
         {
@@ -425,7 +425,7 @@ const ACTS = {
       ]
     },
     {
-      id: 20,
+      id: 21,
       name: "Deep in the forest, scouts discover a strange glowing artifact of immense power. What do you do?",
       choices: [
         {
@@ -447,7 +447,7 @@ const ACTS = {
       ]
     },
     {
-      id: 21,
+      id: 22,
       name: "A massive wave of refugees from a destroyed land seeks shelter in your forest. What do you do?",
       choices: [
         {
@@ -469,7 +469,7 @@ const ACTS = {
       ]
     },
     {
-      id: 22,
+      id: 23,
       name: "A political faction grows powerful, challenging your authority. How do you respond?",
       choices: [
         {
@@ -491,7 +491,7 @@ const ACTS = {
       ]
     },
     {
-      id: 23,
+      id: 24,
       name: "Your kingdom needs protection from threats. How will you defend your borders?",
       choices: [
         {
@@ -513,7 +513,7 @@ const ACTS = {
       ]
     },
     {
-      id: 24,
+      id: 25,
       name: "Someone commits a serious crime, sabotaging vital kingdom infrastructure. How is justice served?",
       choices: [
         {
@@ -535,7 +535,7 @@ const ACTS = {
       ]
     },
     {
-      id: 25,
+      id: 26,
       name: "A great blight spreads through the forest, killing ancient trees. How do you respond?",
       choices: [
         {
@@ -557,7 +557,7 @@ const ACTS = {
       ]
     },
     {
-      id: 26,
+      id: 27,
       name: "An inventor creates a revolutionary new tool that could change everything. Do you embrace it?",
       choices: [
         {
@@ -581,7 +581,7 @@ const ACTS = {
   ],
   4: [
     {
-      id: 27,
+      id: 28,
       name: "As your kingdom matures, what do your people hold most sacred?",
       choices: [
         {
@@ -603,7 +603,7 @@ const ACTS = {
       ]
     },
     {
-      id: 28,
+      id: 29,
       name: "What lessons will you pass to the next generation as your legacy?",
       choices: [
         {
@@ -625,7 +625,7 @@ const ACTS = {
       ]
     },
     {
-      id: 29,
+      id: 30,
       name: "Your kingdom grows strong. Neighboring lands beckon. How do you handle expansion?",
       choices: [
         {
@@ -647,7 +647,7 @@ const ACTS = {
       ]
     },
     {
-      id: 30,
+      id: 31,
       name: "A rebel faction threatens to split your kingdom. This is your final test. How do you respond?",
       choices: [
         {
@@ -669,7 +669,7 @@ const ACTS = {
       ]
     },
     {
-      id: 31,
+      id: 32,
       name: "You write your kingdom's permanent constitution. What form of government will endure?",
       choices: [
         {
@@ -691,7 +691,7 @@ const ACTS = {
       ]
     },
     {
-      id: 32,
+      id: 33,
       name: "Your final decree: What is the eternal spirit that will define your forest kingdom for all time?",
       choices: [
         {
@@ -713,27 +713,31 @@ const ACTS = {
       ]
     }
   ]
-};
-
+ };
+ 
+ 
 // === Dynamic Threshold System ===
 // Thresholds scale based on cumulative questions per act
 const THRESHOLDS_PER_ACT = {
-  1: { HIGH_POS: 4, HIGH_NEG: -4 },   // 8 questions
-  2: { HIGH_POS: 7, HIGH_NEG: -7 },   // 17 cumulative
-  3: { HIGH_POS: 10, HIGH_NEG: -10 }, // 25 cumulative
-  4: { HIGH_POS: 12, HIGH_NEG: -12 }  // 31 cumulative
+  1: { HIGH_POS: 4, HIGH_NEG: -4 },   // 10 questions
+  2: { HIGH_POS: 7, HIGH_NEG: -7 },   // 18 cumulative (10 + 8)
+  3: { HIGH_POS: 10, HIGH_NEG: -10 }, // 26 cumulative (18 + 8)
+  4: { HIGH_POS: 12, HIGH_NEG: -12 }  // 32 cumulative (26 + 6)
 };
-
-function getThresholds(act) {
+ 
+ 
+ function getThresholds(act) {
   return THRESHOLDS_PER_ACT[act] || THRESHOLDS_PER_ACT[4];
-}
-
-function isHighPos(v, thresholds) { return v >= thresholds.HIGH_POS; }
-function isHighNeg(v, thresholds) { return v <= thresholds.HIGH_NEG; }
-function isMid(v, thresholds) { return v > thresholds.HIGH_NEG && v < thresholds.HIGH_POS; }
-
-// Helper function to calculate alignment percentage to an ending profile
-function calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds) {
+ }
+ 
+ 
+ function isHighPos(v, thresholds) { return v >= thresholds.HIGH_POS; }
+ function isHighNeg(v, thresholds) { return v <= thresholds.HIGH_NEG; }
+ function isMid(v, thresholds) { return v > thresholds.HIGH_NEG && v < thresholds.HIGH_POS; }
+ 
+ 
+ // Helper function to calculate alignment percentage to an ending profile
+ function calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds) {
   // Calculate Euclidean distance to ideal profile
   const distance = Math.sqrt(
     Math.pow((FA - profile.FA * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2) +
@@ -743,80 +747,86 @@ function calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds) {
     Math.pow((PR - profile.PR * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2) +
     Math.pow((TE - profile.TE * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2)
   );
-  
-  // Convert distance to percentage (0 distance = 100%, max distance = 0%)
+   // Convert distance to percentage (0 distance = 100%, max distance = 0%)
   const maxDistance = Math.sqrt(6 * 4);
   return Math.max(0, Math.min(100, Math.round((1 - distance / maxDistance) * 100)));
-}
-
-// === Ending resolver ===
-// REORDERED: Most specific conditions first, general conditions last
-function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
+ }
+ 
+ 
+ // === Ending resolver ===
+ // REORDERED: Most specific conditions first, general conditions last
+ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
   const thresholds = getThresholds(act);
   const vals = { FA, CT, EC, OP, PR, TE };
   const highPosCount = Object.values(vals).filter(v => isHighPos(v, thresholds)).length;
   const highNegCount = Object.values(vals).filter(v => isHighNeg(v, thresholds)).length;
-
-  // 10. Sacred Order (High Faith + High Control + Communal) - MOST SPECIFIC
+ 
+ 
+  // 1. Sacred Order (High Faith + High Control + Communal) - MOST SPECIFIC
   if (isHighPos(FA, thresholds) && isHighPos(CT, thresholds) && isHighPos(EC, thresholds)) {
     const profile = { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 };
     return {
-      id: 10,
+      id: 1,
       name: "The Sacred Order",
       tagline: "Divine authority guides the community; faith and discipline shape every branch.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "High Faith + High Control + High Communal Economy."
     };
   }
-
-  // 8. Primeval Kingdom - check early (specific combo)
+ 
+ 
+  // 2. Primeval Kingdom - check early (specific combo)
   if (isHighNeg(PR, thresholds) && isHighPos(CT, thresholds) && FA > 0) {
     const profile = { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 };
     return {
-      id: 8,
+      id: 2,
       name: "The Primeval Kingdom",
       tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "Strongly Traditional (NEG PR), very high Control, positive Faith (ancestral/spiritual)."
     };
   }
-
-  // 9. Ordered Commune - check before general CT checks
+ 
+ 
+  // 3. Ordered Commune - check before general CT checks
   if (isHighPos(CT, thresholds) && isHighPos(EC, thresholds) && !isHighPos(FA, thresholds) && !isHighNeg(OP, thresholds)) {
     const profile = { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 };
     return {
-      id: 9,
+      id: 3,
       name: "The Ordered Commune",
       tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "High Control + High Communal Economy, not HIGH faith, not NEG openness."
     };
   }
-
-  // 2. Thorn Regime (authoritarian + closed)
+ 
+ 
+  // 4. Thorn Regime (authoritarian + closed)
   if (isHighPos(CT, thresholds) && isHighNeg(OP, thresholds) && PR <= 0) {
     const profile = { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 };
     return {
-      id: 2,
+      id: 4,
       name: "The Thorn Regime",
       tagline: "Order at any cost. The forest tightens into a barbed crown.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "High Control, very closed (NEG OP), traditional/non-innovative."
     };
   }
-
-  // 3. Free-Root Collective (all 3 conditions HIGH/NEG)
-  if (isHighPos(EC, thresholds) && isHighNeg(CT, thresholds) && isHighPos(OP, thresholds)) {
-    const profile = { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 };
+ 
+ 
+  // 5. Free-Root Collective (natural anarchist commune)
+  if (isHighPos(EC, thresholds) && isHighNeg(CT, thresholds) && isHighPos(OP, thresholds) && TE <= 0) {
+    const profile = { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: -1 };
     return {
-      id: 3,
+      id: 5,
       name: "The Free-Root Collective",
-      tagline: "Borders blur, property dissolves, and the forest lives as one vast commune.",
+      tagline: "Borders blur, property dissolves, and the forest returns to its natural commune.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "Communal economy (HIGH EC), very free (NEG CT), very open (HIGH OP)."
+      debug: "Communal economy (HIGH EC), very free (NEG CT), very open (HIGH OP), green/neutral tech (TE ≤ 0)."
     };
   }
-
+ 
+ 
   // 6. Dawnbound Republic - check before Cosmopolitan (more specific)
   if (isHighPos(PR, thresholds) && isHighPos(OP, thresholds) && isMid(CT, thresholds) && isMid(FA, thresholds)) {
     const profile = { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 };
@@ -828,74 +838,79 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
       debug: "High Progress + Openness, mid Control + Faith."
     };
   }
-
-  // 1. Verdant Theocracy (spiritual leadership) - moved down to not capture Sacred Order
-  if (isHighPos(FA, thresholds) && !isHighNeg(CT, thresholds)) {
-    const profile = { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 };
+ 
+ 
+  // 7. Verdant Theocracy (nature-worshipping spiritual leadership)
+  if (isHighPos(FA, thresholds) && isMid(CT, thresholds) && TE <= 0) {
+    const profile = { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 };
     return {
-      id: 1,
+      id: 7,
       name: "The Verdant Theocracy",
-      tagline: "The forest is ruled by roots and rites; law is written in leaf and omen.",
+      tagline: "The forest is ruled by roots and rites; nature's spirits guide every branch.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "High Faith, not extreme anarchy."
+      debug: "High Faith + Mid Control + Green/Neutral Tech (TE ≤ 0)."
     };
   }
-
-  // 4. Cosmopolitan Grove - requires HIGH Openness + HIGH Economy
-  if (isHighPos(OP, thresholds) && isHighPos(EC, thresholds) && isMid(CT, thresholds)) {
-    const profile = { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 };
+ 
+ 
+  // 8. Cosmopolitan Grove - high-tech metropolis
+  if (isHighPos(OP, thresholds) && isMid(EC, thresholds) && isMid(CT, thresholds) && isHighPos(TE, thresholds) && PR >= 0) {
+    const profile = { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 1 };
     return {
-      id: 4,
+      id: 8,
       name: "The Cosmopolitan Grove",
-      tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds.",
+      tagline: "Paths and technologies cross freely; the forest becomes a thriving hub of innovation and exchange.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
-      debug: "High Openness + High Communal Economy, moderate Control."
+      debug: "High Openness + Mid Communal + Mid Control + HIGH Tech (TE ≥ 12) + positive Progress (PR ≥ 0)."
     };
   }
-
-  // 7. Emerald Symbiosis (Green Tech)
+ 
+ 
+  // 9. Emerald Symbiosis (Green Tech)
   if (isHighNeg(TE, thresholds) && PR >= 0 && OP >= 0 && EC >= 0) {
     const profile = { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 };
     return {
-      id: 7,
+      id: 9,
       name: "The Emerald Symbiosis",
       tagline: "Vines and circuits entwine; the forest and its tools become one living system.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "Tech strongly Green (NEG TE) with neutral+ PR, OP, EC."
     };
   }
-
-  // 5. Shielded Woodland
+ 
+ 
+  // 10. Shielded Woodland
   if (isHighNeg(OP, thresholds) && CT >= 0 && PR <= 0) {
     const profile = { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 };
     return {
-      id: 5,
+      id: 10,
       name: "The Shielded Woodland",
       tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion.",
       alignmentPercent: calculateAlignment(FA, CT, EC, OP, PR, TE, profile, thresholds),
       debug: "Closed borders (NEG OP), some order (CT ≥ 0), traditional or neutral progress (PR ≤ 0)."
     };
   }
-
+ 
+ 
   // Fallback: Find closest matching ending (10 endings)
   const allEndings = [
-    { id: 1, profile: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 }, name: "The Verdant Theocracy", tagline: "The forest is ruled by roots and rites; law is written in leaf and omen." },
-    { id: 2, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Thorn Regime", tagline: "Order at any cost. The forest tightens into a barbed crown." },
-    { id: 3, profile: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: 0 }, name: "The Free-Root Collective", tagline: "Borders blur, property dissolves, and the forest lives as one vast commune." },
-    { id: 4, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }, name: "The Cosmopolitan Grove", tagline: "Paths and tongues cross freely; the forest becomes a crossroads of worlds." },
-    { id: 5, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Shielded Woodland", tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion." },
+    { id: 1, profile: { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Sacred Order", tagline: "Divine authority guides the community; faith and discipline shape every branch." },
+    { id: 2, profile: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }, name: "The Primeval Kingdom", tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth." },
+    { id: 3, profile: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Ordered Commune", tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future." },
+    { id: 4, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Thorn Regime", tagline: "Order at any cost. The forest tightens into a barbed crown." },
+    { id: 5, profile: { FA: 0, CT: -1, EC: 1, OP: 1, PR: 0, TE: -1 }, name: "The Free-Root Collective", tagline: "Borders blur, property dissolves, and the forest returns to its natural commune." },
     { id: 6, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }, name: "The Dawnbound Republic", tagline: "Innovation and openness guide a forward-thinking council toward a brighter future." },
-    { id: 7, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Emerald Symbiosis", tagline: "Vines and circuits entwine; the forest and its tools become one living system." },
-    { id: 8, profile: { FA: 1, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }, name: "The Primeval Kingdom", tagline: "Ancestral laws and crowned canopies rule; the oldest rings decide the newest growth." },
-    { id: 9, profile: { FA: 0, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Ordered Commune", tagline: "Strong hands guide shared resources; structure and cooperation build the forest's future." },
-    { id: 10, profile: { FA: 1, CT: 1, EC: 1, OP: 0, PR: 0, TE: 0 }, name: "The Sacred Order", tagline: "Divine authority guides the community; faith and discipline shape every branch." }
+    { id: 7, profile: { FA: 1, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Verdant Theocracy", tagline: "The forest is ruled by roots and rites; nature's spirits guide every branch." },
+    { id: 8, profile: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 1 }, name: "The Cosmopolitan Grove", tagline: "Paths and technologies cross freely; the forest becomes a thriving hub of innovation and exchange." },
+    { id: 9, profile: { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: -1 }, name: "The Emerald Symbiosis", tagline: "Vines and circuits entwine; the forest and its tools become one living system." },
+    { id: 10, profile: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }, name: "The Shielded Woodland", tagline: "Walls of bark and belief keep the outside at bay; safety is found in seclusion." }
   ];
-
+ 
+ 
   // Calculate distance to each ending profile (normalized by thresholds)
   let closestEnding = allEndings[0];
   let minDistance = Infinity;
-  
-  for (const ending of allEndings) {
+   for (const ending of allEndings) {
     // Calculate Euclidean distance in normalized space
     const distance = Math.sqrt(
       Math.pow((FA - ending.profile.FA * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2) +
@@ -905,26 +920,40 @@ function resolveEnding(FA, CT, EC, OP, PR, TE, act = 4) {
       Math.pow((PR - ending.profile.PR * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2) +
       Math.pow((TE - ending.profile.TE * thresholds.HIGH_POS) / thresholds.HIGH_POS, 2)
     );
-    
+   
     if (distance < minDistance) {
       minDistance = distance;
       closestEnding = ending;
     }
   }
-  
-  // Calculate alignment percentage (closer to 0 distance = higher percentage)
+   // Calculate alignment percentage (closer to 0 distance = higher percentage)
   // Max reasonable distance is around 6 (all axes at opposite extremes)
   const maxDistance = Math.sqrt(6 * 4); // sqrt of 6 axes * 4 (2 thresholds squared)
   const alignmentPercent = Math.max(0, Math.min(100, Math.round((1 - minDistance / maxDistance) * 100)));
-  
-  return {
+   return {
     id: closestEnding.id,
     name: closestEnding.name,
     tagline: closestEnding.tagline,
     alignmentPercent: alignmentPercent,
     debug: `Closest match fallback (${alignmentPercent}% aligned). Scores: FA:${FA}, CT:${CT}, EC:${EC}, OP:${OP}, PR:${PR}, TE:${TE}`
   };
-}
+ }
+ 
+ 
+// === Act Names ===
+const ACT_NAMES = {
+  1: "Emergence",
+  2: "New Growth",
+  3: "The Weathering",
+  4: "Eternal Forest"
+};
+
+const ACT_TAGLINES = {
+  1: "Rising from decay",
+  2: "Building fresh systems",
+  3: "Enduring hardship",
+  4: "What endures forever"
+};
 
 // === Quiz state ===
 let currentAct = 1;
@@ -936,23 +965,113 @@ const allAnswers = {
   3: new Array(ACTS[3].length).fill(null),
   4: new Array(ACTS[4].length).fill(null)
 };
-
-function getCurrentQuestions() {
+ 
+ 
+ function getCurrentQuestions() {
   return ACTS[currentAct];
-}
-
-function getCurrentAnswers() {
+ }
+ 
+ 
+ function getCurrentAnswers() {
   return allAnswers[currentAct];
-}
-
-function recalcScores() {
-  const totals = { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 };
+ }
+ 
+ 
+ function updateAnswerLog() {
+  const logContent = document.getElementById("answer-log-content");
+  logContent.innerHTML = "";
   
-  // Sum up all answers from all acts up to and including current act
-  for (let act = 1; act <= currentAct; act++) {
+  let hasAnswers = false;
+  
+  // Loop through all acts up to current act
+  for (let act = 1; act <= 4; act++) {
     const actQuestions = ACTS[act];
     const actAnswers = allAnswers[act];
     
+    // Check if this act has any answers
+    const hasActAnswers = actAnswers.some(a => a != null);
+    if (!hasActAnswers) continue;
+    
+    // Add act header
+    const actHeader = document.createElement("div");
+    actHeader.className = "answer-log-act-header";
+    actHeader.textContent = `Act ${act}: ${ACT_NAMES[act]}`;
+    logContent.appendChild(actHeader);
+    
+    // Add questions for this act
+    actQuestions.forEach((q, qi) => {
+      const choiceIndex = actAnswers[qi];
+      if (choiceIndex == null) return;
+      
+      hasAnswers = true;
+      const choice = q.choices[choiceIndex];
+      
+      const item = document.createElement("div");
+      item.className = "answer-log-item";
+      
+      const questionDiv = document.createElement("div");
+      questionDiv.className = "answer-log-question";
+      questionDiv.textContent = `Q${q.id}: ${q.name}`;
+      
+      const answerDiv = document.createElement("div");
+      answerDiv.className = "answer-log-answer";
+      answerDiv.textContent = `→ ${choice.label}`;
+      
+      const metaDiv = document.createElement("div");
+      metaDiv.className = "answer-log-meta";
+      const deltaText = Object.entries(choice.deltas)
+        .filter(([_, val]) => val !== 0)
+        .map(([key, val]) => `${key}${val > 0 ? '+' : ''}${val}`)
+        .join(", ");
+      metaDiv.textContent = deltaText || "No alignment changes";
+      
+      item.appendChild(questionDiv);
+      item.appendChild(answerDiv);
+      item.appendChild(metaDiv);
+      logContent.appendChild(item);
+    });
+    
+    // Add act ending if it exists
+    const ending = actEndings[act];
+    if (ending) {
+      const endingDiv = document.createElement("div");
+      endingDiv.className = "answer-log-ending";
+      
+      const endingTitle = document.createElement("div");
+      endingTitle.className = "answer-log-ending-title";
+      endingTitle.textContent = "Act Ending:";
+      
+      const endingName = document.createElement("div");
+      endingName.className = "answer-log-ending-name";
+      endingName.textContent = ending.name;
+      
+      const endingTagline = document.createElement("div");
+      endingTagline.className = "answer-log-ending-tagline";
+      endingTagline.textContent = ending.tagline;
+      
+      endingDiv.appendChild(endingTitle);
+      endingDiv.appendChild(endingName);
+      endingDiv.appendChild(endingTagline);
+      logContent.appendChild(endingDiv);
+    }
+  }
+  
+  if (!hasAnswers) {
+    const emptyDiv = document.createElement("div");
+    emptyDiv.className = "answer-log-empty";
+    emptyDiv.textContent = "No answers yet. Start answering questions to see your choices here.";
+    logContent.appendChild(emptyDiv);
+  }
+}
+
+
+ function recalcScores() {
+  const totals = { FA: 0, CT: 0, EC: 0, OP: 0, PR: 0, TE: 0 };
+   // Sum up all answers from all acts up to and including current act
+  for (let act = 1; act <= currentAct; act++) {
+    const actQuestions = ACTS[act];
+    const actAnswers = allAnswers[act];
+   
     actQuestions.forEach((q, qi) => {
       const choiceIndex = actAnswers[qi];
       if (choiceIndex == null) return;
@@ -962,93 +1081,94 @@ function recalcScores() {
       }
     });
   }
-  
-  document.getElementById("score-fa").textContent = totals.FA;
+   document.getElementById("score-fa").textContent = totals.FA;
   document.getElementById("score-ct").textContent = totals.CT;
   document.getElementById("score-ec").textContent = totals.EC;
   document.getElementById("score-op").textContent = totals.OP;
   document.getElementById("score-pr").textContent = totals.PR;
   document.getElementById("score-te").textContent = totals.TE;
-  
-  // Calculate and show trending ending
+   // Calculate and show trending ending
   const trendingEnding = resolveEnding(
     totals.FA, totals.CT, totals.EC, totals.OP, totals.PR, totals.TE, currentAct
   );
   document.getElementById("trending-name").textContent = trendingEnding.name;
-  
-  // Show alignment percentage if available
+   // Show alignment percentage if available
   if (trendingEnding.alignmentPercent !== undefined) {
-    document.getElementById("trending-alignment").textContent = 
+    document.getElementById("trending-alignment").textContent =
       `${trendingEnding.alignmentPercent}% aligned with this ending`;
   } else {
     document.getElementById("trending-alignment").textContent = "";
   }
+   // Update answer log
+  updateAnswerLog();
   
   return totals;
-}
-
-function renderQuestion() {
+ }
+ 
+ 
+ function renderQuestion() {
   const questions = getCurrentQuestions();
   const answers = getCurrentAnswers();
   const q = questions[currentIndex];
-  
-  document.getElementById("act-display").textContent = `Act ${currentAct}`;
+   document.getElementById("act-display").textContent = `Act ${currentAct}: ${ACT_TAGLINES[currentAct]}`;
   document.getElementById("q-number").textContent = `Policy ${q.id}`;
   document.getElementById("q-name").textContent = q.name;
   document.getElementById("q-progress").textContent =
     `Question ${currentIndex + 1} of ${questions.length}`;
-  
-  // Update progress bar
+   // Update progress bar
   const progressPercent = ((currentIndex + 1) / questions.length) * 100;
   document.getElementById("progress-fill").style.width = `${progressPercent}%`;
-  document.getElementById("progress-text").textContent = 
+  document.getElementById("progress-text").textContent =
     `Question ${currentIndex + 1} of ${questions.length}`;
-
+ 
+ 
   const container = document.getElementById("choices-container");
   container.innerHTML = "";
   q.choices.forEach((choice, idx) => {
     const choiceId = `q${currentAct}-${currentIndex}-choice${idx}`;
     const wrapper = document.createElement("div");
     wrapper.className = "choice";
-
+ 
+ 
     const input = document.createElement("input");
     input.type = "radio";
     input.name = `q${currentAct}-${currentIndex}`;
     input.id = choiceId;
     input.value = idx;
     if (answers[currentIndex] === idx) input.checked = true;
-
+ 
+ 
     input.addEventListener("change", () => {
       allAnswers[currentAct][currentIndex] = idx;
       recalcScores();
     });
-
+ 
+ 
     const label = document.createElement("label");
     label.className = "choice-label";
     label.setAttribute("for", choiceId);
     label.textContent = choice.label;
-
+ 
+ 
     wrapper.appendChild(input);
     wrapper.appendChild(label);
     container.appendChild(wrapper);
   });
-
+ 
+ 
   // Only disable back button at the very first question of Act 1
   document.getElementById("prev-btn").disabled = (currentAct === 1 && currentIndex === 0);
-  
-  // On last question, change Next button to show it will compute ending
+   // On last question, change Next button to show it will compute ending
   const isLastQuestion = currentIndex === questions.length - 1;
   const nextBtn = document.getElementById("next-btn");
-  
-  if (isLastQuestion) {
+   if (isLastQuestion) {
     nextBtn.textContent = "🔮 View Act Ending →";
     nextBtn.className = "btn-primary"; // Make it primary/highlighted
   } else {
     nextBtn.textContent = "Next →";
     nextBtn.className = "btn-secondary";
   }
-  
-  // Show/hide UI elements based on state
+   // Show/hide UI elements based on state
   document.getElementById("question-block").style.display = "block";
   document.getElementById("act-complete-block").style.display = "none";
   document.getElementById("continue-btn").style.display = "none";
@@ -1056,9 +1176,10 @@ function renderQuestion() {
   document.getElementById("next-btn").style.display = "inline-flex";
   document.querySelector(".progress-container").style.display = "block";
   document.getElementById("trending-block").style.display = "block"; // Show trending during questions
-}
-
-function computeEnding() {
+ }
+ 
+ 
+ function computeEnding() {
   const totals = recalcScores();
   const res = resolveEnding(
     totals.FA,
@@ -1069,39 +1190,32 @@ function computeEnding() {
     totals.TE,
     currentAct  // Pass current act for dynamic thresholds
   );
-  
-  // Store the ending for this act
+   // Store the ending for this act
   actEndings[currentAct] = res;
-  
-  // Update the sidebar and show it
+   // Update the sidebar and show it
   document.getElementById("result-block").style.display = "block";
   document.getElementById("ending-name").textContent = res.name;
-  
-  // Show alignment percentage if available
+   // Show alignment percentage if available
   if (res.alignmentPercent !== undefined) {
-    document.getElementById("ending-alignment").textContent = 
+    document.getElementById("ending-alignment").textContent =
       `${res.alignmentPercent}% aligned with this ending`;
   } else {
     document.getElementById("ending-alignment").textContent = "";
   }
-  
-  document.getElementById("ending-tagline").textContent = res.tagline;
+   document.getElementById("ending-tagline").textContent = res.tagline;
   document.getElementById("debug").textContent =
     `FA: ${totals.FA}, CT: ${totals.CT}, EC: ${totals.EC}, OP: ${totals.OP}, PR: ${totals.PR}, TE: ${totals.TE}\n` +
     (res.debug || "");
-  
-  // Show act complete screen
+   // Show act complete screen
   document.getElementById("question-block").style.display = "none";
   document.getElementById("act-complete-block").style.display = "block";
   document.getElementById("prev-btn").style.display = "inline-flex"; // Keep back button visible
   document.getElementById("next-btn").style.display = "none";
   document.querySelector(".progress-container").style.display = "none";
   document.getElementById("trending-block").style.display = "none"; // Hide trending when showing actual ending
-  
-  // Build summary of all acts so far
-  let summary = `<strong>Act ${currentAct} Ending: ${res.name}</strong><br>${res.tagline}`;
-  
-  if (currentAct < 4) {
+   // Build summary of all acts so far
+  let summary = `<strong>${res.name}</strong><br>${res.tagline}`;
+   if (currentAct < 4) {
     document.getElementById("continue-btn").style.display = "inline-flex";
   } else {
     // Final act - show all endings
@@ -1109,48 +1223,47 @@ function computeEnding() {
     for (let act = 1; act <= 4; act++) {
       const ending = actEndings[act];
       if (ending) {
-        summary += `<strong>Act ${act}:</strong> ${ending.name}<br><em>${ending.tagline}</em><br><br>`;
+        summary += `<strong>Act ${act}: ${ACT_NAMES[act]}</strong><br>${ending.name}<br><em>${ending.tagline}</em><br><br>`;
       }
     }
   }
-  
-  document.getElementById("act-ending-summary").innerHTML = summary;
-}
-
-function continueToNextAct() {
+   document.getElementById("act-ending-summary").innerHTML = summary;
+ }
+ 
+ 
+ function continueToNextAct() {
   if (currentAct < 4) {
     currentAct++;
     currentIndex = 0;
     renderQuestion();
   }
-}
-
-function resetQuiz() {
+ }
+ 
+ 
+ function resetQuiz() {
   currentAct = 1;
   currentIndex = 0;
-  
-  // Reset all answers
+   // Reset all answers
   for (let act in allAnswers) {
     for (let i = 0; i < allAnswers[act].length; i++) {
       allAnswers[act][i] = null;
     }
   }
-  
-  // Clear endings
+   // Clear endings
   for (let act in actEndings) {
     delete actEndings[act];
   }
-  
-  recalcScores();
+   recalcScores();
   document.getElementById("result-block").style.display = "none";
   document.getElementById("ending-name").textContent = "";
   document.getElementById("ending-tagline").textContent = "";
   document.getElementById("debug").textContent = "";
   renderQuestion();
-}
-
-// Initialize the app
-function initApp() {
+ }
+ 
+ 
+ // Initialize the app
+ function initApp() {
   document.getElementById("prev-btn").addEventListener("click", () => {
     // If we're showing the act complete screen, go back to last question
     if (document.getElementById("act-complete-block").style.display !== "none") {
@@ -1166,8 +1279,7 @@ function initApp() {
       renderQuestion();
     }
   });
-  
-  document.getElementById("next-btn").addEventListener("click", () => {
+   document.getElementById("next-btn").addEventListener("click", () => {
     const questions = getCurrentQuestions();
     if (currentIndex < questions.length - 1) {
       currentIndex++;
@@ -1177,18 +1289,24 @@ function initApp() {
       computeEnding();
     }
   });
-  
-  document.getElementById("continue-btn").addEventListener("click", continueToNextAct);
+   document.getElementById("continue-btn").addEventListener("click", continueToNextAct);
   document.getElementById("reset-btn").addEventListener("click", resetQuiz);
-
+ 
+ 
   renderQuestion();
   recalcScores();
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
+ }
+ 
+ 
+ // Run when DOM is ready
+ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initApp);
-} else {
+ } else {
   initApp();
-}
-
+ }
+ 
+ 
+ 
+ 
+ 
+ 

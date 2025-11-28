@@ -1,94 +1,95 @@
 # Decay Game - Balance Analysis (10 Endings)
 
 ## Overview
-The game features **10 distinct, achievable endings** numbered 1-10 that cover all major political/philosophical axes.
+The game features **10 distinct, achievable endings** numbered 1-10 that cover all major political/philosophical axes. Endings are listed in check order from most specific to least specific.
 
 ## Final 10 Endings
+*(Listed in check order - most specific to least specific)*
 
-### 1. The Verdant Theocracy
-- **Requirements:** HIGH Faith, not extreme anarchy
-- **Theme:** Spiritual leadership, faith-driven governance
-- **Profile:** FA:HIGH
+### 1. The Sacred Order
+- **Requirements:** HIGH Faith + HIGH Control + HIGH Communal
+- **Theme:** Theocratic commune with divine authority
+- **Profile:** FA:HIGH, CT:HIGH, EC:HIGH
 
-### 2. The Thorn Regime
+### 2. The Primeval Kingdom
+- **Requirements:** NEG Progress (Traditional) + HIGH Control + FA > 0
+- **Theme:** Traditional monarchy with ancestral faith
+- **Profile:** PR:NEG, CT:HIGH, FA:POS
+
+### 3. The Ordered Commune
+- **Requirements:** HIGH Control + HIGH Communal + not HIGH Faith + not NEG Openness
+- **Theme:** Structured socialism with organization
+- **Profile:** CT:HIGH, EC:HIGH, FA:not HIGH, OP:not NEG
+
+### 4. The Thorn Regime
 - **Requirements:** HIGH Control + NEG Openness + Traditional (PR ≤ 0)
 - **Theme:** Authoritarian isolationist state
 - **Profile:** CT:HIGH, OP:NEG, PR:NEG
 
-### 3. The Free-Root Collective
-- **Requirements:** HIGH Communal + NEG Control + HIGH Openness
-- **Theme:** Anarchist commune with open borders
-- **Profile:** EC:HIGH, CT:NEG, OP:HIGH
-
-### 4. The Cosmopolitan Grove
-- **Requirements:** HIGH Openness + HIGH Communal + MID Control
-- **Theme:** Open borders, communal sharing, cultural crossroads
-- **Profile:** OP:HIGH, EC:HIGH, CT:MID
-
-### 5. The Shielded Woodland
-- **Requirements:** NEG Openness + CT ≥ 0 + Traditional (PR ≤ 0)
-- **Theme:** Moderate isolationist society
-- **Profile:** OP:NEG, CT:≥0, PR:≤0
+### 5. The Free-Root Collective
+- **Requirements:** HIGH Communal + NEG Control + HIGH Openness + Green/Neutral Tech (TE ≤ 0)
+- **Theme:** Natural anarchist commune rejecting industrial technology
+- **Profile:** EC:HIGH, CT:NEG, OP:HIGH, TE:NEG/NEUTRAL
 
 ### 6. The Dawnbound Republic
 - **Requirements:** HIGH Progress + HIGH Openness + MID Control + MID Faith
 - **Theme:** Progressive democracy with innovation
 - **Profile:** PR:HIGH, OP:HIGH, CT:MID, FA:MID
 
-### 7. The Emerald Symbiosis
+### 7. The Verdant Theocracy
+- **Requirements:** HIGH Faith + MID Control + Green/Neutral Tech (TE ≤ 0)
+- **Theme:** Nature-worshipping spiritual leadership with moderate governance
+- **Profile:** FA:HIGH, CT:MID, TE:NEG/NEUTRAL
+
+### 8. The Cosmopolitan Grove
+- **Requirements:** HIGH Openness + MID Communal + MID Control + HIGH Tech (TE ≥ 12) + Positive Progress (PR ≥ 0)
+- **Theme:** High-tech industrial metropolis enabling cultural exchange and trade
+- **Profile:** OP:HIGH, EC:MID, CT:MID, TE:HIGH, PR:POS
+
+### 9. The Emerald Symbiosis
 - **Requirements:** NEG Tech (Green) + positive PR/OP/EC
 - **Theme:** Natural/green technology, ecological harmony
 - **Profile:** TE:NEG (green), PR/OP/EC:≥0
 
-### 8. The Primeval Kingdom
-- **Requirements:** NEG Progress (Traditional) + HIGH Control + FA > 0
-- **Theme:** Traditional monarchy with ancestral faith
-- **Profile:** PR:NEG, CT:HIGH, FA:POS
-
-### 9. The Ordered Commune
-- **Requirements:** HIGH Control + HIGH Communal + not HIGH Faith + not NEG Openness
-- **Theme:** Structured socialism with organization
-- **Profile:** CT:HIGH, EC:HIGH, FA:not HIGH, OP:not NEG
-
-### 10. The Sacred Order
-- **Requirements:** HIGH Faith + HIGH Control + HIGH Communal
-- **Theme:** Theocratic commune with divine authority
-- **Profile:** FA:HIGH, CT:HIGH, EC:HIGH
+### 10. The Shielded Woodland
+- **Requirements:** NEG Openness + CT ≥ 0 + Traditional (PR ≤ 0)
+- **Theme:** Moderate isolationist society
+- **Profile:** OP:NEG, CT:≥0, PR:≤0
 
 ## Dynamic Threshold System
 
 Thresholds scale with cumulative questions to maintain consistent difficulty:
 
-| Act | Questions (Cumulative) | HIGH_POS | HIGH_NEG | Reasoning |
-|-----|----------------------|----------|----------|-----------|
-| 1   | 9                    | +4       | -4       | ~50% of realistic max (~9-11) |
-| 2   | 18                   | +7       | -7       | ~50% of realistic max (~13-16) |
-| 3   | 26                   | +10      | -10      | ~50% of realistic max (~19-23) |
-| 4   | 32                   | +12      | -12      | ~50% of realistic max (~23-27) |
+| Act | Name | Questions (Cumulative) | HIGH_POS | HIGH_NEG | Reasoning |
+|-----|------|----------------------|----------|----------|-----------|
+| 1   | Emergence | 10                   | +4       | -4       | ~40% of realistic max (~10-12) |
+| 2   | New Growth | 18                   | +7       | -7       | ~45% of realistic max (~15-18) |
+| 3   | The Weathering | 26                   | +10      | -10      | ~40% of realistic max (~23-26) |
+| 4   | Eternal Forest | 32                   | +12      | -12      | ~40% of realistic max (~28-32) |
 
 ## Score Ranges by Act
 
-| Act | Max Positive | Max Negative | Questions |
-|-----|--------------|--------------|-----------|
-| 1   | ~+9 to +11   | ~-9 to -11   | 9         |
-| 2   | ~+15 to +17  | ~-13 to -15  | 18        |
-| 3   | ~+21 to +23  | ~-19 to -21  | 26        |
-| 4   | ~+26 to +29  | ~-23 to -27  | 32        |
+| Act | Name | Max Positive | Max Negative | Questions |
+|-----|------|--------------|--------------|-----------|
+| 1   | Emergence | ~+10 to +12  | ~-10 to -12  | 10        |
+| 2   | New Growth | ~+15 to +18  | ~-15 to -18  | 18 cumulative (8 in Act 2) |
+| 3   | The Weathering | ~+23 to +26  | ~-23 to -26  | 26 cumulative (8 in Act 3) |
+| 4   | Eternal Forest | ~+28 to +32  | ~-28 to -32  | 32 cumulative (6 in Act 4) |
 
 ## Ending Check Order (Most Specific → Least Specific)
 
 The endings are checked in this order to prevent more general endings from "capturing" specific combinations:
 
-1. **Sacred Order** (FA+CT+EC all HIGH) - Most specific 3-axis combo
-2. **Primeval Kingdom** (PR NEG + CT HIGH + FA POS) - Specific combo
-3. **Ordered Commune** (CT+EC HIGH, not FA HIGH, not OP NEG) - Structured socialism
-4. **Thorn Regime** (CT HIGH + OP NEG + PR ≤ 0) - Authoritarian isolationist
-5. **Free-Root Collective** (EC HIGH + CT NEG + OP HIGH) - All 3 conditions
-6. **Dawnbound Republic** (PR+OP HIGH, CT+FA MID) - Multi-condition progressive
-7. **Verdant Theocracy** (FA HIGH) - General faith ending
-8. **Cosmopolitan Grove** (OP HIGH + EC HIGH + CT MID) - Open communal society
-9. **Emerald Symbiosis** (TE NEG + others ≥ 0) - Green tech
-10. **Shielded Woodland** (OP NEG + CT ≥ 0 + PR ≤ 0) - Isolationist fallback
+1. **Sacred Order** - FA+CT+EC all HIGH - Most specific 3-axis combo
+2. **Primeval Kingdom** - PR NEG + CT HIGH + FA POS - Specific combo
+3. **Ordered Commune** - CT+EC HIGH, not FA HIGH, not OP NEG - Structured socialism
+4. **Thorn Regime** - CT HIGH + OP NEG + PR ≤ 0 - Authoritarian isolationist
+5. **Free-Root Collective** - EC HIGH + CT NEG + OP HIGH + TE ≤ 0 - Natural anarchist commune
+6. **Dawnbound Republic** - PR+OP HIGH, CT+FA MID - Multi-condition progressive
+7. **Verdant Theocracy** - FA HIGH + CT MID + TE ≤ 0 - Nature worship spiritual leadership
+8. **Cosmopolitan Grove** - OP HIGH + EC MID + CT MID + TE HIGH + PR ≥ 0 - High-tech metropolis
+9. **Emerald Symbiosis** - TE NEG + others ≥ 0 - Green tech
+10. **Shielded Woodland** - OP NEG + CT ≥ 0 + PR ≤ 0 - Isolationist fallback
 
 ## Ending Achievability
 
@@ -99,21 +100,23 @@ All 10 endings are deliberately designed to be:
 
 ### Difficulty Tiers
 
-**Easy (Single Axis Focus):**
-- 1. Verdant Theocracy (HIGH Faith)
-- 7. Emerald Symbiosis (NEG Tech)
+**Easy (Single/Dual Axis):**
+- 9. Emerald Symbiosis - NEG Tech + positive others
 
 **Moderate (Dual/Triple Axis):**
-- 2. Thorn Regime (Control + Closed + Traditional)
-- 3. Free-Root Collective (Communal + Anarchy + Open)
-- 4. Cosmopolitan Grove (Openness + Communal + balanced Control)
-- 5. Shielded Woodland (Closed + Traditional)
-- 6. Dawnbound Republic (Progress + Openness + balanced others)
+- 4. Thorn Regime - Control + Closed + Traditional
+- 6. Dawnbound Republic - Progress + Openness + balanced others
+- 7. Verdant Theocracy - Faith + Moderate Control + Green Tech
+- 10. Shielded Woodland - Closed + Traditional
 
 **Challenging (Triple+ Axis):**
-- 8. Primeval Kingdom (Traditional + Authoritarian + Faith)
-- 9. Ordered Commune (Control + Communal, avoiding Faith)
-- 10. Sacred Order (Faith + Control + Communal all HIGH)
+- 5. Free-Root Collective - Communal + Anarchy + Open + Green Tech
+- 8. Cosmopolitan Grove - High Openness + balanced Communal/Control + HIGH Tech + Progress
+
+**Very Challenging (4+ Axes):**
+- 1. Sacred Order - Faith + Control + Communal all HIGH
+- 2. Primeval Kingdom - Traditional + Authoritarian + Faith
+- 3. Ordered Commune - Control + Communal, avoiding Faith
 
 ## Fallback System
 
@@ -162,6 +165,6 @@ The 10-ending system provides:
 - Meaningful political/philosophical diversity
 - Balanced difficulty across all endings
 - Strong feedback through alignment percentages
-- Sequential numbering (1-10) for clarity
+- Sequential numbering (1-10) from most specific to least specific
 
 Players can intentionally pursue any ending and see meaningful progress toward their chosen path throughout all 4 acts.

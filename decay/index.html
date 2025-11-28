@@ -7,10 +7,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="mushroom-header">
+    <img src="images/stickguy.png" alt="Stick figure" class="stickguy-icon">
+    <img src="images/mushroom.png" alt="Decay mushroom" class="mushroom-icon">
+    <img src="images/frog.png" alt="Frog" class="frog-icon">
+  </div>
   <div class="app">
     <div>
       <h1>Decay Game: Ending Simulator</h1>
-      <div class="act-display" id="act-display">Act 1</div>
+      <div class="act-display" id="act-display">Act 1: Rising from decay</div>
       <div class="subtitle">
         Answer each policy question. Your choices update the 6 alignment axes, and at the end
         of each act you'll see your ending for that act.
@@ -89,6 +94,13 @@
         <div class="ending-alignment" id="ending-alignment"></div>
         <div class="ending-tagline" id="ending-tagline"></div>
         <div class="debug" id="debug"></div>
+      </div>
+    </div>
+
+    <div class="answer-log" id="answer-log">
+      <div class="answer-log-title">Your Answer History</div>
+      <div class="answer-log-content" id="answer-log-content">
+        <div class="answer-log-empty">No answers yet. Start answering questions to see your choices here.</div>
       </div>
     </div>
   </div>
