@@ -1,8 +1,8 @@
 # Decay Game - Complete Guide to All 10 Endings
 
-**Complete 32-question paths through all 4 acts** to reach each of the 10 endings.
+**Complete 37-question paths through all 4 acts** to reach each of the 10 endings.
 
-**Note:** Endings are now numbered 1-10 in check order (most specific to least specific). The paths below retain their original organization but use updated ending numbers.
+**Note:** Endings are now numbered 1-10 in check order (most specific to least specific). The game now has 37 total questions (10+9+9+9). The paths below will need to be updated to include the new questions.
 
 ---
 
@@ -11,7 +11,7 @@
 1. Reset the quiz before starting each path
 2. Follow the choice numbers (1-4) for each question
 3. Running scores are shown after each act
-4. All paths go through all 32 questions
+4. All paths go through all 37 questions
 
 ---
 

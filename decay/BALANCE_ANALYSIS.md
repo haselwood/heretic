@@ -42,7 +42,7 @@ The game features **10 distinct, achievable endings** numbered 1-10 that cover a
 - **Profile:** FA:HIGH, CT:MID, TE:NEG/NEUTRAL
 
 ### 8. The Cosmopolitan Grove
-- **Requirements:** HIGH Openness + MID Communal + MID Control + HIGH Tech (TE ≥ 12) + Positive Progress (PR ≥ 0)
+- **Requirements:** HIGH Openness + MID Communal + MID Control + HIGH Tech (TE ≥ 13) + Positive Progress (PR ≥ 0)
 - **Theme:** High-tech industrial metropolis enabling cultural exchange and trade
 - **Profile:** OP:HIGH, EC:MID, CT:MID, TE:HIGH, PR:POS
 
@@ -63,18 +63,18 @@ Thresholds scale with cumulative questions to maintain consistent difficulty:
 | Act | Name | Questions (Cumulative) | HIGH_POS | HIGH_NEG | Reasoning |
 |-----|------|----------------------|----------|----------|-----------|
 | 1   | Emergence | 10                   | +4       | -4       | ~40% of realistic max (~10-12) |
-| 2   | New Growth | 18                   | +7       | -7       | ~45% of realistic max (~15-18) |
-| 3   | The Weathering | 26                   | +10      | -10      | ~40% of realistic max (~23-26) |
-| 4   | Eternal Forest | 32                   | +12      | -12      | ~40% of realistic max (~28-32) |
+| 2   | New Growth | 19                   | +7       | -7       | ~40% of realistic max (~16-19) |
+| 3   | The Weathering | 28                   | +10      | -10      | ~40% of realistic max (~24-28) |
+| 4   | Eternal Forest | 37                   | +13      | -13      | ~40% of realistic max (~32-37) |
 
 ## Score Ranges by Act
 
 | Act | Name | Max Positive | Max Negative | Questions |
 |-----|------|--------------|--------------|-----------|
 | 1   | Emergence | ~+10 to +12  | ~-10 to -12  | 10        |
-| 2   | New Growth | ~+15 to +18  | ~-15 to -18  | 18 cumulative (8 in Act 2) |
-| 3   | The Weathering | ~+23 to +26  | ~-23 to -26  | 26 cumulative (8 in Act 3) |
-| 4   | Eternal Forest | ~+28 to +32  | ~-28 to -32  | 32 cumulative (6 in Act 4) |
+| 2   | New Growth | ~+16 to +19  | ~-16 to -19  | 19 cumulative (9 in Act 2) |
+| 3   | The Weathering | ~+24 to +28  | ~-24 to -28  | 28 cumulative (9 in Act 3) |
+| 4   | Eternal Forest | ~+32 to +37  | ~-32 to -37  | 37 cumulative (9 in Act 4) |
 
 ## Ending Check Order (Most Specific → Least Specific)
 

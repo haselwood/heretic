@@ -1,6 +1,6 @@
 # Decay Game - Overview
 
-A narrative decision-making game where players shape a forest kingdom's future through 32 policy choices across 4 acts, leading to one of 10 distinct political endings.
+A narrative decision-making game where players shape a forest kingdom's future through 37 policy choices across 4 acts, leading to one of 10 distinct political endings.
 
 ---
 
@@ -40,11 +40,11 @@ At the end of Act 4, players receive one of 10 unique endings based on their cum
 
 ### Acts & Questions
 - **Act 1: Emergence** — 10 questions (rising from decay)
-- **Act 2: New Growth** — 8 questions (building culture & society)
-- **Act 3: The Weathering** — 8 questions (enduring trials & crises)
-- **Act 4: Eternal Forest** — 6 questions (defining your legacy)
+- **Act 2: New Growth** — 9 questions (building culture & society)
+- **Act 3: The Weathering** — 9 questions (enduring trials & crises)
+- **Act 4: Eternal Forest** — 9 questions (defining your legacy)
 
-**Total:** 32 questions across 4 acts
+**Total:** 37 questions across 4 acts
 
 ### Dynamic Thresholds
 Thresholds scale with cumulative questions to maintain balance:
@@ -52,9 +52,9 @@ Thresholds scale with cumulative questions to maintain balance:
 | Act | Name | Questions (Cumulative) | HIGH Threshold |
 |-----|------|------------------------|----------------|
 | 1   | Emergence | 10                     | ±4             |
-| 2   | New Growth | 18 (10 + 8)            | ±7             |
-| 3   | The Weathering | 26 (18 + 8)            | ±10            |
-| 4   | Eternal Forest | 32 (26 + 6)            | ±12            |
+| 2   | New Growth | 19 (10 + 9)            | ±7             |
+| 3   | The Weathering | 28 (19 + 9)            | ±10            |
+| 4   | Eternal Forest | 37 (28 + 9)            | ±13            |
 
 ---
 

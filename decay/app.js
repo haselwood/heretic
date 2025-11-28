@@ -314,45 +314,45 @@ const ACTS = {
     },
     {
       id: 15,
-      name: "Two species have formed a rivalry. What do you do?",
+      name: "Two species have formed a rivalry on the precipice of war. What do you do?",
       choices: [
         {
-          label: "Integrated housing where all species mix freely",
-          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
+          label: "Hold a summit to discuss the issue and find a solution",
+          deltas: { FA: 0, CT: -2, EC: 1, OP: 1, PR: 1, TE: 0 }
         },
         {
-          label: "Separate zones for each clan to preserve traditions",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+          label: "Decide in favor with the species most beneficial to the kingdom",
+          deltas: { FA: -2, CT: 1, EC: -2, OP: -1, PR: -1, TE: 0 }
         },
         {
-          label: "Assign species to roles based on their strengths",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: -1, TE: 0 }
+          label: "Designate two territories for the species to live seperately and declare the city central neutral territory",
+          deltas: { FA: -1, CT: 1, EC: 1, OP: 1, PR: -1, TE: 0 }
         },
         {
-          label: "Randomly assign housing to break down barriers",
-          deltas: { FA: 0, CT: -1, EC: 0, OP: 0, PR: 1, TE: 0 }
+          label: "Display neutrality plublically but pass policies that benefit the species most beneficial to the kingdom",
+          deltas: { FA: 0, CT: 1, EC: -2, OP: 1, PR: -1, TE: 0 }
         }
       ]
     },
     {
       id: 16,
-      name: "Strangers approach your borders seeking entry. What is your policy?",
+      name: "Strangers approach your borders seeking entry to your prosperous kingdom. What is your policy?",
       choices: [
         {
           label: "Welcome all; our borders are open",
-          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }
+          deltas: { FA: 0, CT: -2, EC: 2, OP: 2, PR: 1, TE: 0 }
         },
         {
-          label: "Strictly control who may enter",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+          label: "Only allow those who can contribute to the kingdom",
+          deltas: { FA: -1, CT: 1, EC: -1, OP: 1, PR: -1, TE: 1 }
         },
         {
           label: "Only those seeking aid or sanctuary may enter",
-          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
+          deltas: { FA: 1, CT: 1, EC: -1, OP: 1, PR: 0, TE: 0 }
         },
         {
           label: "Close the borders; no outsiders allowed",
-          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+          deltas: { FA: 0, CT: 2, EC: -1, OP: -3, PR: -2, TE: 0 }
         }
       ]
     },
@@ -397,6 +397,28 @@ const ACTS = {
         {
           label: "Let the past fade; focus on the future",
           deltas: { FA: -1, CT: 0, EC: 0, OP: 0, PR: 1, TE: 0 }
+        }
+      ]
+    },
+    {
+      id: 19,
+      name: "A wealthy merchant class has emerged, accumulating significant resources. How do you respond?",
+      choices: [
+        {
+          label: "Tax their wealth heavily to redistribute to the community",
+          deltas: { FA: 0, CT: 1, EC: 2, OP: 0, PR: 0, TE: 0 }
+        },
+        {
+          label: "Let them keep their wealth; prosperity benefits everyone",
+          deltas: { FA: -1, CT: -1, EC: -2, OP: 1, PR: 1, TE: 1 }
+        },
+        {
+          label: "Require them to fund public works and temples",
+          deltas: { FA: 2, CT: 1, EC: 1, OP: 0, PR: -1, TE: 0 }
+        },
+        {
+          label: "Seize their assets; no one should have such power",
+          deltas: { FA: 0, CT: 2, EC: 1, OP: -2, PR: 0, TE: 0 }
         }
       ]
     }
@@ -577,11 +599,33 @@ const ACTS = {
           deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 1, TE: 0 }
         }
       ]
+    },
+    {
+      id: 28,
+      name: "A charismatic prophet claims to have visions of the forest's future and gathers followers. How do you respond?",
+      choices: [
+        {
+          label: "Embrace their teachings and elevate them to spiritual advisor",
+          deltas: { FA: 2, CT: 0, EC: 0, OP: 0, PR: -1, TE: -1 }
+        },
+        {
+          label: "Allow them to preach freely but keep governance separate",
+          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
+        },
+        {
+          label: "Monitor them closely; such influence could be dangerous",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+        },
+        {
+          label: "Discredit them publicly; superstition has no place here",
+          deltas: { FA: -2, CT: 1, EC: 0, OP: 0, PR: 1, TE: 1 }
+        }
+      ]
     }
   ],
   4: [
     {
-      id: 28,
+      id: 29,
       name: "As your kingdom matures, what do your people hold most sacred?",
       choices: [
         {
@@ -603,7 +647,7 @@ const ACTS = {
       ]
     },
     {
-      id: 29,
+      id: 30,
       name: "What lessons will you pass to the next generation as your legacy?",
       choices: [
         {
@@ -625,7 +669,7 @@ const ACTS = {
       ]
     },
     {
-      id: 30,
+      id: 31,
       name: "Your kingdom grows strong. Neighboring lands beckon. How do you handle expansion?",
       choices: [
         {
@@ -647,7 +691,73 @@ const ACTS = {
       ]
     },
     {
-      id: 31,
+      id: 32,
+      name: "Your kingdom faces a choice: expand influence abroad or focus inward on perfecting what you've built. What do you choose?",
+      choices: [
+        {
+          label: "Send ambassadors and establish trade networks across the world",
+          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
+        },
+        {
+          label: "Build walls and focus on internal harmony",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: -1, TE: 0 }
+        },
+        {
+          label: "Create a network of allied kingdoms sharing resources",
+          deltas: { FA: 0, CT: 0, EC: 1, OP: 1, PR: 0, TE: 0 }
+        },
+        {
+          label: "Remain isolated; the forest needs no one else",
+          deltas: { FA: 1, CT: 0, EC: 0, OP: -1, PR: 0, TE: -1 }
+        }
+      ]
+    },
+    {
+      id: 33,
+      name: "How should your kingdom remember those who opposed you or made mistakes?",
+      choices: [
+        {
+          label: "Erase their names; only honor the righteous",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: -1, PR: 0, TE: 0 }
+        },
+        {
+          label: "Record all history truthfully, both triumph and failure",
+          deltas: { FA: -1, CT: 0, EC: 0, OP: 1, PR: 1, TE: 0 }
+        },
+        {
+          label: "Forgive and remember them with compassion",
+          deltas: { FA: 1, CT: -1, EC: 1, OP: 0, PR: 0, TE: 0 }
+        },
+        {
+          label: "Let each community tell their own version",
+          deltas: { FA: 0, CT: -1, EC: 0, OP: 1, PR: 0, TE: 0 }
+        }
+      ]
+    },
+    {
+      id: 34,
+      name: "A neighboring kingdom offers a powerful alliance, but they practice values opposite to yours. Do you accept?",
+      choices: [
+        {
+          label: "Yes, pragmatism over principles; we need strength",
+          deltas: { FA: -1, CT: 1, EC: 0, OP: 0, PR: 1, TE: 0 }
+        },
+        {
+          label: "No, we will never compromise our beliefs",
+          deltas: { FA: 1, CT: 0, EC: 0, OP: -1, PR: -1, TE: 0 }
+        },
+        {
+          label: "Negotiate terms that respect both our values",
+          deltas: { FA: 0, CT: 0, EC: 0, OP: 1, PR: 0, TE: 0 }
+        },
+        {
+          label: "Accept but secretly work to change them from within",
+          deltas: { FA: 0, CT: 1, EC: 0, OP: 0, PR: 0, TE: 0 }
+        }
+      ]
+    },
+    {
+      id: 35,
       name: "A rebel faction threatens to split your kingdom. This is your final test. How do you respond?",
       choices: [
         {
@@ -669,7 +779,7 @@ const ACTS = {
       ]
     },
     {
-      id: 32,
+      id: 36,
       name: "You write your kingdom's permanent constitution. What form of government will endure?",
       choices: [
         {
@@ -691,7 +801,7 @@ const ACTS = {
       ]
     },
     {
-      id: 33,
+      id: 37,
       name: "Your final decree: What is the eternal spirit that will define your forest kingdom for all time?",
       choices: [
         {
@@ -720,9 +830,9 @@ const ACTS = {
 // Thresholds scale based on cumulative questions per act
 const THRESHOLDS_PER_ACT = {
   1: { HIGH_POS: 4, HIGH_NEG: -4 },   // 10 questions
-  2: { HIGH_POS: 7, HIGH_NEG: -7 },   // 18 cumulative (10 + 8)
-  3: { HIGH_POS: 10, HIGH_NEG: -10 }, // 26 cumulative (18 + 8)
-  4: { HIGH_POS: 12, HIGH_NEG: -12 }  // 32 cumulative (26 + 6)
+  2: { HIGH_POS: 7, HIGH_NEG: -7 },   // 19 cumulative (10 + 9)
+  3: { HIGH_POS: 10, HIGH_NEG: -10 }, // 28 cumulative (19 + 9)
+  4: { HIGH_POS: 13, HIGH_NEG: -13 }  // 37 cumulative (28 + 9)
 };
  
  
