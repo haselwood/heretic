@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.rpy": "renpy"
+  },
+  "python.analysis.exclude": [
+    "**/*.rpy"
+  ],
+  "python.linting.ignorePatterns": [
+    "**/*.rpy"
+  ]
+}
+
+
