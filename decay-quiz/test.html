@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Novel Starter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Parallax layers */
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #bg { z-index: 1; animation: parallax-bg 20s ease-in-out infinite; }
+        #far { z-index: 2; animation: parallax-far 15s ease-in-out infinite; }
+        #mid { z-index: 3; animation: parallax-mid 10s ease-in-out infinite; }
+        #fg { z-index: 4; animation: parallax-fg 7s ease-in-out infinite; }
+
+        @keyframes parallax-bg {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+
+        @keyframes parallax-far {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(40px); }
+        }
+
+        @keyframes parallax-mid {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(60px); }
+        }
+
+        @keyframes parallax-fg {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(80px); }
+        }
+
+        /* Dialogue box */
+        #dialogue-box {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 3px solid #fff;
+            border-radius: 10px;
+            padding: 30px 40px;
+            z-index: 100;
+            display: none;
+        }
+
+        #dialogue-box.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        #character-name {
+            position: absolute;
+            top: -30px;
+            left: 40px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #fff;
+            border-radius: 5px;
+            padding: 5px 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #dialogue-text {
+            color: #fff;
+            font-size: 20px;
+            line-height: 1.6;
+            min-height: 60px;
+        }
+
+        #continue-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #fff;
+            font-size: 14px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Choices */
+        #choices {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 101;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #choices.show {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        .choice-button {
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #fff;
+            border-radius: 5px;
+            padding: 15px 30px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 400px;
+            text-align: center;
+        }
+
+        .choice-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Name input */
+        #name-input-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #fff;
+            border-radius: 10px;
+            padding: 50px;
+            z-index: 200;
+            display: none;
+            text-align: center;
+        }
+
+        #name-input-screen.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        #name-input-screen h2 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        #name-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 24px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #name-submit {
+            background: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #name-submit:hover {
+            background: #ccc;
+            transform: scale(1.05);
+        }
+
+        /* Title screen */
+        #title-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        #title-screen h1 {
+            color: #fff;
+            font-size: 64px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .menu-button {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #fff;
+            border-radius: 5px;
+            padding: 20px 60px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Parallax backgrounds -->
+        <div id="bg" class="parallax-layer"></div>
+        <div id="far" class="parallax-layer"></div>
+        <div id="mid" class="parallax-layer"></div>
+        <div id="fg" class="parallax-layer"></div>
+
+        <!-- Title screen -->
+        <div id="title-screen">
+            <h1>Your Visual Novel</h1>
+            <button class="menu-button" onclick="startGame()">Start Game</button>
+            <button class="menu-button" onclick="loadGame()">Load Game</button>
+        </div>
+
+        <!-- Name input -->
+        <div id="name-input-screen">
+            <h2>Enter your name:</h2>
+            <input type="text" id="name-input" placeholder="Hero" maxlength="20">
+            <button id="name-submit" onclick="submitName()">Continue</button>
+        </div>
+
+        <!-- Dialogue box -->
+        <div id="dialogue-box">
+            <div id="character-name"></div>
+            <div id="dialogue-text"></div>
+            <div id="continue-indicator">▼ Click to continue</div>
+        </div>
+
+        <!-- Choices -->
+        <div id="choices"></div>
+    </div>
+
+    <script>
+        // Game state
+        let gameState = {
+            playerName: '',
+            currentScene: 0,
+            choices: {}
+        };
+
+        // Story data - ADD YOUR STORY HERE
+        const story = [
+            {
+                background: 'sky',
+                character: 'Narrator',
+                text: 'In a world on the brink of change...',
+                choices: null
+            },
+            {
+                background: 'sky',
+                character: 'Narrator',
+                text: 'Where ancient powers stir from their slumber...',
+                choices: null
+            },
+            {
+                background: 'sky',
+                character: '???',
+                text: 'The time has come.',
+                choices: null
+            },
+            {
+                background: 'black',
+                character: '???',
+                text: 'A hero will rise.',
+                choices: null
+            },
+            {
+                background: 'black',
+                character: 'Narrator',
+                text: 'But first... we need to know who you are.',
+                choices: null,
+                action: 'getName'
+            },
+            {
+                background: 'room',
+                character: 'Narrator',
+                text: 'Welcome, {player}. Your journey begins now...',
+                choices: null
+            },
+            {
+                background: 'room',
+                character: '{player}',
+                text: "I'm ready for whatever comes next.",
+                choices: null
+            },
+            {
+                background: 'room',
+                character: 'Narrator',
+                text: 'What will you do first?',
+                choices: [
+                    { text: 'Explore the town', next: 'explore' },
+                    { text: 'Rest at the inn', next: 'rest' }
+                ]
+            }
+        ];
+
+        // Background configurations
+        const backgrounds = {
+            sky: {
+                bg: 'linear-gradient(to bottom, #87ceeb, #e0f6ff)',
+                far: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1))',
+                mid: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.2))',
+                fg: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.3))'
+            },
+            room: {
+                bg: 'linear-gradient(to bottom, #8b7355, #6b5345)',
+                far: 'linear-gradient(to bottom, transparent, rgba(139,115,85,0.3))',
+                mid: 'linear-gradient(to bottom, transparent, rgba(139,115,85,0.5))',
+                fg: 'linear-gradient(to bottom, transparent, rgba(139,115,85,0.7))'
+            },
+            black: {
+                bg: '#000',
+                far: '#000',
+                mid: '#000',
+                fg: '#000'
+            }
+        };
+
+        // Initialize
+        function startGame() {
+            document.getElementById('title-screen').style.display = 'none';
+            gameState.currentScene = 0;
+            showScene();
+        }
+
+        function loadGame() {
+            const saved = localStorage.getItem('visualNovelSave');
+            if (saved) {
+                gameState = JSON.parse(saved);
+                document.getElementById('title-screen').style.display = 'none';
+                showScene();
+            } else {
+                alert('No save file found!');
+            }
+        }
+
+        function saveGame() {
+            localStorage.setItem('visualNovelSave', JSON.stringify(gameState));
+        }
+
+        function setBackground(bgName) {
+            const bg = backgrounds[bgName];
+            document.getElementById('bg').style.background = bg.bg;
+            document.getElementById('far').style.background = bg.far;
+            document.getElementById('mid').style.background = bg.mid;
+            document.getElementById('fg').style.background = bg.fg;
+        }
+
+        let currentTypewriter = null;
+        let isTyping = false;
+
+        function showScene() {
+            const scene = story[gameState.currentScene];
+            if (!scene) return;
+
+            // Clear any existing typewriter
+            if (currentTypewriter) {
+                clearInterval(currentTypewriter);
+                currentTypewriter = null;
+            }
+
+            // Set background
+            setBackground(scene.background);
+
+            // Handle special actions
+            if (scene.action === 'getName') {
+                document.getElementById('name-input-screen').classList.add('show');
+                return;
+            }
+
+            // Show dialogue
+            const dialogueBox = document.getElementById('dialogue-box');
+            const characterName = document.getElementById('character-name');
+            const dialogueText = document.getElementById('dialogue-text');
+            const choicesDiv = document.getElementById('choices');
+
+            characterName.textContent = scene.character;
+            
+            // Replace {player} with actual name
+            let text = scene.text.replace('{player}', gameState.playerName);
+            dialogueText.textContent = '';
+            
+            dialogueBox.classList.add('show');
+            choicesDiv.classList.remove('show');
+
+            // Typewriter effect
+            isTyping = true;
+            let i = 0;
+            currentTypewriter = setInterval(() => {
+                if (i < text.length) {
+                    dialogueText.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(currentTypewriter);
+                    currentTypewriter = null;
+                    isTyping = false;
+                }
+            }, 30);
+
+            // Auto-save
+            saveGame();
+        }
+
+        function submitName() {
+            const nameInput = document.getElementById('name-input');
+            gameState.playerName = nameInput.value.trim() || 'Hero';
+            document.getElementById('name-input-screen').classList.remove('show');
+            gameState.currentScene++;
+            showScene();
+        }
+
+        function showChoices() {
+            const scene = story[gameState.currentScene];
+            if (scene.choices) {
+                const choicesDiv = document.getElementById('choices');
+                choicesDiv.innerHTML = '';
+                
+                scene.choices.forEach((choice, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-button';
+                    button.textContent = choice.text;
+                    button.onclick = () => makeChoice(choice.next);
+                    choicesDiv.appendChild(button);
+                });
+
+                choicesDiv.classList.add('show');
+                document.getElementById('continue-indicator').style.display = 'none';
+            }
+        }
+
+        function makeChoice(next) {
+            gameState.choices[gameState.currentScene] = next;
+            gameState.currentScene++;
+            document.getElementById('choices').classList.remove('show');
+            document.getElementById('continue-indicator').style.display = 'block';
+            showScene();
+        }
+
+        // Click to advance
+        document.getElementById('dialogue-box').addEventListener('click', () => {
+            // If still typing, finish the text immediately
+            if (isTyping && currentTypewriter) {
+                clearInterval(currentTypewriter);
+                currentTypewriter = null;
+                isTyping = false;
+                const scene = story[gameState.currentScene];
+                const text = scene.text.replace('{player}', gameState.playerName);
+                document.getElementById('dialogue-text').textContent = text;
+                return;
+            }
+
+            const scene = story[gameState.currentScene];
+            
+            if (scene && scene.choices) {
+                showChoices();
+            } else {
+                gameState.currentScene++;
+                if (gameState.currentScene < story.length) {
+                    showScene();
+                } else {
+                    alert('End of demo! Thanks for playing!');
+                }
+            }
+        });
+
+        // Press Enter to submit name
+        document.getElementById('name-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitName();
+        });
+    </script>
+</body>
+</html>
