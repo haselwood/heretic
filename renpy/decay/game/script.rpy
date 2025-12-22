@@ -61,8 +61,8 @@ label start:
 label intro_cutscene:
     scene black with fade
     
-    mossguy "......"
-    mossguy "......"
+    mossguy "........."
+    mossguy "........."
     show mossguy normal at left
     mossguy normal "We did it..."
     
