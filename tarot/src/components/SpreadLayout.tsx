@@ -1,8 +1,6 @@
 import { TarotCard } from './TarotCard'
 import { SPREAD_CONFIGS } from '@/data/cards'
 import type { DealtCard, SpreadType } from '@/types'
-import { cn } from '@/lib/utils'
-
 interface SpreadLayoutProps {
   cards: DealtCard[]
   spreadType: SpreadType
