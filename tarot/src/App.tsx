@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { SpreadSelector } from '@/components/SpreadSelector'
 import { ShuffleAnimation } from '@/components/ShuffleAnimation'
 import { SpreadLayout } from '@/components/SpreadLayout'
 import { CardBrowser } from '@/components/CardBrowser'
 import { Lightbox } from '@/components/Lightbox'
+import { DeckPile } from '@/components/DeckPile'
+import { ActionButton } from '@/components/ActionButton'
 import { shuffleDeck, SPREAD_CONFIGS } from '@/data/cards'
 import type { SpreadType, DealtCard, AppPhase, TarotCard } from '@/types'
 import { cn } from '@/lib/utils'
@@ -11,17 +13,37 @@ import { cn } from '@/lib/utils'
 function App() {
   const [phase, setPhase] = useState<AppPhase>('select')
   const [spreadType, setSpreadType] = useState<SpreadType>('single')
+  const [deck, setDeck] = useState<TarotCard[]>(() => shuffleDeck())
   const [dealtCards, setDealtCards] = useState<DealtCard[]>([])
   const [lightboxCard, setLightboxCard] = useState<TarotCard | null>(null)
+  const [isShuffling, setIsShuffling] = useState(false)
+  const [question, setQuestion] = useState('')
+  const deckRef = useRef<HTMLDivElement>(null)
 
   const handleSelectSpread = useCallback((type: SpreadType) => {
     setSpreadType(type)
+    setDealtCards([])
     setPhase('shuffling')
   }, [])
 
-  const handleShuffleComplete = useCallback(() => {
+  const handleInitialShuffleComplete = useCallback(() => {
+    setDeck(shuffleDeck())
+    setPhase('ready')
+  }, [])
+
+  const handleShuffle = useCallback(() => {
+    setDealtCards([])
+    setIsShuffling(true)
+    setPhase('ready')
+  }, [])
+
+  const handleDeckShuffleComplete = useCallback(() => {
+    setDeck(shuffleDeck())
+    setIsShuffling(false)
+  }, [])
+
+  const handleDeal = useCallback(() => {
     const config = SPREAD_CONFIGS[spreadType]
-    const deck = shuffleDeck()
     const dealt: DealtCard[] = deck.slice(0, config.count).map((card, i) => ({
       card,
       position: config.positions[i],
@@ -32,7 +54,7 @@ function App() {
     }))
     setDealtCards(dealt)
     setPhase('dealt')
-  }, [spreadType])
+  }, [spreadType, deck])
 
   const handleFlip = useCallback((index: number) => {
     setDealtCards(prev => prev.map((d, i) =>
@@ -47,26 +69,46 @@ function App() {
 
   const handleNewReading = useCallback(() => {
     setDealtCards([])
+    setQuestion('')
     setPhase('select')
   }, [])
 
   return (
     <div className="min-h-screen relative">
       <div className="flex flex-col items-center px-4 py-8 sm:py-12 min-h-screen">
-        {/* Header (shown after selection) */}
-        {phase !== 'select' && phase !== 'browse' && (
-          <header className="mb-8 sm:mb-12 text-center">
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide">
-              Startup Arcana
-            </h1>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-oracle/30 to-transparent mx-auto mt-3" />
-          </header>
+        {/* Floating toolbar */}
+        {(phase === 'ready' || phase === 'dealt' || phase === 'reading') && (
+          <div className="sticky top-0 z-30 w-full max-w-[1200px] mb-10">
+            <div className="flex justify-center mb-6">
+              <ActionButton onClick={handleNewReading}>
+                &larr; New Spread
+              </ActionButton>
+            </div>
+            <div className="flex flex-col items-center rounded-xl bg-obsidian/80 backdrop-blur-md border border-sigil/30 py-6" style={{ boxShadow: '0 8px 32px rgba(130, 100, 200, 0.08), 0 4px 16px rgba(0, 0, 0, 0.3)' }}>
+              <p className="text-[20px] font-serif text-white tracking-wide">
+                {SPREAD_CONFIGS[spreadType].label}
+              </p>
+              <span className="text-oracle/50 text-[10px] my-1">&#x2726;</span>
+              <p className="text-[14px] font-mono text-white">
+                {SPREAD_CONFIGS[spreadType].description}
+              </p>
+              <div className="mt-4 w-full max-w-md px-4">
+                <input
+                  type="text"
+                  value={question}
+                  onChange={e => setQuestion(e.target.value)}
+                  placeholder="Type your question for the universe..."
+                  className="w-full px-4 py-3 rounded-lg border border-sigil/60 bg-obsidian/50 text-white text-[14px] font-mono placeholder:text-whisper/50 focus:outline-none focus:border-whisper/50 transition-colors text-center"
+                />
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Main content */}
         <main className={cn(
-          'flex-1 flex flex-col items-center w-full max-w-[1000px]',
-          phase !== 'browse' && 'justify-center'
+          'flex-1 flex flex-col items-center w-full max-w-[1200px]',
+          phase === 'select' && 'justify-center'
         )}>
           {phase === 'select' && (
             <SpreadSelector onSelect={handleSelectSpread} onBrowse={() => setPhase('browse')} />
@@ -77,51 +119,92 @@ function App() {
           )}
 
           {phase === 'shuffling' && (
-            <ShuffleAnimation onComplete={handleShuffleComplete} />
+            <ShuffleAnimation onComplete={handleInitialShuffleComplete} />
+          )}
+
+          {phase === 'ready' && (
+            <div className="flex flex-col items-center gap-4 w-full">
+              <div className="flex items-start justify-center gap-16 sm:gap-20 w-full">
+                <div className="flex flex-col items-center gap-4 w-[180px] sm:w-[234px]">
+                  <div ref={deckRef}>
+                    <DeckPile remaining={64} shuffling={isShuffling} onShuffleComplete={handleDeckShuffleComplete} onClickShuffle={handleShuffle} />
+                  </div>
+                  <div className="flex gap-2 w-full">
+                    <ActionButton variant="half" onClick={handleShuffle} disabled={isShuffling}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+                      Shuffle
+                    </ActionButton>
+                    <ActionButton variant="half" onClick={handleDeal} disabled={isShuffling}>
+                      Deal &rarr;
+                    </ActionButton>
+                  </div>
+                </div>
+                <SpreadLayout
+                  cards={[]}
+                  spreadType={spreadType}
+                  onFlip={() => {}}
+                  onLightbox={() => {}}
+                  placeholder
+                  deckRef={deckRef}
+                  onDeal={handleDeal}
+                />
+              </div>
+            </div>
           )}
 
           {(phase === 'dealt' || phase === 'reading') && (
-            <div className="flex flex-col items-center gap-8 w-full">
-              <div className="text-center space-y-1">
-                <p className="text-[11px] font-mono text-whisper/40 uppercase tracking-[0.15em]">
-                  {SPREAD_CONFIGS[spreadType].label} — {SPREAD_CONFIGS[spreadType].description}
-                </p>
+            <div className="flex flex-col items-center gap-4 w-full">
+              <div className="flex items-start justify-center gap-16 sm:gap-20 w-full">
+                <div className="flex flex-col items-center gap-4 w-[180px] sm:w-[234px]">
+                  <div ref={deckRef}>
+                    <DeckPile remaining={64 - dealtCards.length} shuffling={isShuffling} onShuffleComplete={handleDeckShuffleComplete} onClickShuffle={handleShuffle} />
+                  </div>
+                  <div className="flex gap-2 w-full">
+                    <ActionButton variant="half" onClick={handleShuffle} disabled={isShuffling}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+                      Shuffle
+                    </ActionButton>
+                    <ActionButton variant="half" onClick={handleDeal} disabled={isShuffling || dealtCards.length > 0}>
+                      Deal &rarr;
+                    </ActionButton>
+                  </div>
+                </div>
+                <SpreadLayout
+                  cards={dealtCards}
+                  spreadType={spreadType}
+                  onFlip={handleFlip}
+                  onLightbox={handleLightbox}
+                  deckRef={deckRef}
+                />
               </div>
-
-              <SpreadLayout
-                cards={dealtCards}
-                spreadType={spreadType}
-                onFlip={handleFlip}
-                onLightbox={handleLightbox}
-              />
-
-              <button
-                onClick={handleNewReading}
-                className={cn(
-                  'mt-8 px-6 py-2.5 rounded-lg border border-sigil/60',
-                  'bg-obsidian/50 hover:bg-ritual/60 hover:border-oracle/40',
-                  'text-[13px] font-serif text-whisper/60 hover:text-oracle',
-                  'transition-all duration-300 uppercase tracking-widest',
-                  'hover:shadow-[0_0_20px_rgba(201,162,39,0.08)]'
-                )}
-              >
-                &#x21bb; New Reading
-              </button>
             </div>
           )}
         </main>
 
-        {/* Subtle footer */}
-        <footer className="mt-auto pt-8">
-          <p className="text-[10px] font-mono text-whisper/15 tracking-widest uppercase">
-            64 cards &middot; 4 suits &middot; 0 venture backing
-          </p>
-        </footer>
+        {/* Footer — only on homepage */}
+        {phase === 'select' && (
+          <footer className="mt-auto pt-8 text-center">
+            <p className="text-[14px] text-whisper/70 tracking-widest uppercase font-mono">
+              64 cards &middot; 4 suits &middot; 0 venture backing
+            </p>
+            <p className="text-[16px] text-whisper/50 tracking-widest mt-2 text-center uppercase font-mono">
+              Made by Heather Hex
+            </p>
+          </footer>
+        )}
       </div>
 
-      {lightboxCard && (
-        <Lightbox card={lightboxCard} onClose={() => setLightboxCard(null)} />
-      )}
+      {lightboxCard && (() => {
+        const idx = dealtCards.findIndex(d => d.card.id === lightboxCard.id)
+        return (
+          <Lightbox
+            card={lightboxCard}
+            onClose={() => setLightboxCard(null)}
+            onPrev={idx > 0 ? () => setLightboxCard(dealtCards[idx - 1].card) : undefined}
+            onNext={idx < dealtCards.length - 1 ? () => setLightboxCard(dealtCards[idx + 1].card) : undefined}
+          />
+        )
+      })()}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useRef, useLayoutEffect } from 'react'
 import { cn, suitBgClass } from '@/lib/utils'
 import { CardImage } from './CardImage'
 import type { DealtCard } from '@/types'
@@ -7,10 +8,34 @@ interface TarotCardProps {
   onFlip: () => void
   onLightbox: () => void
   index: number
+  deckRef?: React.RefObject<HTMLDivElement | null>
 }
 
-export function TarotCard({ dealt, onFlip, onLightbox, index }: TarotCardProps) {
+export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef }: TarotCardProps) {
   const { card, position, isFlipped, dealDelay } = dealt
+  const cardRef = useRef<HTMLButtonElement>(null)
+
+  useLayoutEffect(() => {
+    const el = cardRef.current
+    if (!deckRef?.current || !el) return
+
+    el.style.animation = 'none'
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    el.offsetHeight
+
+    const deckEl = deckRef.current.querySelector('.deck-origin') as HTMLElement | null
+    const sourceRect = deckEl ? deckEl.getBoundingClientRect() : deckRef.current.getBoundingClientRect()
+    const cardRect = el.getBoundingClientRect()
+    const dx = (sourceRect.left + sourceRect.width / 2) - (cardRect.left + cardRect.width / 2)
+    const dy = (sourceRect.top + sourceRect.height / 2) - (cardRect.top + cardRect.height / 2)
+
+    el.style.setProperty('--deal-from-x', `${dx}px`)
+    el.style.setProperty('--deal-from-y', `${dy}px`)
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    el.offsetHeight
+    el.style.animation = `deal-in 0.55s cubic-bezier(0.22, 0.68, 0.35, 1.0) ${dealDelay}ms both`
+  }, [deckRef, dealDelay])
 
   const handleClick = () => {
     if (!isFlipped) {
@@ -21,15 +46,15 @@ export function TarotCard({ dealt, onFlip, onLightbox, index }: TarotCardProps) 
   }
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="relative flex flex-col items-center gap-3" style={{ zIndex: 50 - index }}>
       <button
+        ref={cardRef}
         type="button"
         className={cn(
           'card-container cursor-pointer deal-in',
-          'w-[140px] h-[234px] sm:w-[180px] sm:h-[300px]',
+          'w-[180px] h-[300px] sm:w-[234px] sm:h-[390px]',
           'bg-transparent border-none p-0 outline-none focus-visible:ring-2 focus-visible:ring-oracle/50 rounded-xl'
         )}
-        style={{ animationDelay: `${dealDelay}ms`, '--deal-rotate': `${(index % 2 === 0 ? 1 : -1) * 3}deg` } as React.CSSProperties}
         onClick={handleClick}
         aria-label={isFlipped ? `${card.name} — ${card.suit}` : `Reveal card in ${position} position`}
       >
@@ -62,7 +87,7 @@ export function TarotCard({ dealt, onFlip, onLightbox, index }: TarotCardProps) 
       </button>
 
       {/* Position label */}
-      <span className="text-[10px] sm:text-[11px] font-mono text-whisper/70 uppercase tracking-wider text-center max-w-[140px] sm:max-w-[180px]">
+      <span className="text-[10px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center max-w-[180px] sm:max-w-[234px]">
         {position}
       </span>
     </div>

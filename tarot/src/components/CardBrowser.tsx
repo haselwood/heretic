@@ -4,6 +4,7 @@ import { CARD_MEANINGS } from '@/data/meanings'
 import { cn, suitClass } from '@/lib/utils'
 import { CardImage } from './CardImage'
 import { Lightbox } from './Lightbox'
+import { ActionButton } from './ActionButton'
 import type { Suit, TarotCard } from '@/types'
 
 interface CardBrowserProps {
@@ -28,18 +29,9 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
     <div className="w-full max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
-        <button
-          onClick={onBack}
-          className={cn(
-            'px-4 py-2 rounded-lg border border-sigil/50',
-            'bg-obsidian/50 hover:bg-ritual/60 hover:border-oracle/40',
-            'text-[12px] font-serif text-whisper/60 hover:text-oracle',
-            'transition-all duration-200 uppercase tracking-widest',
-            'hover:shadow-[0_0_12px_rgba(201,162,39,0.08)]'
-          )}
-        >
+        <ActionButton onClick={onBack}>
           &larr; Back
-        </button>
+        </ActionButton>
         <h2 className="font-serif text-2xl sm:text-3xl text-white tracking-wide">
           The Guidebook
         </h2>
@@ -83,7 +75,7 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
                 'focus-visible:ring-2 focus-visible:ring-purple-400/50'
               )}
             >
-              <div className="flex items-start gap-4 p-6">
+              <div className="flex items-start gap-6 sm:gap-8 p-6">
                 <CardImage
                   src={card.image}
                   alt={card.name}
@@ -113,9 +105,19 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
                   </span>
 
                   {meaning && (
-                    <p className="mt-2 text-[13px] sm:text-[14px] leading-relaxed text-phantom/75">
-                      {meaning}
-                    </p>
+                    <div className="mt-3 space-y-3">
+                      <div>
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
+                        <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.light.join(', ')}</p>
+                      </div>
+                      <div>
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
+                        <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.dark.join(', ')}</p>
+                      </div>
+                      <p className="mt-1 text-[13px] sm:text-[14px] leading-relaxed text-phantom/75">
+                        {meaning.description}
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>
@@ -124,26 +126,19 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
         })}
       </div>
 
-      {/* Bottom nav */}
-      <div className="mt-8 flex justify-center">
-        <button
-          onClick={onBack}
-          className={cn(
-            'px-6 py-2.5 rounded-lg border border-sigil/60',
-            'bg-obsidian/50 hover:bg-ritual/60 hover:border-oracle/40',
-            'text-[13px] font-serif text-whisper/60 hover:text-oracle',
-            'transition-all duration-300 uppercase tracking-widest',
-            'hover:shadow-[0_0_20px_rgba(201,162,39,0.08)]'
-          )}
-        >
-          &larr; Back to Readings
-        </button>
-      </div>
-
       {/* Lightbox */}
-      {lightboxCard && (
-        <Lightbox card={lightboxCard} onClose={() => setLightboxCard(null)} />
-      )}
+      {lightboxCard && (() => {
+        const idx = currentSuit.cards.findIndex(c => c.id === lightboxCard.id)
+        const allCards = currentSuit.cards
+        return (
+          <Lightbox
+            card={lightboxCard}
+            onClose={() => setLightboxCard(null)}
+            onPrev={idx > 0 ? () => setLightboxCard(allCards[idx - 1]) : undefined}
+            onNext={idx < allCards.length - 1 ? () => setLightboxCard(allCards[idx + 1]) : undefined}
+          />
+        )
+      })()}
     </div>
   )
 }

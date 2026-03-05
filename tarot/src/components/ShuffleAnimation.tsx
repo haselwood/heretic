@@ -27,7 +27,7 @@ export function ShuffleAnimation({ onComplete }: ShuffleAnimationProps) {
       <p className="text-[13px] text-oracle/60 tracking-widest uppercase loading-pulse">
         Shuffling the deck
       </p>
-      <div className="relative w-[180px] h-[300px]">
+      <div className="relative w-[180px] h-[300px] sm:w-[234px] sm:h-[390px]">
         {cards.map((i) => {
           const isActive = phase >= 1
           const offset = isActive

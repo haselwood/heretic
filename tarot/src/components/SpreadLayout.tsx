@@ -1,4 +1,5 @@
 import { TarotCard } from './TarotCard'
+import { SPREAD_CONFIGS } from '@/data/cards'
 import type { DealtCard, SpreadType } from '@/types'
 import { cn } from '@/lib/utils'
 
@@ -7,20 +8,68 @@ interface SpreadLayoutProps {
   spreadType: SpreadType
   onFlip: (index: number) => void
   onLightbox: (index: number) => void
+  placeholder?: boolean
+  deckRef?: React.RefObject<HTMLDivElement | null>
+  onDeal?: () => void
 }
 
-export function SpreadLayout({ cards, spreadType, onFlip, onLightbox }: SpreadLayoutProps) {
+function PlaceholderCard({ position, onClick }: { position: string; onClick?: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="flex flex-col items-center gap-3 cursor-pointer group">
+      <div className="w-[180px] h-[300px] sm:w-[234px] sm:h-[390px] rounded-xl border-2 border-dashed border-sigil/30 flex items-center justify-center transition-colors group-hover:border-sigil/60">
+        <span className="text-whisper/20 font-serif text-3xl group-hover:text-whisper/40 transition-colors">?</span>
+      </div>
+      <span className="text-[10px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center max-w-[180px] sm:max-w-[234px]">
+        {position}
+      </span>
+    </button>
+  )
+}
+
+export function SpreadLayout({ cards, spreadType, onFlip, onLightbox, placeholder, deckRef, onDeal }: SpreadLayoutProps) {
+  const config = SPREAD_CONFIGS[spreadType]
+
   if (spreadType === 'five') {
-    return <FiveCard cards={cards} onFlip={onFlip} onLightbox={onLightbox} />
+    if (placeholder) {
+      return (
+        <div className="flex flex-col items-center gap-4 sm:gap-6">
+          <div className="flex justify-center gap-4 sm:gap-8">
+            {[0, 1, 2].map(i => <PlaceholderCard key={i} position={config.positions[i]} onClick={onDeal} />)}
+          </div>
+          <div className="flex justify-center gap-4 sm:gap-8">
+            {[3, 4].map(i => <PlaceholderCard key={i} position={config.positions[i]} onClick={onDeal} />)}
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className="flex flex-col items-center gap-4 sm:gap-6">
+        <div className="flex justify-center gap-4 sm:gap-8">
+          {[0, 1, 2].map(i => cards[i] && (
+            <TarotCard key={cards[i].card.id} dealt={cards[i]} index={i} onFlip={() => onFlip(i)} onLightbox={() => onLightbox(i)} deckRef={deckRef} />
+          ))}
+        </div>
+        <div className="flex justify-center gap-4 sm:gap-8">
+          {[3, 4].map(i => cards[i] && (
+            <TarotCard key={cards[i].card.id} dealt={cards[i]} index={i} onFlip={() => onFlip(i)} onLightbox={() => onLightbox(i)} deckRef={deckRef} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (placeholder) {
+    return (
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
+        {Array.from({ length: config.count }).map((_, i) => (
+          <PlaceholderCard key={i} position={config.positions[i]} onClick={onDeal} />
+        ))}
+      </div>
+    )
   }
 
   return (
-    <div className={cn(
-      'flex flex-wrap justify-center gap-4 sm:gap-8',
-      spreadType === 'single' && 'max-w-[300px]',
-      spreadType === 'two' && 'max-w-[500px]',
-      spreadType === 'three' && 'max-w-[700px]',
-    )}>
+    <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
       {cards.map((dealt, i) => (
         <TarotCard
           key={dealt.card.id}
@@ -28,50 +77,9 @@ export function SpreadLayout({ cards, spreadType, onFlip, onLightbox }: SpreadLa
           index={i}
           onFlip={() => onFlip(i)}
           onLightbox={() => onLightbox(i)}
+          deckRef={deckRef}
         />
       ))}
-    </div>
-  )
-}
-
-function FiveCard({ cards, onFlip, onLightbox }: {
-  cards: DealtCard[]
-  onFlip: (index: number) => void
-  onLightbox: (index: number) => void
-}) {
-  /*
-    Five Card Decision Spread (cross shape):
-      0: Your Motivation (top)
-      1: Ideal Outcome (center)
-      2: Your Values (bottom)
-      3: Option 1 Likely Outcome (left)
-      4: Option 2 Likely Outcome (right)
-  */
-
-  const renderCard = (index: number) =>
-    cards[index] && (
-      <TarotCard
-        dealt={cards[index]}
-        index={index}
-        onFlip={() => onFlip(index)}
-        onLightbox={() => onLightbox(index)}
-      />
-    )
-
-  return (
-    <div className="flex flex-col items-center gap-4">
-      {/* Top: Card 0 */}
-      {renderCard(0)}
-
-      {/* Middle row: Card 3 (left), Card 1 (center), Card 4 (right) */}
-      <div className="flex items-center gap-4 sm:gap-8">
-        {renderCard(3)}
-        {renderCard(1)}
-        {renderCard(4)}
-      </div>
-
-      {/* Bottom: Card 2 */}
-      {renderCard(2)}
     </div>
   )
 }

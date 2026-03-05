@@ -151,25 +151,29 @@ body {
   animation: shuffle-card 0.6s ease-in-out;
 }
 
-/* Deal animation */
+/* Deal animation — card lifts off deck and slides to slot */
 @keyframes deal-in {
   0% {
-    opacity: 0;
-    transform: translateY(-60px) scale(0.8) rotate(var(--deal-rotate, 0deg));
+    transform: translate(var(--deal-from-x, 0px), var(--deal-from-y, 0px));
+    z-index: 50;
   }
-  60% {
-    opacity: 1;
-    transform: translateY(5px) scale(1.02) rotate(0deg);
+  12% {
+    transform: translate(var(--deal-from-x, 0px), var(--deal-from-y, 0px)) translateY(-8px) scale(1.03);
+    z-index: 50;
+  }
+  99% {
+    z-index: 50;
   }
   100% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
+    transform: translate(0, 0) scale(1);
+    z-index: auto;
   }
 }
 
 .deal-in {
-  animation: deal-in 0.5s ease-out forwards;
-  opacity: 0;
+  position: relative;
+  z-index: 50;
+  animation: deal-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* Glow effect for oracle text */
@@ -214,7 +218,7 @@ body {
 .card-glow-wrap::before {
   content: '';
   position: absolute;
-  inset: -6px;
+  inset: 0;
   border-radius: inherit;
   background: conic-gradient(
     from 0deg,
