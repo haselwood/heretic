@@ -36,12 +36,12 @@ export function SpreadSelector() {
                 'transition-all duration-300 text-left'
               )}
             >
-              <div className="flex flex-col items-center text-center gap-1">
+              <div className="flex flex-col items-center text-center gap-2">
                 <div>
-                  <span className="font-serif text-[18px] text-ghost group-hover:text-white transition-colors">
+                  <span className="font-serif text-[20px] text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
-                  <p className="text-xs sm:text-[11px] text-whisper group-hover:text-white transition-colors leading-tight">
+                  <p className="text-[14px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
                     {config.description}
                   </p>
                 </div>

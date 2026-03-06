@@ -24,10 +24,10 @@ function HomePage() {
         <footer className="pt-5 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
           <Link
             to="/guidebook/archetypes"
-            className="group flex items-center justify-center gap-3 w-full px-4 pt-3.5 pb-2 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
+            className="group flex items-center justify-center gap-3 w-full px-4 py-4 sm:pt-3.5 sm:pb-3 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
           >
             <span className="text-purple-400/60 group-hover:text-purple-300 transition-colors text-sm">&#x2756;</span>
-            <span className="font-serif text-[15px] sm:text-[16px] text-white transition-colors tracking-wide">
+            <span className="font-serif text-[18px] sm:text-[16px] text-white transition-colors tracking-wide">
               Browse the Guidebook
             </span>
           </Link>
