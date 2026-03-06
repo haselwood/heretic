@@ -37,14 +37,14 @@ export function Lightbox({ card, onClose, onPrev, onNext }: LightboxProps) {
       <div className="absolute inset-0 bg-void/90 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 flex flex-col max-h-[90vh] overflow-y-auto rounded-2xl border border-sigil/30 bg-obsidian/60 backdrop-blur-md"
+        className="relative z-10 flex flex-col max-h-[90vh] overflow-y-auto border border-sigil/30 bg-obsidian/60 backdrop-blur-md"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button — top right */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white/70 hover:text-white hover:bg-white/20 transition-colors text-[16px]"
+          className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/10 border border-white/20 text-white/70 hover:text-white hover:bg-white/20 transition-colors text-[16px]"
           aria-label="Close"
         >
           &times;
@@ -77,11 +77,11 @@ export function Lightbox({ card, onClose, onPrev, onNext }: LightboxProps) {
                 <div className={cn('w-10 h-px mb-4 opacity-20 bg-current', 'mx-auto sm:mx-0')} />
                 <div className="space-y-3 mb-4">
                   <div>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
+                    <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
                     <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.light.join(', ')}</p>
                   </div>
                   <div>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
+                    <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
                     <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.dark.join(', ')}</p>
                   </div>
                 </div>
@@ -97,14 +97,14 @@ export function Lightbox({ card, onClose, onPrev, onNext }: LightboxProps) {
         {(onPrev || onNext) && (
           <div className="flex items-center gap-3 px-6 sm:px-10 pb-6">
             {onPrev ? (
-              <button type="button" onClick={onPrev} className="flex-1 py-3 rounded-lg border border-sigil/50 bg-obsidian/50 text-[13px] font-mono text-white hover:bg-white/10 hover:border-white/30 transition-all">
+              <button type="button" onClick={onPrev} className="flex-1 py-3 border border-sigil/50 bg-obsidian/50 text-[13px] font-mono text-white hover:bg-white/10 hover:border-white/30 transition-all">
                 &larr; Prev
               </button>
             ) : (
               <div className="flex-1" />
             )}
             {onNext ? (
-              <button type="button" onClick={onNext} className="flex-1 py-3 rounded-lg border border-sigil/50 bg-obsidian/50 text-[13px] font-mono text-white hover:bg-white/10 hover:border-white/30 transition-all">
+              <button type="button" onClick={onNext} className="flex-1 py-3 border border-sigil/50 bg-obsidian/50 text-[13px] font-mono text-white hover:bg-white/10 hover:border-white/30 transition-all">
                 Next &rarr;
               </button>
             ) : (

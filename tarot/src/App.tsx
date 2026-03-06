@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
+import { Routes, Route, Navigate, useNavigate, useParams, Link } from 'react-router-dom'
 import { SpreadSelector } from '@/components/SpreadSelector'
 import { ShuffleAnimation } from '@/components/ShuffleAnimation'
 import { SpreadLayout } from '@/components/SpreadLayout'
@@ -6,25 +7,54 @@ import { CardBrowser } from '@/components/CardBrowser'
 import { Lightbox } from '@/components/Lightbox'
 import { DeckPile } from '@/components/DeckPile'
 import { ActionButton } from '@/components/ActionButton'
+import { HomeBg } from '@/components/HomeBg'
 import { shuffleDeck, SPREAD_CONFIGS } from '@/data/cards'
-import type { SpreadType, DealtCard, AppPhase, TarotCard } from '@/types'
-import { cn } from '@/lib/utils'
+import type { SpreadType, DealtCard, TarotCard } from '@/types'
 
-function App() {
-  const [phase, setPhase] = useState<AppPhase>('select')
-  const [spreadType, setSpreadType] = useState<SpreadType>('single')
+const VALID_SPREADS = new Set<string>(Object.keys(SPREAD_CONFIGS))
+
+function HomePage() {
+  return (
+    <>
+      <HomeBg />
+      <div className="relative z-10 flex flex-col items-center px-4 py-4 sm:py-6 min-h-screen">
+        <main className="flex-1 flex flex-col items-center justify-center w-full max-w-[1200px]">
+          <SpreadSelector />
+        </main>
+        <footer className="mt-auto pt-4 text-center">
+          <Link
+            to="/guidebook/archetypes"
+            className="group flex items-center justify-center gap-3 w-full max-w-[528px] mx-auto px-4 pt-3.5 pb-2 mb-3 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
+          >
+            <span className="text-purple-400/60 group-hover:text-purple-300 transition-colors text-sm">&#x2756;</span>
+            <span className="font-serif text-[15px] sm:text-[16px] text-white transition-colors tracking-wide">
+              Browse the Guidebook
+            </span>
+          </Link>
+          <p className="text-[14px] text-whisper/70 tracking-widest uppercase font-mono">
+            64 cards &middot; 4 suits &middot; 0 venture backing
+          </p>
+          <p className="text-[11px] text-whisper/50 tracking-widest mt-2 text-center uppercase font-mono">
+            Made by Heather Hex
+          </p>
+        </footer>
+      </div>
+    </>
+  )
+}
+
+function SpreadPage() {
+  const navigate = useNavigate()
+  const { type: typeParam } = useParams<{ type: string }>()
+  const spreadType = (typeParam && VALID_SPREADS.has(typeParam) ? typeParam : 'single') as SpreadType
+
+  const [phase, setPhase] = useState<'shuffling' | 'ready' | 'dealt' | 'reading'>('shuffling')
   const [deck, setDeck] = useState<TarotCard[]>(() => shuffleDeck())
   const [dealtCards, setDealtCards] = useState<DealtCard[]>([])
   const [lightboxCard, setLightboxCard] = useState<TarotCard | null>(null)
   const [isShuffling, setIsShuffling] = useState(false)
   const [question, setQuestion] = useState('')
   const deckRef = useRef<HTMLDivElement>(null)
-
-  const handleSelectSpread = useCallback((type: SpreadType) => {
-    setSpreadType(type)
-    setDealtCards([])
-    setPhase('shuffling')
-  }, [])
 
   const handleInitialShuffleComplete = useCallback(() => {
     setDeck(shuffleDeck())
@@ -67,24 +97,17 @@ function App() {
     if (dealt) setLightboxCard(dealt.card)
   }, [dealtCards])
 
-  const handleNewReading = useCallback(() => {
-    setDealtCards([])
-    setQuestion('')
-    setPhase('select')
-  }, [])
-
   return (
-    <div className="min-h-screen relative">
+    <>
       <div className="flex flex-col items-center px-4 py-8 sm:py-12 min-h-screen">
-        {/* Floating toolbar */}
         {(phase === 'ready' || phase === 'dealt' || phase === 'reading') && (
           <div className="sticky top-0 z-30 w-full max-w-[1200px] mb-10">
             <div className="flex justify-center mb-6">
-              <ActionButton onClick={handleNewReading}>
+              <ActionButton onClick={() => navigate('/')}>
                 &larr; New Spread
               </ActionButton>
             </div>
-            <div className="flex flex-col items-center rounded-xl bg-obsidian/80 backdrop-blur-md border border-sigil/30 py-6" style={{ boxShadow: '0 8px 32px rgba(130, 100, 200, 0.08), 0 4px 16px rgba(0, 0, 0, 0.3)' }}>
+            <div className="flex flex-col items-center bg-obsidian/80 backdrop-blur-md border border-sigil/30 py-6" style={{ boxShadow: '0 8px 32px rgba(130, 100, 200, 0.08), 0 4px 16px rgba(0, 0, 0, 0.3)' }}>
               <p className="text-[20px] font-serif text-white tracking-wide">
                 {SPREAD_CONFIGS[spreadType].label}
               </p>
@@ -98,26 +121,14 @@ function App() {
                   value={question}
                   onChange={e => setQuestion(e.target.value)}
                   placeholder="Type your question for the universe..."
-                  className="w-full px-4 py-3 rounded-lg border border-sigil/60 bg-obsidian/50 text-white text-[14px] font-mono placeholder:text-whisper/50 focus:outline-none focus:border-whisper/50 transition-colors text-center"
+                  className="w-full px-4 py-3 border border-sigil/60 bg-obsidian/50 text-white text-[14px] font-mono placeholder:text-whisper/50 focus:outline-none focus:border-whisper/50 transition-colors text-center"
                 />
               </div>
             </div>
           </div>
         )}
 
-        {/* Main content */}
-        <main className={cn(
-          'flex-1 flex flex-col items-center w-full max-w-[1200px]',
-          phase === 'select' && 'justify-center'
-        )}>
-          {phase === 'select' && (
-            <SpreadSelector onSelect={handleSelectSpread} onBrowse={() => setPhase('browse')} />
-          )}
-
-          {phase === 'browse' && (
-            <CardBrowser onBack={() => setPhase('select')} />
-          )}
-
+        <main className="flex-1 flex flex-col items-center w-full max-w-[1200px]">
           {phase === 'shuffling' && (
             <ShuffleAnimation onComplete={handleInitialShuffleComplete} />
           )}
@@ -180,18 +191,6 @@ function App() {
             </div>
           )}
         </main>
-
-        {/* Footer — only on homepage */}
-        {phase === 'select' && (
-          <footer className="mt-auto pt-8 text-center">
-            <p className="text-[14px] text-whisper/70 tracking-widest uppercase font-mono">
-              64 cards &middot; 4 suits &middot; 0 venture backing
-            </p>
-            <p className="text-[16px] text-whisper/50 tracking-widest mt-2 text-center uppercase font-mono">
-              Made by Heather Hex
-            </p>
-          </footer>
-        )}
       </div>
 
       {lightboxCard && (() => {
@@ -205,6 +204,19 @@ function App() {
           />
         )
       })()}
+    </>
+  )
+}
+
+function App() {
+  return (
+    <div className="min-h-screen relative">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/spread/:type" element={<SpreadPage />} />
+        <Route path="/guidebook" element={<Navigate to="/guidebook/archetypes" replace />} />
+        <Route path="/guidebook/:suit" element={<CardBrowser />} />
+      </Routes>
     </div>
   )
 }

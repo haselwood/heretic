@@ -140,7 +140,7 @@ export const SPREAD_CONFIGS: Record<string, SpreadConfig> = {
   five: {
     type: 'five',
     label: 'Make a Decision',
-    description: 'Interrogate the path forward',
+    description: 'Interrogate the path',
     count: 5,
     positions: [
       'Your Motivation',

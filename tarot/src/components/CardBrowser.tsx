@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ARCHETYPE, MINDSET, ARTIFACTS, VIBES } from '@/data/cards'
 import { CARD_MEANINGS } from '@/data/meanings'
 import { cn, suitClass } from '@/lib/utils'
@@ -7,8 +8,18 @@ import { Lightbox } from './Lightbox'
 import { ActionButton } from './ActionButton'
 import type { Suit, TarotCard } from '@/types'
 
-interface CardBrowserProps {
-  onBack: () => void
+const SUIT_SLUGS: Record<string, Suit> = {
+  archetypes: 'ARCHETYPE',
+  mindset: 'MINDSET',
+  artifacts: 'ARTIFACTS',
+  vibes: 'VIBES',
+}
+
+const SUIT_TO_SLUG: Record<Suit, string> = {
+  ARCHETYPE: 'archetypes',
+  MINDSET: 'mindset',
+  ARTIFACTS: 'artifacts',
+  VIBES: 'vibes',
 }
 
 const SUITS: { key: Suit; label: string; cards: TarotCard[] }[] = [
@@ -19,8 +30,10 @@ const SUITS: { key: Suit; label: string; cards: TarotCard[] }[] = [
 ]
 
 
-export function CardBrowser({ onBack }: CardBrowserProps) {
-  const [activeSuit, setActiveSuit] = useState<Suit>('ARCHETYPE')
+export function CardBrowser() {
+  const { suit: suitParam } = useParams<{ suit?: string }>()
+  const navigate = useNavigate()
+  const activeSuit = (suitParam && SUIT_SLUGS[suitParam]) || 'ARCHETYPE'
   const [lightboxCard, setLightboxCard] = useState<TarotCard | null>(null)
 
   const currentSuit = SUITS.find(s => s.key === activeSuit)!
@@ -29,7 +42,7 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
     <div className="w-full max-w-5xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
-        <ActionButton onClick={onBack}>
+        <ActionButton onClick={() => navigate('/')}>
           &larr; Back
         </ActionButton>
         <h2 className="font-serif text-2xl sm:text-3xl text-white tracking-wide">
@@ -42,11 +55,11 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
       <div className="sticky top-0 z-20 mb-6 py-3 bg-void/80 backdrop-blur-md -mx-4 px-4">
         <div className="flex w-full border-b border-sigil/30">
           {SUITS.map(({ key, label }) => (
-            <button
+            <Link
               key={key}
-              onClick={() => setActiveSuit(key)}
+              to={`/guidebook/${SUIT_TO_SLUG[key]}`}
               className={cn(
-                'flex-1 py-2.5 text-[16px] sm:text-[17px] font-serif tracking-wider',
+                'flex-1 py-2.5 text-[16px] sm:text-[17px] font-serif tracking-wider text-center no-underline',
                 'transition-all duration-200 border-b-2 -mb-px',
                 activeSuit === key
                   ? cn('border-current', suitClass(key))
@@ -54,7 +67,7 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
               )}
             >
               {label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
@@ -70,7 +83,7 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
               key={card.id}
               onClick={() => setLightboxCard(card)}
               className={cn(
-                'card-glow-wrap relative w-full rounded-lg border transition-all duration-300 cursor-pointer text-left overflow-hidden',
+                'card-glow-wrap relative w-full border transition-all duration-300 cursor-pointer text-left overflow-hidden',
                 'border-sigil/15 bg-obsidian/20',
                 'focus-visible:ring-2 focus-visible:ring-purple-400/50'
               )}
@@ -107,11 +120,11 @@ export function CardBrowser({ onBack }: CardBrowserProps) {
                   {meaning && (
                     <div className="mt-3 space-y-3">
                       <div>
-                        <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
+                        <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
                         <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.light.join(', ')}</p>
                       </div>
                       <div>
-                        <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
+                        <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
                         <p className="mt-2 text-[13px] font-sans text-phantom/80">{meaning.dark.join(', ')}</p>
                       </div>
                       <p className="mt-1 text-[13px] sm:text-[14px] leading-relaxed text-phantom/75">

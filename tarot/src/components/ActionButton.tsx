@@ -11,7 +11,7 @@ export function ActionButton({ children, className, variant = 'default', disable
       type="button"
       disabled={disabled}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg border border-sigil/50',
+        'inline-flex items-center justify-center gap-2 border border-sigil/50',
         'bg-obsidian/50 text-[12px] font-mono text-white',
         'transition-all duration-200',
         'enabled:hover:bg-whisper/10 enabled:hover:border-whisper/30',

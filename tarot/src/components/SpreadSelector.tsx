@@ -1,11 +1,7 @@
+import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { SPREAD_CONFIGS } from '@/data/cards'
 import type { SpreadType } from '@/types'
-
-interface SpreadSelectorProps {
-  onSelect: (type: SpreadType) => void
-  onBrowse: () => void
-}
 
 const spreadDiamonds: Record<SpreadType, string> = {
   single: '◆',
@@ -16,67 +12,47 @@ const spreadDiamonds: Record<SpreadType, string> = {
   five: '◆ ◆ ◆ ◆ ◆',
 }
 
-export function SpreadSelector({ onSelect, onBrowse }: SpreadSelectorProps) {
+export function SpreadSelector() {
   return (
-    <div className="flex flex-col items-center gap-8 sm:gap-12 px-2 w-full">
-      <div className="text-center space-y-3 sm:space-y-4">
+    <div className="flex flex-col items-center gap-5 sm:gap-6 px-2 w-full">
+      <div className="text-center">
         <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
           Startup Arcana
         </h1>
-        <p className="text-[15px] sm:text-[17px] text-whisper/80 max-w-md mx-auto leading-relaxed font-mono">
-          An oracle deck for the chronically employed
-        </p>
       </div>
 
-      <div className="space-y-3 w-full max-w-[783px]">
+      <div className="space-y-2 w-full max-w-[528px]">
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.15em] text-center">
           Choose your spread
         </p>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
           {Object.values(SPREAD_CONFIGS).map((config) => (
-            <button
+            <Link
               key={config.type}
-              onClick={() => onSelect(config.type)}
+              to={`/spread/${config.type}`}
               className={cn(
-                'card-glow-wrap group relative p-4 sm:p-6 rounded-xl border border-sigil/60 overflow-hidden',
+                'card-glow-wrap group relative px-3 py-5 sm:px-4 sm:py-6 border border-sigil/60 overflow-hidden no-underline',
                 'bg-obsidian/50',
                 'transition-all duration-300 text-left'
               )}
             >
-              <div className="flex flex-col gap-2 sm:gap-2.5">
-                <div>
-                  <span className="font-serif text-base sm:text-xl text-ghost group-hover:text-white transition-colors">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <span className="font-serif text-sm sm:text-base text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
-                  <div className="text-[14px] sm:text-[15px] text-whisper mt-0.5">
-                    {config.count} {config.count === 1 ? 'card' : 'cards'}
-                  </div>
+                  <p className="text-[10px] sm:text-[11px] text-whisper group-hover:text-white transition-colors leading-tight truncate">
+                    {config.description}
+                  </p>
                 </div>
-                <p className="text-[11px] sm:text-[12px] text-whisper group-hover:text-white transition-colors leading-snug">
-                  {config.description}
-                </p>
-                <span className="text-purple-400/60 text-[10px] sm:text-xs tracking-[0.3em] group-hover:text-purple-300 transition-colors mt-auto pt-1">
+                <span className="text-purple-400/60 text-[9px] sm:text-[10px] tracking-[0.2em] group-hover:text-purple-300 transition-colors shrink-0">
                   {spreadDiamonds[config.type]}
                 </span>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
-
-      <button
-        onClick={onBrowse}
-        className={cn(
-          'group w-full max-w-[783px] flex items-center justify-center gap-3 px-6 py-4 rounded-xl border border-whisper/20',
-          'bg-transparent hover:bg-whisper/5',
-          'transition-all duration-300'
-        )}
-      >
-        <span className="text-purple-400/60 group-hover:text-purple-300 transition-colors text-sm">&#x2756;</span>
-        <span className="font-mono text-[15px] sm:text-[16px] text-white transition-colors">
-          Browse the Guidebook
-        </span>
-      </button>
     </div>
   )
 }
