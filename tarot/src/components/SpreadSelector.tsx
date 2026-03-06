@@ -31,17 +31,17 @@ export function SpreadSelector() {
               key={config.type}
               to={`/spread/${config.type}`}
               className={cn(
-                'card-glow-wrap group relative px-3 py-5 sm:px-4 sm:py-6 border border-sigil/60 overflow-hidden no-underline',
+                'card-glow-wrap group relative px-3 py-6 sm:px-4 sm:py-7 border border-sigil/60 overflow-hidden no-underline',
                 'bg-obsidian/50',
                 'transition-all duration-300 text-left'
               )}
             >
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
                 <div className="min-w-0">
                   <span className="font-serif text-sm sm:text-base text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
-                  <p className="text-[10px] sm:text-[11px] text-whisper group-hover:text-white transition-colors leading-tight truncate">
+                  <p className="text-[10px] sm:text-[11px] text-whisper group-hover:text-white transition-colors leading-tight">
                     {config.description}
                   </p>
                 </div>
