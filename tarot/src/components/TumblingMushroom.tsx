@@ -9,9 +9,9 @@ function Mushroom() {
 
   useFrame((_, delta) => {
     if (!ref.current) return
-    ref.current.rotation.x += delta * 0.3
-    ref.current.rotation.y += delta * 0.5
-    ref.current.rotation.z += delta * 0.2
+    ref.current.rotation.x += delta * 0.1875
+    ref.current.rotation.y += delta * 0.3125
+    ref.current.rotation.z += delta * 0.125
   })
 
   return <primitive ref={ref} object={scene} scale={1.5} />
@@ -69,9 +69,10 @@ export function TumblingMushroom() {
         gl={{ alpha: true, antialias: true }}
         style={{ background: 'transparent', pointerEvents: 'none' }}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[3, 5, 2]} intensity={1.2} color="#c8a0ff" />
-        <directionalLight position={[-3, -2, 4]} intensity={0.5} color="#60d090" />
+        <ambientLight intensity={3.125} />
+        <directionalLight position={[3, 5, 2]} intensity={3.75} color="#dcc0ff" />
+        <directionalLight position={[-3, -2, 4]} intensity={2.5} color="#80e0a0" />
+        <directionalLight position={[0, -3, 3]} intensity={1.875} color="#ffffff" />
         <Mushroom />
       </Canvas>
     </div>

@@ -85,7 +85,8 @@ function SpreadCard({
 }
 
 export function SpreadSelector() {
-  const configs = Object.values(SPREAD_CONFIGS)
+  const hiddenSpreads = new Set<SpreadType>(['three', 'four'])
+  const configs = Object.values(SPREAD_CONFIGS).filter(c => !hiddenSpreads.has(c.type))
 
   return (
     <div className="flex flex-col items-center gap-1 sm:gap-4 px-2 w-full">

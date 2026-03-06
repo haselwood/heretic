@@ -8,7 +8,8 @@ import { Lightbox } from '@/components/Lightbox'
 import { DeckPile } from '@/components/DeckPile'
 import { ActionButton } from '@/components/ActionButton'
 import { HomeBg } from '@/components/HomeBg'
-import { TumblingMushroom } from '@/components/TumblingMushroom'
+import { PixelMoth } from '@/components/PixelMoth'
+import { OraclePage } from '@/components/OraclePage'
 import { shuffleDeck, SPREAD_CONFIGS } from '@/data/cards'
 import type { SpreadType, DealtCard, TarotCard } from '@/types'
 
@@ -18,26 +19,35 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <TumblingMushroom />
       <div className="relative z-10 flex flex-col items-center justify-start pt-[5vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
         <footer className="pt-5 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
-          <Link
-            to="/guidebook/archetypes"
-            className="group flex items-center justify-center gap-2 w-full px-4 py-3 mb-4 border border-sigil/50 no-underline bg-obsidian/50 hover:bg-whisper/10 hover:border-whisper/30 transition-all duration-200"
-          >
-            <span className="font-mono text-[12px] text-white tracking-[0.055em]">
+          <div className="flex items-center justify-center gap-3">
+            <Link
+              to="/guidebook/archetypes"
+              className="font-mono text-[14px] text-white tracking-[0.055em] underline transition-all duration-200 hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]"
+            >
               Deck Guidebook
-            </span>
-          </Link>
-          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono">
+            </Link>
+            <span className="text-white/60 text-[7px]">◆</span>
+            <Link
+              to="/oracle"
+              className="font-mono text-[14px] text-white tracking-[0.055em] underline transition-all duration-200 hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]"
+            >
+              The Oracle
+            </Link>
+          </div>
+          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono mt-4">
             64 cards &middot; 4 suits &middot; 0 venture backing
           </p>
           <p className="text-[12px] text-whisper/85 tracking-widest mt-2 text-center uppercase font-mono">
             Made by Heather Hex
           </p>
+          <div className="flex justify-center mt-4">
+            <PixelMoth />
+          </div>
         </footer>
       </div>
     </>
@@ -215,6 +225,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/spread/:type" element={<SpreadPage />} />
+        <Route path="/oracle" element={<OraclePage />} />
         <Route path="/guidebook" element={<Navigate to="/guidebook/archetypes" replace />} />
         <Route path="/guidebook/:suit" element={<CardBrowser />} />
       </Routes>
