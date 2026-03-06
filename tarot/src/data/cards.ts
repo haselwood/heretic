@@ -104,8 +104,8 @@ export const ALL_CARDS: TarotCard[] = [...ARCHETYPE, ...MINDSET, ...ARTIFACTS, .
 export const SPREAD_CONFIGS: Record<string, SpreadConfig> = {
   single: {
     type: 'single',
-    label: 'Card of the Day',
-    description: 'A quick pulse check',
+    label: 'Pulse Check',
+    description: 'Card of the day',
     count: 1,
     positions: ['Card of the Day'],
   },
@@ -139,8 +139,8 @@ export const SPREAD_CONFIGS: Record<string, SpreadConfig> = {
   },
   four: {
     type: 'four',
-    label: 'Make a Decision',
-    description: 'Interrogate the path',
+    label: '360 Review',
+    description: 'Examine blind spots',
     count: 4,
     positions: [
       'Your Motivation',
