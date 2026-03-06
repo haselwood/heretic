@@ -41,7 +41,7 @@ export function SpreadSelector() {
                   <span className="font-serif text-[20px] text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
-                  <p className="text-[14px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
+                  <p className="text-[16px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
                     {config.description}
                   </p>
                 </div>

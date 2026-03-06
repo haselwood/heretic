@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-[5vh] pb-4 sm:justify-center sm:py-12 px-4 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-[5vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
@@ -26,7 +26,6 @@ function HomePage() {
             to="/guidebook/archetypes"
             className="group flex items-center justify-center gap-3 w-full px-4 py-4 sm:pt-3.5 sm:pb-3 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
           >
-            <span className="text-purple-400/60 group-hover:text-purple-300 transition-colors text-sm">&#x2756;</span>
             <span className="font-serif text-[18px] sm:text-[16px] text-white transition-colors tracking-wide">
               Browse the Guidebook
             </span>
