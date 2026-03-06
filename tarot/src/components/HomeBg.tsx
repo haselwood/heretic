@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 
 const PARTICLE_COLORS: [number, number, number][] = [
   [180, 160, 220],
@@ -22,10 +22,26 @@ interface Particle {
   color: [number, number, number]
 }
 
+function generateNoiseTile(): string {
+  const size = 256
+  const c = document.createElement('canvas')
+  c.width = size
+  c.height = size
+  const ctx = c.getContext('2d')!
+  const img = ctx.createImageData(size, size)
+  const d = new Uint32Array(img.data.buffer)
+  for (let i = 0; i < d.length; i++) {
+    const v = (Math.random() * 255) | 0
+    d[i] = (255 << 24) | (v << 16) | (v << 8) | v
+  }
+  ctx.putImageData(img, 0, 0)
+  return c.toDataURL('image/png')
+}
+
 export function HomeBg() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const noiseCanvasRef = useRef<HTMLCanvasElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
+  const [noiseTile] = useState(generateNoiseTile)
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!glowRef.current) return
@@ -47,54 +63,6 @@ export function HomeBg() {
     }
   }, [handleMouseMove, handleMouseLeave])
 
-  useEffect(() => {
-    const nc = noiseCanvasRef.current
-    if (!nc) return
-    const nctx = nc.getContext('2d')
-    if (!nctx) return
-
-    let nw = 0
-    let nh = 0
-    let noiseImageData: ImageData
-    let buf32: Uint32Array
-
-    function resizeNoise() {
-      nw = Math.ceil(window.innerWidth / 2)
-      nh = Math.ceil(window.innerHeight / 2)
-      nc!.width = nw
-      nc!.height = nh
-      nc!.style.width = window.innerWidth + 'px'
-      nc!.style.height = window.innerHeight + 'px'
-      noiseImageData = nctx!.createImageData(nw, nh)
-      buf32 = new Uint32Array(noiseImageData.data.buffer)
-    }
-
-    resizeNoise()
-
-    let animId: number
-    let frame = 0
-
-    function drawNoise() {
-      frame++
-      if (frame % 4 === 0) {
-        for (let i = 0; i < buf32.length; i++) {
-          const v = (Math.random() * 255) | 0
-          buf32[i] = (255 << 24) | (v << 16) | (v << 8) | v
-        }
-        nctx!.putImageData(noiseImageData, 0, 0)
-      }
-      animId = requestAnimationFrame(drawNoise)
-    }
-
-    animId = requestAnimationFrame(drawNoise)
-    const onResize = () => resizeNoise()
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener('resize', onResize)
-    }
-  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -276,7 +244,13 @@ export function HomeBg() {
 
       <div className="absolute inset-0 home-pixel-grid" />
 
-      <canvas ref={noiseCanvasRef} className="absolute inset-0 home-noise" />
+      <div
+        className="home-noise"
+        style={{
+          backgroundImage: `url(${noiseTile})`,
+          backgroundSize: '128px 128px',
+        }}
+      />
 
       <div className="absolute inset-0 home-scanlines" />
 

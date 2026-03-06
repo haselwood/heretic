@@ -340,7 +340,7 @@ body {
 .home-gradient {
   background:
     radial-gradient(ellipse at 30% 15%, rgba(55, 20, 90, 0.45) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 80%, rgba(15, 40, 65, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 80%, rgba(7, 69, 15, 0.35) 0%, transparent 55%),
     radial-gradient(ellipse at 50% 50%, #0d0b14 0%, #0a0a0f 100%);
 }
 
@@ -421,8 +421,24 @@ body {
 }
 
 .home-noise {
-  opacity: 0.12;
-  mix-blend-mode: screen;
+  position: absolute;
+  inset: -256px;
+  opacity: 0.16;
+  mix-blend-mode: normal;
+  filter: blur(0.6px);
+  animation: noise-shift 2s steps(12) infinite;
+}
+
+@keyframes noise-shift {
+  0% { transform: translate(0, 0); }
+  12.5% { transform: translate(-128px, -64px); }
+  25% { transform: translate(64px, -128px); }
+  37.5% { transform: translate(-192px, 32px); }
+  50% { transform: translate(96px, -192px); }
+  62.5% { transform: translate(-32px, 128px); }
+  75% { transform: translate(160px, -96px); }
+  87.5% { transform: translate(-64px, 192px); }
+  100% { transform: translate(0, 0); }
 }
 
 .home-scanlines {
