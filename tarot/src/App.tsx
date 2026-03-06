@@ -17,11 +17,11 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-8 sm:py-12 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-4 sm:py-12 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
-        <footer className="pt-8 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
+        <footer className="pt-5 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
           <Link
             to="/guidebook/archetypes"
             className="group flex items-center justify-center gap-3 w-full px-4 pt-3.5 pb-2 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
@@ -31,10 +31,10 @@ function HomePage() {
               Browse the Guidebook
             </span>
           </Link>
-          <p className="text-[11px] sm:text-[14px] text-whisper/70 tracking-widest uppercase font-mono">
+          <p className="text-[11px] sm:text-[14px] text-whisper/95 tracking-widest uppercase font-mono">
             64 cards &middot; 4 suits &middot; 0 venture backing
           </p>
-          <p className="text-[11px] text-whisper/50 tracking-widest mt-2 text-center uppercase font-mono">
+          <p className="text-[12px] text-whisper/70 tracking-widest mt-2 text-center uppercase font-mono">
             Made by Heather Hex
           </p>
         </footer>
