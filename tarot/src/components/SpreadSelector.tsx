@@ -14,15 +14,15 @@ const spreadDiamonds: Record<SpreadType, string> = {
 
 export function SpreadSelector() {
   return (
-    <div className="flex flex-col items-center gap-4 sm:gap-8 px-2 w-full">
+    <div className="flex flex-col items-center gap-1 sm:gap-4 px-2 w-full">
       <div className="text-center">
-        <h1 className="title-glow font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
+        <h1 className="title-glow font-serif text-[50px] sm:text-[63px] md:text-[76px] font-bold text-white tracking-[0.015em]">
           Startup Arcana
         </h1>
       </div>
 
       <div className="space-y-3 w-full max-w-[528px]">
-        <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.15em] text-center">
+        <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.14em] text-center">
           Choose your spread
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
@@ -38,14 +38,14 @@ export function SpreadSelector() {
             >
               <div className="flex flex-col items-center text-center gap-2">
                 <div>
-                  <span className="font-serif text-[20px] text-ghost group-hover:text-white transition-colors">
+                  <span className="font-serif text-[20px] tracking-[0.01em] text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
-                  <p className="text-[16px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
+                  <p className="font-mono text-[16px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
                     {config.description}
                   </p>
                 </div>
-                <span className="text-purple-400/60 text-[10px] tracking-[0.2em] group-hover:text-purple-300 transition-colors">
+                <span className="text-[#00FB8A]/60 text-[10px] tracking-[0.2em] group-hover:text-[#00FB8A] transition-colors">
                   {spreadDiamonds[config.type]}
                 </span>
               </div>

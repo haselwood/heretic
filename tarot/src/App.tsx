@@ -26,14 +26,14 @@ function HomePage() {
             to="/guidebook/archetypes"
             className="group flex items-center justify-center gap-3 w-full px-4 py-4 sm:pt-3.5 sm:pb-3 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
           >
-            <span className="font-serif text-[18px] sm:text-[16px] text-white transition-colors tracking-wide">
+            <span className="font-serif text-[18px] sm:text-[16px] text-white transition-colors tracking-[0.055em]">
               Browse the Guidebook
             </span>
           </Link>
-          <p className="text-[11px] sm:text-[14px] text-whisper/95 tracking-widest uppercase font-mono">
+          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono">
             64 cards &middot; 4 suits &middot; 0 venture backing
           </p>
-          <p className="text-[12px] text-whisper/70 tracking-widest mt-2 text-center uppercase font-mono">
+          <p className="text-[12px] text-whisper/85 tracking-widest mt-2 text-center uppercase font-mono">
             Made by Heather Hex
           </p>
         </footer>
