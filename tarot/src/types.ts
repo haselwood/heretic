@@ -7,7 +7,7 @@ export interface TarotCard {
   image: string
 }
 
-export type SpreadType = 'single' | 'two' | 'three' | 'standup' | 'retro' | 'five'
+export type SpreadType = 'single' | 'two' | 'three' | 'standup' | 'retro' | 'four'
 
 export interface SpreadConfig {
   type: SpreadType

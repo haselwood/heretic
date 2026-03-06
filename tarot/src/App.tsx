@@ -24,10 +24,10 @@ function HomePage() {
         <footer className="pt-5 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
           <Link
             to="/guidebook/archetypes"
-            className="group flex items-center justify-center gap-3 w-full px-4 py-4 sm:pt-3.5 sm:pb-3 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
+            className="group flex items-center justify-center gap-2 w-full px-4 py-3 mb-4 border border-sigil/50 no-underline bg-obsidian/50 hover:bg-whisper/10 hover:border-whisper/30 transition-all duration-200"
           >
-            <span className="font-serif text-[18px] sm:text-[16px] text-white transition-colors tracking-[0.055em]">
-              Browse the Guidebook
+            <span className="font-mono text-[12px] text-white tracking-[0.055em]">
+              Deck Guidebook
             </span>
           </Link>
           <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono">

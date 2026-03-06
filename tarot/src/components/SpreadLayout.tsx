@@ -27,35 +27,6 @@ function PlaceholderCard({ position, onClick }: { position: string; onClick?: ()
 export function SpreadLayout({ cards, spreadType, onFlip, onLightbox, placeholder, deckRef, onDeal }: SpreadLayoutProps) {
   const config = SPREAD_CONFIGS[spreadType]
 
-  if (spreadType === 'five') {
-    if (placeholder) {
-      return (
-        <div className="flex flex-col items-center gap-4 sm:gap-6">
-          <div className="flex justify-center gap-4 sm:gap-8">
-            {[0, 1, 2].map(i => <PlaceholderCard key={i} position={config.positions[i]} onClick={onDeal} />)}
-          </div>
-          <div className="flex justify-center gap-4 sm:gap-8">
-            {[3, 4].map(i => <PlaceholderCard key={i} position={config.positions[i]} onClick={onDeal} />)}
-          </div>
-        </div>
-      )
-    }
-    return (
-      <div className="flex flex-col items-center gap-4 sm:gap-6">
-        <div className="flex justify-center gap-4 sm:gap-8">
-          {[0, 1, 2].map(i => cards[i] && (
-            <TarotCard key={cards[i].card.id} dealt={cards[i]} index={i} onFlip={() => onFlip(i)} onLightbox={() => onLightbox(i)} deckRef={deckRef} />
-          ))}
-        </div>
-        <div className="flex justify-center gap-4 sm:gap-8">
-          {[3, 4].map(i => cards[i] && (
-            <TarotCard key={cards[i].card.id} dealt={cards[i]} index={i} onFlip={() => onFlip(i)} onLightbox={() => onLightbox(i)} deckRef={deckRef} />
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   if (placeholder) {
     return (
       <div className="flex flex-wrap justify-center gap-4 sm:gap-8">

@@ -137,17 +137,16 @@ export const SPREAD_CONFIGS: Record<string, SpreadConfig> = {
     count: 3,
     positions: ['Start', 'Stop', 'Continue'],
   },
-  five: {
-    type: 'five',
+  four: {
+    type: 'four',
     label: 'Make a Decision',
     description: 'Interrogate the path',
-    count: 5,
+    count: 4,
     positions: [
       'Your Motivation',
+      'External Forces',
       'Ideal Outcome',
-      'Your Values',
-      'Option 1 Likely Outcome',
-      'Option 2 Likely Outcome',
+      'Likely Outcome',
     ],
   },
 }
