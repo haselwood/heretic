@@ -36,16 +36,16 @@ export function SpreadSelector() {
                 'transition-all duration-300 text-left'
               )}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
-                <div className="min-w-0">
-                  <span className="font-serif text-base sm:text-base text-ghost group-hover:text-white transition-colors">
+              <div className="flex flex-col items-center text-center gap-1">
+                <div>
+                  <span className="font-serif text-[18px] text-ghost group-hover:text-white transition-colors">
                     {config.label}
                   </span>
                   <p className="text-xs sm:text-[11px] text-whisper group-hover:text-white transition-colors leading-tight">
                     {config.description}
                   </p>
                 </div>
-                <span className="text-purple-400/60 text-[10px] sm:text-[10px] tracking-[0.2em] group-hover:text-purple-300 transition-colors shrink-0">
+                <span className="text-purple-400/60 text-[10px] tracking-[0.2em] group-hover:text-purple-300 transition-colors">
                   {spreadDiamonds[config.type]}
                 </span>
               </div>
