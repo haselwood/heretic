@@ -479,6 +479,24 @@ body {
   background: radial-gradient(ellipse at center, transparent 25%, rgba(6, 6, 16, 0.75) 100%);
 }
 
+.tumbling-mushroom {
+  position: fixed;
+  right: -2vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  z-index: 50;
+  pointer-events: auto;
+  opacity: 0.85;
+}
+
+@media (max-width: 1100px) {
+  .tumbling-mushroom {
+    display: none;
+  }
+}
+
 .cursor-glow {
   position: fixed;
   width: 350px;

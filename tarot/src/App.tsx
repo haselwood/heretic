@@ -8,6 +8,7 @@ import { Lightbox } from '@/components/Lightbox'
 import { DeckPile } from '@/components/DeckPile'
 import { ActionButton } from '@/components/ActionButton'
 import { HomeBg } from '@/components/HomeBg'
+import { TumblingMushroom } from '@/components/TumblingMushroom'
 import { shuffleDeck, SPREAD_CONFIGS } from '@/data/cards'
 import type { SpreadType, DealtCard, TarotCard } from '@/types'
 
@@ -17,6 +18,7 @@ function HomePage() {
   return (
     <>
       <HomeBg />
+      <TumblingMushroom />
       <div className="relative z-10 flex flex-col items-center justify-start pt-[5vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
