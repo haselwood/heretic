@@ -16,7 +16,7 @@ export function SpreadSelector() {
   return (
     <div className="flex flex-col items-center gap-4 sm:gap-8 px-2 w-full">
       <div className="text-center">
-        <h1 className="title-glow font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
+        <h1 className="title-glow font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
           Startup Arcana
         </h1>
       </div>
@@ -25,7 +25,7 @@ export function SpreadSelector() {
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.15em] text-center">
           Choose your spread
         </p>
-        <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
           {Object.values(SPREAD_CONFIGS).map((config) => (
             <Link
               key={config.type}
