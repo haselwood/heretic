@@ -17,14 +17,14 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <div className="relative z-10 flex flex-col items-center px-4 py-4 sm:py-6 min-h-screen">
-        <main className="flex-1 flex flex-col items-center justify-center w-full max-w-[1200px]">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-8 sm:py-12 min-h-screen">
+        <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
-        <footer className="mt-auto pt-4 text-center">
+        <footer className="pt-8 sm:pt-10 text-center w-full max-w-[528px]">
           <Link
             to="/guidebook/archetypes"
-            className="group flex items-center justify-center gap-3 w-full max-w-[528px] mx-auto px-4 pt-3.5 pb-2 mb-3 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
+            className="group flex items-center justify-center gap-3 w-full px-4 pt-3.5 pb-2 mb-4 border border-whisper/20 no-underline bg-transparent hover:bg-whisper/5 transition-all duration-300"
           >
             <span className="text-purple-400/60 group-hover:text-purple-300 transition-colors text-sm">&#x2756;</span>
             <span className="font-serif text-[15px] sm:text-[16px] text-white transition-colors tracking-wide">

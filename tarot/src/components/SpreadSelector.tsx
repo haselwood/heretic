@@ -14,14 +14,14 @@ const spreadDiamonds: Record<SpreadType, string> = {
 
 export function SpreadSelector() {
   return (
-    <div className="flex flex-col items-center gap-5 sm:gap-6 px-2 w-full">
+    <div className="flex flex-col items-center gap-6 sm:gap-8 px-2 w-full">
       <div className="text-center">
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
+        <h1 className="title-glow font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide">
           Startup Arcana
         </h1>
       </div>
 
-      <div className="space-y-2 w-full max-w-[528px]">
+      <div className="space-y-3 w-full max-w-[528px]">
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.15em] text-center">
           Choose your spread
         </p>

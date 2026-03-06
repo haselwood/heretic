@@ -255,7 +255,7 @@ body {
   position: absolute;
   inset: 1.5px;
   border-radius: inherit;
-  background: var(--color-obsidian, #1a1726);
+  background: var(--color-abyss, #12101a);
   z-index: 0;
   transform: translateZ(0);
 }
@@ -280,6 +280,54 @@ body {
 @keyframes shimmer-rotate {
   from { transform: translateZ(0) rotate(0deg); }
   to { transform: translateZ(0) rotate(360deg); }
+}
+
+/* Title candlelight glow */
+.title-glow {
+  text-shadow:
+    0 0 10px rgba(180, 140, 255, 0.5),
+    0 0 30px rgba(140, 80, 220, 0.3),
+    0 0 60px rgba(120, 50, 200, 0.18),
+    0 0 100px rgba(100, 30, 180, 0.1);
+  animation: title-flicker 6s ease-in-out infinite;
+}
+
+@keyframes title-flicker {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(180, 140, 255, 0.5),
+      0 0 30px rgba(140, 80, 220, 0.3),
+      0 0 60px rgba(120, 50, 200, 0.18),
+      0 0 100px rgba(100, 30, 180, 0.1);
+  }
+  18% {
+    text-shadow:
+      0 0 8px rgba(180, 140, 255, 0.35),
+      0 0 22px rgba(140, 80, 220, 0.2),
+      0 0 45px rgba(120, 50, 200, 0.1),
+      0 0 75px rgba(100, 30, 180, 0.05);
+  }
+  33% {
+    text-shadow:
+      0 0 14px rgba(180, 160, 255, 0.6),
+      0 0 38px rgba(150, 90, 230, 0.38),
+      0 0 70px rgba(130, 60, 210, 0.22),
+      0 0 110px rgba(100, 30, 180, 0.12);
+  }
+  52% {
+    text-shadow:
+      0 0 9px rgba(180, 140, 255, 0.4),
+      0 0 26px rgba(140, 80, 220, 0.25),
+      0 0 50px rgba(120, 50, 200, 0.13),
+      0 0 85px rgba(100, 30, 180, 0.07);
+  }
+  74% {
+    text-shadow:
+      0 0 12px rgba(190, 150, 255, 0.55),
+      0 0 34px rgba(150, 100, 240, 0.35),
+      0 0 65px rgba(130, 70, 220, 0.2),
+      0 0 105px rgba(110, 40, 200, 0.11);
+  }
 }
 
 /* === Homepage animated background === */
