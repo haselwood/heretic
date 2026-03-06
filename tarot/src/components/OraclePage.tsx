@@ -14,15 +14,14 @@ export function OraclePage() {
             &larr; Back
           </ActionButton>
 
-          <h1 className="title-glow font-serif text-[42px] sm:text-[56px] font-bold text-white tracking-[0.015em]">
+          <h1 className="title-glow font-serif text-[42px] sm:text-[56px] font-bold text-white tracking-[0.015em] mt-4">
             The Oracle
           </h1>
-
           <div className="space-y-4">
             <p className="font-mono text-[14px] sm:text-[16px] text-whisper leading-relaxed">
-              Huzzah, good visitor. I am Heather, a designer who wants to make beautifully ridiculous projets on the internet. Born of a deep love/hate relationship to corporate tech jargon, I hope the Startup Oracle helps you find your path forward. If you enjoyed this deck, come say hello.
+              Huzzah, good visitor. I am Heather, a designer who wants to make beautifully ridiculous projets on the internet. Welcome to my world of luscious glows, unneccesary filigree, and a yearning for Geocities. I hope the Startup Arcana helps you find your path through the mists of corporate jargon and the dreaded Sunday Scaries. If you enjoyed this deck, come say hello.
               <br /><br />
-              And yes, I did actually illustrate the cards in Procreate on my iPad.
+              And yes, I did actually hand illustrate the cards in Procreate on my iPad.
             </p>
           </div>
 
