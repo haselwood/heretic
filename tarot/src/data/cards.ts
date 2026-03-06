@@ -43,7 +43,7 @@ export const ARCHETYPE = createCards('ARCHETYPE', [
 ])
 
 export const MINDSET = createCards('MINDSET', [
-  'Drink the Koolaid',
+  'Cultural Fit',
   'Growth Mindset',
   'Low Hanging Fruit',
   'Fail Fast',

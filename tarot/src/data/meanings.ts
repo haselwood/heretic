@@ -109,7 +109,7 @@ export const CARD_MEANINGS: Record<string, CardMeaning> = {
   // MINDSET
   // ══════════════════════════════════════
 
-  'mindset-drink-the-koolaid': {
+  'mindset-cultural-fit': {
     light: ['Buy-In', 'Alignment', 'Commitment', 'Belonging'],
     dark: ['Brainwashing', 'Blind Faith', 'Loss of Self', 'Cult Vibes'],
     description: "You've started using the company values in casual conversation unironically. You said 'we're a family here' at dinner with your actual family. The brainwashing is complete. The equity vesting schedule has you in a chokehold.",
