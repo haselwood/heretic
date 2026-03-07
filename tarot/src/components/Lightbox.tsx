@@ -70,14 +70,14 @@ export function Lightbox({ card, onClose }: LightboxProps) {
                 <div className="space-y-3 mb-4">
                   <div>
                     <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Light</span>
-                    <p className="mt-2 text-[14px] font-sans text-phantom/80">{meaning.light.join(', ')}</p>
+                    <p className="mt-2 text-[14px] font-sans text-phantom/80 tracking-wide">{meaning.light.join(', ')}</p>
                   </div>
                   <div>
                     <span className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-white/10 border border-white/20 text-white">Dark</span>
-                    <p className="mt-2 text-[14px] font-sans text-phantom/80">{meaning.dark.join(', ')}</p>
+                    <p className="mt-2 text-[14px] font-sans text-phantom/80 tracking-wide">{meaning.dark.join(', ')}</p>
                   </div>
                 </div>
-                <p className="text-[14px] leading-relaxed text-phantom/85">
+                <p className="text-[14px] leading-relaxed text-phantom/85 tracking-wide">
                   {meaning.description}
                 </p>
               </div>
