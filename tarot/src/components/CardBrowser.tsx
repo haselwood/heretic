@@ -58,24 +58,51 @@ export function CardBrowser() {
     <HomeBg noGlitch suitColor={SUIT_HEX[activeSuit]} />
     <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-5 pt-8 sm:pt-12">
+      <div className="flex flex-col items-center gap-2 mb-4 pt-6 sm:gap-0 sm:mb-6 sm:pt-12 sm:flex-row sm:items-center sm:justify-between">
         <ActionButton onClick={() => navigate('/')}>
           &larr; Back
         </ActionButton>
         <h2
-          className="font-serif text-3xl sm:text-4xl text-white tracking-wide font-bold transition-all duration-700"
+          className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center"
           style={{
             textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
           }}
         >
           The Guidebook
         </h2>
-        <div className="w-[85px]" />
+        <div className="hidden sm:block w-[85px]" />
       </div>
 
       {/* Suit tabs */}
-      <div className="mb-6 py-3">
-        <div className="relative flex w-full bg-black/25 border border-sigil/30 p-1">
+      <div className="mb-4 sm:mb-6">
+        {/* Mobile: vertical stack */}
+        <div className="relative flex flex-col sm:hidden w-full bg-black/25 border border-sigil/30 p-1">
+          <div
+            className="absolute left-0.5 right-0.5 bg-[#0a0612] border border-sigil/50 transition-all duration-250 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]"
+            style={{
+              height: `calc(${100 / SUITS.length}% - 4px)`,
+              top: `calc(${(SUITS.findIndex(s => s.key === activeSuit) / SUITS.length) * 100}% + 2px)`,
+              boxShadow: SUIT_GLOW[activeSuit],
+            }}
+          />
+          {SUITS.map(({ key, label }) => (
+            <Link
+              key={key}
+              to={`/guidebook/${SUIT_TO_SLUG[key]}`}
+              className={cn(
+                'relative z-10 pt-3 pb-1.5 text-[16px] leading-none font-serif tracking-wider text-center no-underline',
+                'transition-colors duration-200',
+                activeSuit === key
+                  ? cn('shimmer-text', suitClass(key))
+                  : 'text-ghost/60 hover:text-white hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]'
+              )}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+        {/* Desktop: horizontal row */}
+        <div className="relative hidden sm:flex w-full bg-black/25 border border-sigil/30 p-1">
           <div
             className="absolute top-0.5 bottom-0.5 bg-[#0a0612] border border-sigil/50 transition-all duration-250 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]"
             style={{
@@ -89,7 +116,7 @@ export function CardBrowser() {
               key={key}
               to={`/guidebook/${SUIT_TO_SLUG[key]}`}
               className={cn(
-                'relative z-10 flex-1 py-2 text-[17px] sm:text-[18px] font-serif tracking-wider text-center no-underline',
+                'relative z-10 flex-1 pt-3.5 pb-2 text-[18px] leading-none font-serif tracking-wider text-center no-underline',
                 'transition-colors duration-200',
                 activeSuit === key
                   ? cn('shimmer-text', suitClass(key))
@@ -103,16 +130,16 @@ export function CardBrowser() {
       </div>
 
       {/* Suit explanation card */}
-      <div className="relative mb-6 px-5 py-6 sm:px-8 sm:py-8 border border-sigil/60 overflow-hidden bg-obsidian/50">
-        <div className="flex flex-col items-center text-center gap-2 relative z-1">
-          <p className="font-mono text-[13px] sm:text-[14px] text-white leading-relaxed max-w-[700px]">
+      <div className="relative mb-4 px-4 py-4 sm:mb-6 sm:px-8 sm:py-6 border border-sigil/60 overflow-hidden bg-obsidian/50">
+        <div className="flex flex-col items-center text-center relative z-1">
+          <p className="font-mono text-[12px] sm:text-[14px] text-white leading-relaxed max-w-[700px]">
             {currentSuit.description}
           </p>
         </div>
       </div>
 
       {/* Card gallery */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
         {currentSuit.cards.map((card) => (
           <button
             type="button"
@@ -135,7 +162,7 @@ export function CardBrowser() {
       </div>
 
       {/* Footer */}
-      <footer className="pt-8 sm:pt-12 pb-8 text-center w-full max-w-[528px] mx-auto px-2 sm:px-0">
+      <footer className="pt-6 sm:pt-10 pb-6 sm:pb-8 text-center w-full max-w-[528px] mx-auto px-2 sm:px-0">
         <div className="flex items-center justify-center gap-3">
           <Link
             to="/"
