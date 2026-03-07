@@ -8,8 +8,8 @@ export function OraclePage() {
   return (
     <>
       <HomeBg noGlitch />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-[8vh] pb-12 sm:justify-center sm:py-16 px-4 min-h-screen">
-        <main className="flex flex-col items-center w-full max-w-[380px] text-center gap-4 [&_p]:text-justify">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-[8vh] pb-12 sm:justify-center sm:py-16 px-6 sm:px-4 min-h-screen">
+        <main className="flex flex-col items-center w-full max-w-[380px] text-center gap-4 px-2 sm:px-0 [&_p]:text-justify">
           <ActionButton onClick={() => navigate('/')}>
             &larr; Back
           </ActionButton>

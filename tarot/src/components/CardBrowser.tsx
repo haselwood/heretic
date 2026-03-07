@@ -90,7 +90,7 @@ export function CardBrowser() {
               key={key}
               to={`/guidebook/${SUIT_TO_SLUG[key]}`}
               className={cn(
-                'relative z-10 pt-3 pb-1.5 text-[16px] leading-none font-serif tracking-wider text-center no-underline',
+                'relative z-10 pt-[14px] pb-[8px] text-[16px] leading-none font-serif tracking-wider text-center no-underline',
                 'transition-colors duration-200',
                 activeSuit === key
                   ? cn('shimmer-text', suitClass(key))
@@ -130,7 +130,7 @@ export function CardBrowser() {
       </div>
 
       {/* Suit explanation card */}
-      <div className="relative mb-4 px-4 py-4 sm:mb-6 sm:px-8 sm:py-6 border border-sigil/60 overflow-hidden bg-obsidian/50">
+      <div className="relative mb-4 px-4 py-4 sm:mb-6 sm:px-8 sm:py-6 border border-sigil/60 overflow-hidden bg-black/40">
         <div className="flex flex-col items-center text-center relative z-1">
           <p className="font-mono text-[12px] sm:text-[14px] text-white leading-relaxed max-w-[700px]">
             {currentSuit.description}
