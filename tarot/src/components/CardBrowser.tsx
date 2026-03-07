@@ -55,7 +55,7 @@ export function CardBrowser() {
 
   return (
     <>
-    <HomeBg noGlitch suitColor={SUIT_HEX[activeSuit]} />
+    <HomeBg noGlitch suitColor={activeSuit === 'ARCHETYPE' ? undefined : SUIT_HEX[activeSuit]} />
     <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
       {/* Header */}
       <div className="mb-[12px] pt-6 sm:mb-6 sm:pt-12">
