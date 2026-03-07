@@ -25,7 +25,7 @@ function PlaceholderCard({ position, onClick, count }: { position: string; onCli
       <div className={`${mobile.w} ${mobile.h} sm:w-[234px] sm:h-[390px] rounded-xl border-2 border-dashed border-sigil/30 flex items-center justify-center transition-colors group-hover:border-sigil/60`}>
         <span className="text-whisper/20 font-serif text-xl sm:text-3xl group-hover:text-whisper/40 transition-colors">?</span>
       </div>
-      <span className={`text-[9px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center ${mobile.maxW} sm:max-w-[234px]`}>
+      <span className={`text-[13px] sm:text-[15px] font-mono text-white uppercase tracking-wider text-center ${mobile.maxW} sm:max-w-[234px]`}>
         {position}
       </span>
     </button>

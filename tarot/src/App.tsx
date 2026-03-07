@@ -71,6 +71,9 @@ function SpreadPage() {
   const deckRef = useRef<HTMLDivElement>(null)
   const readingRef = useRef<HTMLDivElement>(null)
   const hasTriggeredReading = useRef(false)
+  const textBufferRef = useRef('')
+  const displayedLenRef = useRef(0)
+  const typewriterRef = useRef<number | null>(null)
 
   const handleQuestionSubmit = useCallback(() => {
     setPhase('shuffling')
@@ -94,6 +97,9 @@ function SpreadPage() {
   const handleReshuffle = useCallback(() => {
     setDealtCards([])
     setReadingText('')
+    textBufferRef.current = ''
+    displayedLenRef.current = 0
+    if (typewriterRef.current) { clearTimeout(typewriterRef.current); typewriterRef.current = null }
     setIsLoadingReading(false)
     hasTriggeredReading.current = false
     setPhase('shuffling')
@@ -110,9 +116,27 @@ function SpreadPage() {
     if (dealt) setLightboxCard(dealt.card)
   }, [dealtCards])
 
+  const startTypewriter = useCallback(() => {
+    if (typewriterRef.current) return
+    const tick = () => {
+      if (displayedLenRef.current < textBufferRef.current.length) {
+        const charsToAdd = Math.min(3, textBufferRef.current.length - displayedLenRef.current)
+        displayedLenRef.current += charsToAdd
+        setReadingText(textBufferRef.current.slice(0, displayedLenRef.current))
+        typewriterRef.current = window.setTimeout(tick, 10)
+      } else {
+        typewriterRef.current = null
+      }
+    }
+    tick()
+  }, [])
+
   const fetchReading = useCallback(async (cards: DealtCard[]) => {
     setIsLoadingReading(true)
     setReadingText('')
+    textBufferRef.current = ''
+    displayedLenRef.current = 0
+    if (typewriterRef.current) { clearTimeout(typewriterRef.current); typewriterRef.current = null }
     setPhase('reading')
 
     try {
@@ -134,27 +158,30 @@ function SpreadPage() {
       })
 
       if (!res.ok || !res.body) {
-        setReadingText('The cosmos are unavailable right now. Please try again.')
+        textBufferRef.current = 'The cosmos are unavailable right now. Please try again.'
+        displayedLenRef.current = textBufferRef.current.length
+        setReadingText(textBufferRef.current)
         setIsLoadingReading(false)
         return
       }
 
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
-      let text = ''
 
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
-        text += decoder.decode(value, { stream: true })
-        setReadingText(text)
+        textBufferRef.current += decoder.decode(value, { stream: true })
+        startTypewriter()
       }
     } catch {
-      setReadingText('The cosmos are unavailable right now. Please try again.')
+      textBufferRef.current = 'The cosmos are unavailable right now. Please try again.'
+      displayedLenRef.current = textBufferRef.current.length
+      setReadingText(textBufferRef.current)
     } finally {
       setIsLoadingReading(false)
     }
-  }, [question, spreadType])
+  }, [question, spreadType, startTypewriter])
 
   useEffect(() => {
     if (phase !== 'dealt' || hasTriggeredReading.current) return
@@ -219,16 +246,20 @@ function SpreadPage() {
 
         {(phase === 'dealt' || phase === 'reading') && (
           <div className="flex flex-col items-center w-full max-w-[1200px]">
-            <div className="w-full mb-4 sm:mb-8">
-              <div className="flex justify-center mb-3 sm:mb-5">
-                <ActionButton onClick={() => navigate('/')}>
+            <div className="w-full mb-4 sm:mb-8 pt-2 sm:pt-4">
+              <div className="flex justify-between items-center gap-2 mb-4 sm:mb-6">
+                <ActionButton onClick={() => navigate('/')} className="flex-1 sm:flex-none">
                   &larr; New Spread
+                </ActionButton>
+                <ActionButton onClick={handleReshuffle} className="flex-1 sm:flex-none">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+                  Shuffle &amp; Deal
                 </ActionButton>
               </div>
               <div className="flex flex-col items-center text-center gap-1">
-                <p className="text-[16px] sm:text-[20px] font-serif text-white tracking-wide">
+                <h2 className="title-glow font-serif text-[28px] sm:text-[38px] font-bold text-white tracking-[0.015em]">
                   {SPREAD_CONFIGS[spreadType].label}
-                </p>
+                </h2>
                 {question && (
                   <p className="text-[12px] sm:text-[13px] font-mono text-whisper/50 italic max-w-sm">
                     &ldquo;{question}&rdquo;
@@ -245,24 +276,29 @@ function SpreadPage() {
                 onLightbox={handleLightbox}
                 deckRef={deckRef}
               />
-              <div className="flex gap-2 mt-2">
-                <ActionButton onClick={handleReshuffle}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
-                  Reshuffle &amp; Redeal
-                </ActionButton>
-              </div>
             </div>
 
             {phase === 'reading' && (
               <div ref={readingRef} className="w-full max-w-lg mt-8 sm:mt-12 mb-12">
                 {isLoadingReading && !readingText && (
-                  <p className="text-[13px] text-oracle/60 tracking-[0.2em] uppercase font-mono text-center loading-pulse">
-                    Consulting the cosmos&hellip;
-                  </p>
+                  <div className="flex flex-col items-center gap-5">
+                    <div className="smoke-infinity">
+                      <svg viewBox="0 0 120 60"><path className="smoke-infinity-path" d="M 60 30 C 60 10, 0 10, 0 30 C 0 50, 60 50, 60 30 C 60 10, 120 10, 120 30 C 120 50, 60 50, 60 30" /></svg>
+                      <div className="smoke-infinity-head" />
+                      <div className="smoke-infinity-trail" />
+                      <div className="smoke-infinity-trail" />
+                      <div className="smoke-infinity-trail" />
+                      <div className="smoke-infinity-trail" />
+                      <div className="smoke-infinity-trail" />
+                    </div>
+                    <p className="text-[13px] sm:text-[13px] tracking-[0.15em] uppercase font-serif text-center oracle-glow-text">
+                      The Oracle is Processing
+                    </p>
+                  </div>
                 )}
                 {readingText && (
                   <div className="border border-sigil/30 bg-obsidian/40 backdrop-blur-sm p-5 sm:p-8">
-                    <p className="text-[13px] sm:text-[14px] font-mono text-phantom/90 leading-relaxed tracking-wide whitespace-pre-wrap">
+                    <p className="text-[13px] sm:text-[14px] font-mono text-white leading-relaxed tracking-wide whitespace-pre-wrap">
                       {readingText}
                     </p>
                     {isLoadingReading && (
@@ -294,6 +330,30 @@ function ScrollToTop() {
   return null
 }
 
+function LoadingTestPage() {
+  return (
+    <>
+      <HomeBg />
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center gap-6">
+          <div className="smoke-infinity">
+            <svg viewBox="0 0 120 60"><path className="smoke-infinity-path" d="M 60 30 C 60 10, 0 10, 0 30 C 0 50, 60 50, 60 30 C 60 10, 120 10, 120 30 C 120 50, 60 50, 60 30" /></svg>
+            <div className="smoke-infinity-head" />
+            <div className="smoke-infinity-trail" />
+            <div className="smoke-infinity-trail" />
+            <div className="smoke-infinity-trail" />
+            <div className="smoke-infinity-trail" />
+            <div className="smoke-infinity-trail" />
+          </div>
+          <p className="text-[13px] sm:text-[13px] tracking-[0.15em] uppercase font-serif text-center oracle-glow-text">
+            The Oracle is Processing
+          </p>
+        </div>
+      </div>
+    </>
+  )
+}
+
 function App() {
   return (
     <div className="min-h-screen relative">
@@ -304,6 +364,7 @@ function App() {
         <Route path="/oracle" element={<OraclePage />} />
         <Route path="/guidebook" element={<Navigate to="/guidebook/archetypes" replace />} />
         <Route path="/guidebook/:suit" element={<CardBrowser />} />
+        <Route path="/loading" element={<LoadingTestPage />} />
       </Routes>
     </div>
   )

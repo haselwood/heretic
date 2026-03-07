@@ -101,7 +101,7 @@ export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef, totalCard
       </button>
 
       {/* Position label */}
-      <span className={cn('text-[9px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center sm:max-w-[234px]', MOBILE_LABEL_SIZES[totalCards] || MOBILE_LABEL_SIZES[3])}>
+      <span className={cn('text-[13px] sm:text-[15px] font-mono text-white uppercase tracking-wider text-center sm:max-w-[234px]', MOBILE_LABEL_SIZES[totalCards] || MOBILE_LABEL_SIZES[3])}>
         {position}
       </span>
     </div>
