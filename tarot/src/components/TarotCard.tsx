@@ -3,15 +3,28 @@ import { cn, suitBgClass } from '@/lib/utils'
 import { CardImage } from './CardImage'
 import type { DealtCard } from '@/types'
 
+const MOBILE_CARD_SIZES: Record<number, string> = {
+  1: 'w-[200px] h-[333px]',
+  2: 'w-[155px] h-[258px]',
+  3: 'w-[105px] h-[175px]',
+}
+
+const MOBILE_LABEL_SIZES: Record<number, string> = {
+  1: 'max-w-[200px]',
+  2: 'max-w-[155px]',
+  3: 'max-w-[105px]',
+}
+
 interface TarotCardProps {
   dealt: DealtCard
   onFlip: () => void
   onLightbox: () => void
   index: number
   deckRef?: React.RefObject<HTMLDivElement | null>
+  totalCards?: number
 }
 
-export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef }: TarotCardProps) {
+export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef, totalCards = 1 }: TarotCardProps) {
   const { card, position, isFlipped, dealDelay } = dealt
   const cardRef = useRef<HTMLButtonElement>(null)
 
@@ -46,13 +59,14 @@ export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef }: TarotCa
   }
 
   return (
-    <div className="relative flex flex-col items-center gap-3" style={{ zIndex: 50 - index }}>
+    <div className="relative flex flex-col items-center gap-2 sm:gap-3" style={{ zIndex: 50 - index }}>
       <button
         ref={cardRef}
         type="button"
         className={cn(
           'card-container cursor-pointer deal-in',
-          'w-[180px] h-[300px] sm:w-[234px] sm:h-[390px]',
+          MOBILE_CARD_SIZES[totalCards] || MOBILE_CARD_SIZES[3],
+          'sm:w-[234px] sm:h-[390px]',
           'bg-transparent border-none p-0 outline-none focus-visible:ring-2 focus-visible:ring-oracle/50 rounded-xl'
         )}
         onClick={handleClick}
@@ -87,7 +101,7 @@ export function TarotCard({ dealt, onFlip, onLightbox, index, deckRef }: TarotCa
       </button>
 
       {/* Position label */}
-      <span className="text-[10px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center max-w-[180px] sm:max-w-[234px]">
+      <span className={cn('text-[9px] sm:text-[11px] font-mono text-white uppercase tracking-wider text-center sm:max-w-[234px]', MOBILE_LABEL_SIZES[totalCards] || MOBILE_LABEL_SIZES[3])}>
         {position}
       </span>
     </div>

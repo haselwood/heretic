@@ -5,12 +5,12 @@ import { ShuffleAnimation } from '@/components/ShuffleAnimation'
 import { SpreadLayout } from '@/components/SpreadLayout'
 import { CardBrowser } from '@/components/CardBrowser'
 import { Lightbox } from '@/components/Lightbox'
-import { DeckPile } from '@/components/DeckPile'
 import { ActionButton } from '@/components/ActionButton'
 import { HomeBg } from '@/components/HomeBg'
 import { PixelMoth } from '@/components/PixelMoth'
 import { OraclePage } from '@/components/OraclePage'
 import { shuffleDeck, SPREAD_CONFIGS } from '@/data/cards'
+import { CARD_MEANINGS } from '@/data/meanings'
 import type { SpreadType, DealtCard, TarotCard } from '@/types'
 
 const VALID_SPREADS = new Set<string>(Object.keys(SPREAD_CONFIGS))
@@ -58,34 +58,28 @@ function SpreadPage() {
   const navigate = useNavigate()
   const { type: typeParam } = useParams<{ type: string }>()
   const spreadType = (typeParam && VALID_SPREADS.has(typeParam) ? typeParam : 'single') as SpreadType
+  const isSingle = spreadType === 'single'
 
-  const [phase, setPhase] = useState<'shuffling' | 'ready' | 'dealt' | 'reading'>('shuffling')
-  const [deck, setDeck] = useState<TarotCard[]>(() => shuffleDeck())
+  const [phase, setPhase] = useState<'question' | 'shuffling' | 'dealt' | 'reading'>(
+    isSingle ? 'shuffling' : 'question'
+  )
   const [dealtCards, setDealtCards] = useState<DealtCard[]>([])
   const [lightboxCard, setLightboxCard] = useState<TarotCard | null>(null)
-  const [isShuffling, setIsShuffling] = useState(false)
   const [question, setQuestion] = useState('')
+  const [readingText, setReadingText] = useState('')
+  const [isLoadingReading, setIsLoadingReading] = useState(false)
   const deckRef = useRef<HTMLDivElement>(null)
+  const readingRef = useRef<HTMLDivElement>(null)
+  const hasTriggeredReading = useRef(false)
 
-  const handleInitialShuffleComplete = useCallback(() => {
-    setDeck(shuffleDeck())
-    setPhase('ready')
+  const handleQuestionSubmit = useCallback(() => {
+    setPhase('shuffling')
   }, [])
 
-  const handleShuffle = useCallback(() => {
-    setDealtCards([])
-    setIsShuffling(true)
-    setPhase('ready')
-  }, [])
-
-  const handleDeckShuffleComplete = useCallback(() => {
-    setDeck(shuffleDeck())
-    setIsShuffling(false)
-  }, [])
-
-  const handleDeal = useCallback(() => {
+  const handleShuffleComplete = useCallback(() => {
+    const newDeck = shuffleDeck()
     const config = SPREAD_CONFIGS[spreadType]
-    const dealt: DealtCard[] = deck.slice(0, config.count).map((card, i) => ({
+    const dealt: DealtCard[] = newDeck.slice(0, config.count).map((card, i) => ({
       card,
       position: config.positions[i],
       isFlipped: false,
@@ -95,7 +89,15 @@ function SpreadPage() {
     }))
     setDealtCards(dealt)
     setPhase('dealt')
-  }, [spreadType, deck])
+  }, [spreadType])
+
+  const handleReshuffle = useCallback(() => {
+    setDealtCards([])
+    setReadingText('')
+    setIsLoadingReading(false)
+    hasTriggeredReading.current = false
+    setPhase('shuffling')
+  }, [])
 
   const handleFlip = useCallback((index: number) => {
     setDealtCards(prev => prev.map((d, i) =>
@@ -108,100 +110,170 @@ function SpreadPage() {
     if (dealt) setLightboxCard(dealt.card)
   }, [dealtCards])
 
+  const fetchReading = useCallback(async (cards: DealtCard[]) => {
+    setIsLoadingReading(true)
+    setReadingText('')
+    setPhase('reading')
+
+    try {
+      const payload = {
+        question: question || undefined,
+        spreadType,
+        cards: cards.map(d => ({
+          name: d.card.name,
+          suit: d.card.suit,
+          position: d.position,
+          meaning: CARD_MEANINGS[d.card.id] || null,
+        })),
+      }
+
+      const res = await fetch('/api/reading', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok || !res.body) {
+        setReadingText('The cosmos are unavailable right now. Please try again.')
+        setIsLoadingReading(false)
+        return
+      }
+
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let text = ''
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        text += decoder.decode(value, { stream: true })
+        setReadingText(text)
+      }
+    } catch {
+      setReadingText('The cosmos are unavailable right now. Please try again.')
+    } finally {
+      setIsLoadingReading(false)
+    }
+  }, [question, spreadType])
+
+  useEffect(() => {
+    if (phase !== 'dealt' || hasTriggeredReading.current) return
+    const allFlipped = dealtCards.length > 0 && dealtCards.every(d => d.isFlipped)
+    if (allFlipped) {
+      hasTriggeredReading.current = true
+      fetchReading(dealtCards)
+    }
+  }, [phase, dealtCards, fetchReading])
+
+  useEffect(() => {
+    if (readingText && readingRef.current) {
+      readingRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }
+  }, [readingText])
+
   return (
     <>
-      <div className="flex flex-col items-center px-4 py-8 sm:py-12 min-h-screen">
-        {(phase === 'ready' || phase === 'dealt' || phase === 'reading') && (
-          <div className="sticky top-0 z-30 w-full max-w-[1200px] mb-10">
-            <div className="flex justify-center mb-6">
-              <ActionButton onClick={() => navigate('/')}>
-                &larr; New Spread
-              </ActionButton>
-            </div>
-            <div className="flex flex-col items-center bg-obsidian/80 backdrop-blur-md border border-sigil/30 py-6" style={{ boxShadow: '0 8px 32px rgba(130, 100, 200, 0.08), 0 4px 16px rgba(0, 0, 0, 0.3)' }}>
-              <p className="text-[20px] font-serif text-white tracking-wide">
+      <HomeBg />
+      <div className="relative z-10 flex flex-col items-center px-4 py-4 sm:py-12 min-h-screen">
+
+        {phase === 'question' && (
+          <div className="flex flex-col items-center justify-center min-h-[70vh] w-full max-w-md">
+            <div className="flex flex-col items-center text-center gap-2 mb-8">
+              <p className="text-[20px] sm:text-[26px] font-serif text-white tracking-wide">
                 {SPREAD_CONFIGS[spreadType].label}
               </p>
-              <span className="text-oracle/50 text-[10px] my-1">&#x2726;</span>
-              <p className="text-[14px] font-mono text-white">
+              <span className="text-oracle/50 text-[10px]">&#x2726;</span>
+              <p className="text-[13px] sm:text-[14px] font-mono text-whisper/70">
                 {SPREAD_CONFIGS[spreadType].description}
               </p>
-              <div className="mt-4 w-full max-w-md px-4">
-                <input
-                  type="text"
-                  value={question}
-                  onChange={e => setQuestion(e.target.value)}
-                  placeholder="Type your question for the universe..."
-                  className="w-full px-4 py-3 border border-sigil/60 bg-obsidian/50 text-white text-[14px] font-mono placeholder:text-whisper/50 focus:outline-none focus:border-whisper/50 transition-colors text-center"
-                />
+            </div>
+            <div className="w-full space-y-5">
+              <textarea
+                value={question}
+                onChange={e => setQuestion(e.target.value)}
+                placeholder="What is your question for the universe?"
+                rows={3}
+                className="w-full px-4 py-3 border border-sigil/50 bg-obsidian/40 text-white text-[14px] sm:text-[15px] font-mono placeholder:text-whisper/40 focus:outline-none focus:border-whisper/40 transition-colors text-center resize-none"
+              />
+              <div className="flex justify-center">
+                <ActionButton onClick={handleQuestionSubmit}>
+                  Shuffle &amp; Deal
+                </ActionButton>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="mt-8 text-[12px] font-mono text-whisper/50 tracking-wider uppercase hover:text-whisper/80 transition-colors"
+            >
+              &larr; Back
+            </button>
           </div>
         )}
 
-        <main className="flex-1 flex flex-col items-center w-full max-w-[1200px]">
-          {phase === 'shuffling' && (
-            <ShuffleAnimation onComplete={handleInitialShuffleComplete} />
-          )}
+        {phase === 'shuffling' && (
+          <div className="flex-1 flex items-center justify-center w-full">
+            <ShuffleAnimation onComplete={handleShuffleComplete} />
+          </div>
+        )}
 
-          {phase === 'ready' && (
-            <div className="flex flex-col items-center gap-4 w-full">
-              <div className="flex items-start justify-center gap-16 sm:gap-20 w-full">
-                <div className="flex flex-col items-center gap-4 w-[180px] sm:w-[234px]">
-                  <div ref={deckRef}>
-                    <DeckPile remaining={64} shuffling={isShuffling} onShuffleComplete={handleDeckShuffleComplete} onClickShuffle={handleShuffle} />
-                  </div>
-                  <div className="flex gap-2 w-full">
-                    <ActionButton variant="half" onClick={handleShuffle} disabled={isShuffling}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
-                      Shuffle
-                    </ActionButton>
-                    <ActionButton variant="half" onClick={handleDeal} disabled={isShuffling}>
-                      Deal &rarr;
-                    </ActionButton>
-                  </div>
-                </div>
-                <SpreadLayout
-                  cards={[]}
-                  spreadType={spreadType}
-                  onFlip={() => {}}
-                  onLightbox={() => {}}
-                  placeholder
-                  deckRef={deckRef}
-                  onDeal={handleDeal}
-                />
+        {(phase === 'dealt' || phase === 'reading') && (
+          <div className="flex flex-col items-center w-full max-w-[1200px]">
+            <div className="w-full mb-4 sm:mb-8">
+              <div className="flex justify-center mb-3 sm:mb-5">
+                <ActionButton onClick={() => navigate('/')}>
+                  &larr; New Spread
+                </ActionButton>
+              </div>
+              <div className="flex flex-col items-center text-center gap-1">
+                <p className="text-[16px] sm:text-[20px] font-serif text-white tracking-wide">
+                  {SPREAD_CONFIGS[spreadType].label}
+                </p>
+                {question && (
+                  <p className="text-[12px] sm:text-[13px] font-mono text-whisper/50 italic max-w-sm">
+                    &ldquo;{question}&rdquo;
+                  </p>
+                )}
               </div>
             </div>
-          )}
 
-          {(phase === 'dealt' || phase === 'reading') && (
             <div className="flex flex-col items-center gap-4 w-full">
-              <div className="flex items-start justify-center gap-16 sm:gap-20 w-full">
-                <div className="flex flex-col items-center gap-4 w-[180px] sm:w-[234px]">
-                  <div ref={deckRef}>
-                    <DeckPile remaining={64 - dealtCards.length} shuffling={isShuffling} onShuffleComplete={handleDeckShuffleComplete} onClickShuffle={handleShuffle} />
-                  </div>
-                  <div className="flex gap-2 w-full">
-                    <ActionButton variant="half" onClick={handleShuffle} disabled={isShuffling}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
-                      Shuffle
-                    </ActionButton>
-                    <ActionButton variant="half" onClick={handleDeal} disabled={isShuffling || dealtCards.length > 0}>
-                      Deal &rarr;
-                    </ActionButton>
-                  </div>
-                </div>
-                <SpreadLayout
-                  cards={dealtCards}
-                  spreadType={spreadType}
-                  onFlip={handleFlip}
-                  onLightbox={handleLightbox}
-                  deckRef={deckRef}
-                />
+              <SpreadLayout
+                cards={dealtCards}
+                spreadType={spreadType}
+                onFlip={handleFlip}
+                onLightbox={handleLightbox}
+                deckRef={deckRef}
+              />
+              <div className="flex gap-2 mt-2">
+                <ActionButton onClick={handleReshuffle}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+                  Reshuffle &amp; Redeal
+                </ActionButton>
               </div>
             </div>
-          )}
-        </main>
+
+            {phase === 'reading' && (
+              <div ref={readingRef} className="w-full max-w-lg mt-8 sm:mt-12 mb-12">
+                {isLoadingReading && !readingText && (
+                  <p className="text-[13px] text-oracle/60 tracking-[0.2em] uppercase font-mono text-center loading-pulse">
+                    Consulting the cosmos&hellip;
+                  </p>
+                )}
+                {readingText && (
+                  <div className="border border-sigil/30 bg-obsidian/40 backdrop-blur-sm p-5 sm:p-8">
+                    <p className="text-[13px] sm:text-[14px] font-mono text-phantom/90 leading-relaxed tracking-wide whitespace-pre-wrap">
+                      {readingText}
+                    </p>
+                    {isLoadingReading && (
+                      <span className="inline-block w-2 h-4 bg-oracle/60 ml-1 animate-pulse" />
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {lightboxCard && (

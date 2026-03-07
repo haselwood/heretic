@@ -26,4 +26,4 @@ export interface DealtCard {
   dealDelay: number
 }
 
-export type AppPhase = 'select' | 'shuffling' | 'ready' | 'dealt' | 'reading' | 'browse'
+export type AppPhase = 'question' | 'shuffling' | 'dealt' | 'reading'
