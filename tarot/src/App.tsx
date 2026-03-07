@@ -1,5 +1,5 @@
-import { useState, useCallback, useRef } from 'react'
-import { Routes, Route, Navigate, useNavigate, useParams, Link } from 'react-router-dom'
+import { useState, useCallback, useRef, useEffect } from 'react'
+import { Routes, Route, Navigate, useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import { SpreadSelector } from '@/components/SpreadSelector'
 import { ShuffleAnimation } from '@/components/ShuffleAnimation'
 import { SpreadLayout } from '@/components/SpreadLayout'
@@ -219,9 +219,18 @@ function SpreadPage() {
   )
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
   return (
     <div className="min-h-screen relative">
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/spread/:type" element={<SpreadPage />} />

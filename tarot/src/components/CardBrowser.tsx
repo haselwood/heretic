@@ -59,20 +59,17 @@ export function CardBrowser() {
     <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
       {/* Header */}
       <div className="mb-4 pt-6 sm:mb-6 sm:pt-12">
-        <div className="flex items-center justify-between sm:justify-between">
-          <ActionButton onClick={() => navigate('/')}>
-            &larr; Back
-          </ActionButton>
-          <h2
-            className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center flex-1"
-            style={{
-              textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
-            }}
-          >
-            The Guidebook
-          </h2>
-          <div className="w-[85px] hidden sm:block" />
-        </div>
+        <ActionButton onClick={() => navigate('/')} className="w-full sm:w-auto">
+          &larr; Back
+        </ActionButton>
+        <h2
+          className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center mt-4 sm:mt-5"
+          style={{
+            textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
+          }}
+        >
+          The Guidebook
+        </h2>
       </div>
 
       {/* Suit tabs */}
@@ -87,21 +84,28 @@ export function CardBrowser() {
               boxShadow: SUIT_GLOW[activeSuit],
             }}
           />
-          {SUITS.map(({ key, label }) => (
-            <Link
-              key={key}
-              to={`/guidebook/${SUIT_TO_SLUG[key]}`}
-              className={cn(
-                'relative z-10 flex items-center justify-center h-[44px] text-[16px] leading-none font-serif tracking-wider text-center no-underline',
-                'transition-colors duration-200',
-                activeSuit === key
-                  ? cn('shimmer-text', suitClass(key))
-                  : 'text-ghost/60 hover:text-white hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]'
-              )}
-            >
-              {label}
-            </Link>
-          ))}
+          {SUITS.map(({ key, label }) => {
+            const nudge = key === 'ARCHETYPE' ? 'pt-0'
+              : key === 'MINDSET' ? 'pt-[3px]'
+              : key === 'ARTIFACTS' ? 'pt-[4px]'
+              : 'pt-[8px]'
+            return (
+              <Link
+                key={key}
+                to={`/guidebook/${SUIT_TO_SLUG[key]}`}
+                className={cn(
+                  'relative z-10 flex items-center justify-center h-[44px] text-[16px] leading-none font-serif tracking-wider text-center no-underline',
+                  nudge,
+                  'transition-colors duration-200',
+                  activeSuit === key
+                    ? cn('shimmer-text', suitClass(key))
+                    : 'text-ghost/60 hover:text-white hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]'
+                )}
+              >
+                {label}
+              </Link>
+            )
+          })}
         </div>
         {/* Desktop: horizontal row */}
         <div className="relative hidden sm:flex w-full bg-black/25 border border-sigil/30 p-1">

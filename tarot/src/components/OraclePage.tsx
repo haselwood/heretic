@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { HomeBg } from '@/components/HomeBg'
 import { ActionButton } from '@/components/ActionButton'
 import { PixelMoth } from '@/components/PixelMoth'
@@ -8,9 +8,9 @@ export function OraclePage() {
   return (
     <>
       <HomeBg noGlitch />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-[8vh] pb-12 sm:justify-center sm:py-16 px-6 sm:px-4 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-6 pb-12 sm:justify-center sm:py-16 px-6 sm:px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[380px] text-center gap-4 px-2 sm:px-0 [&_p]:text-justify">
-          <ActionButton onClick={() => navigate('/')}>
+          <ActionButton onClick={() => navigate('/')} className="w-full sm:w-auto">
             &larr; Back
           </ActionButton>
 
@@ -25,8 +25,6 @@ export function OraclePage() {
             </p>
           </div>
 
-          <PixelMoth className="mt-2" />
-
           <div className="flex items-center gap-4 mt-2">
             <a href="https://x.com/hhaselwood" target="_blank" rel="noopener noreferrer" className="font-mono text-[13px] text-white/70 hover:text-white transition-colors">Twitter</a>
             <span className="text-[#FFF]/40 text-[10px]">◆</span>
@@ -34,6 +32,32 @@ export function OraclePage() {
           </div>
 
         </main>
+        <footer className="pt-8 sm:pt-10 pb-6 text-center w-full max-w-[528px] px-2 sm:px-0">
+          <div className="flex items-center justify-center gap-3">
+            <Link
+              to="/"
+              className="font-mono text-[14px] text-white tracking-[0.055em] underline transition-all duration-200 hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]"
+            >
+              Spreads
+            </Link>
+            <span className="text-white/60 text-[7px]">◆</span>
+            <Link
+              to="/guidebook/archetypes"
+              className="font-mono text-[14px] text-white tracking-[0.055em] underline transition-all duration-200 hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]"
+            >
+              The Guidebook
+            </Link>
+          </div>
+          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono mt-4">
+            64 cards &middot; 4 suits &middot; 0 venture backing
+          </p>
+          <p className="text-[12px] text-whisper/85 tracking-widest mt-2 text-center uppercase font-mono">
+            Made by Heather Hex
+          </p>
+          <div className="flex justify-center mt-4">
+            <PixelMoth />
+          </div>
+        </footer>
       </div>
     </>
   )
