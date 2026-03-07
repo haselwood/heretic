@@ -19,7 +19,7 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-[5vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-[3vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
@@ -210,8 +210,6 @@ function SpreadPage() {
           <Lightbox
             card={lightboxCard}
             onClose={() => setLightboxCard(null)}
-            onPrev={idx > 0 ? () => setLightboxCard(dealtCards[idx - 1].card) : undefined}
-            onNext={idx < dealtCards.length - 1 ? () => setLightboxCard(dealtCards[idx + 1].card) : undefined}
           />
         )
       })()}

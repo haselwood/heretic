@@ -275,11 +275,104 @@ body {
   z-index: 1;
 }
 
+/* Holographic shimmer sweep across card face on hover */
+.card-shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.card-shimmer-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.03) 30%,
+    rgba(200, 170, 255, 0.10) 38%,
+    rgba(130, 210, 255, 0.13) 44%,
+    rgba(255, 200, 255, 0.10) 50%,
+    rgba(130, 255, 200, 0.08) 56%,
+    rgba(255, 255, 255, 0.03) 64%,
+    transparent 74%
+  );
+  background-size: 250% 100%;
+  background-position: 150% center;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-position 0.6s ease;
+  mix-blend-mode: screen;
+}
+
+.card-glow-wrap:hover .card-shimmer-overlay::before {
+  opacity: 1;
+  background-position: -50% center;
+  transition: opacity 0.3s ease, background-position 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 .card-glow-wrap:hover {
   box-shadow:
-    inset 0 0 0 1.5px rgba(180, 160, 255, 0.7),
     0 0 12px rgba(200, 140, 255, 0.2),
     0 0 25px rgba(180, 120, 255, 0.1);
+}
+
+/* Animated conic-gradient border shimmer on top of card image */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card-border-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1.5px;
+  --border-angle: 0deg;
+  background: conic-gradient(
+    from var(--border-angle),
+    rgba(130, 210, 255, 1) 0%,
+    rgba(170, 170, 255, 1) 5%,
+    rgb(212, 77, 239) 10%,
+    rgba(255, 200, 255, 1) 18%,
+    rgba(255, 200, 255, 1) 26%,
+    rgba(240, 165, 255, 1) 32%,
+    rgba(170, 170, 255, 1) 37%,
+    rgb(130, 255, 159) 42%,
+    rgb(130, 255, 230) 50%,
+    rgba(170, 170, 255, 1) 55%,
+    rgba(240, 165, 255, 1) 60%,
+    rgb(250, 255, 195) 68%,
+    rgba(255, 195, 255, 1) 76%,
+    rgba(240, 165, 255, 1) 82%,
+    rgba(170, 170, 255, 1) 87%,
+    rgba(130, 210, 255, 1) 92%,
+    rgba(130, 210, 255, 1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: border-shimmer-spin 6s linear infinite;
+}
+
+.card-glow-wrap:hover .card-border-shimmer {
+  opacity: 1;
+}
+
+@keyframes border-shimmer-spin {
+  to { --border-angle: 360deg; }
 }
 
 @keyframes shimmer-rotate {

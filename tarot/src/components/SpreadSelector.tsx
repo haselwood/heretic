@@ -91,12 +91,12 @@ export function SpreadSelector() {
   return (
     <div className="flex flex-col items-center gap-1 sm:gap-4 px-2 w-full">
       <div className="text-center">
-        <h1 className="title-glow font-serif text-[50px] sm:text-[63px] md:text-[76px] font-bold text-white tracking-[0.015em]">
+        <h1 className="title-glow font-serif text-[48px] sm:text-[63px] md:text-[76px] font-bold text-white tracking-[0.015em]">
           Startup Arcana
         </h1>
       </div>
 
-      <div className="space-y-5 w-full max-w-[528px]">
+      <div className="space-y-[18px] sm:space-y-5 w-full max-w-[528px]">
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.14em] text-center">
           Optimize your aura
         </p>

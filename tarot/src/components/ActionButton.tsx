@@ -16,7 +16,7 @@ export function ActionButton({ children, className, variant = 'default', disable
         'transition-all duration-200',
         'enabled:hover:bg-whisper/10 enabled:hover:border-whisper/30',
         'disabled:opacity-30 disabled:cursor-not-allowed',
-        variant === 'default' && 'px-4 py-2',
+        variant === 'default' && 'px-4 py-2.5 sm:py-2',
         variant === 'half' && 'flex-1 py-3 text-[14px]',
         className
       )}

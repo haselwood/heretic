@@ -152,8 +152,8 @@ export function CardBrowser() {
             key={card.id}
             onClick={() => setLightboxCard(card)}
             className={cn(
-              'group relative w-full cursor-pointer overflow-hidden rounded-md',
-              'transition-transform duration-300 hover:scale-[1.03]',
+              'card-glow-wrap group relative w-full cursor-pointer overflow-hidden rounded-md',
+              'transition-all duration-300 hover:scale-[1.02]',
               'focus-visible:ring-2 focus-visible:ring-purple-400/50'
             )}
           >
@@ -163,6 +163,8 @@ export function CardBrowser() {
               suit={card.suit}
               className="w-full aspect-[5/8.33] object-cover rounded-md transition-[filter] duration-300 group-hover:brightness-110"
             />
+            <div className="card-shimmer-overlay" />
+            <div className="card-border-shimmer" />
           </button>
         ))}
       </div>
@@ -203,8 +205,6 @@ export function CardBrowser() {
           <Lightbox
             card={lightboxCard}
             onClose={() => setLightboxCard(null)}
-            onPrev={idx > 0 ? () => setLightboxCard(allCards[idx - 1]) : undefined}
-            onNext={idx < allCards.length - 1 ? () => setLightboxCard(allCards[idx + 1]) : undefined}
           />
         )
       })()}
