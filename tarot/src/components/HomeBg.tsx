@@ -1,5 +1,7 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
 
+const IS_MOBILE = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches
+
 const PARTICLE_COLORS: [number, number, number][] = [
   [180, 160, 220],
   [180, 160, 220],
@@ -41,7 +43,7 @@ function generateNoiseTile(): string {
 export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; suitColor?: string } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
-  const [noiseTile] = useState(generateNoiseTile)
+  const [noiseTile] = useState(() => IS_MOBILE ? '' : generateNoiseTile())
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!glowRef.current) return
@@ -55,6 +57,7 @@ export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; su
   }, [])
 
   useEffect(() => {
+    if (IS_MOBILE) return
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseleave', handleMouseLeave)
     return () => {
@@ -89,7 +92,8 @@ export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; su
 
     function init() {
       particles.length = 0
-      const count = Math.min(90, Math.floor((w * h) / 14000))
+      const maxParticles = IS_MOBILE ? 35 : 90
+      const count = Math.min(maxParticles, Math.floor((w * h) / 14000))
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * w,
@@ -181,20 +185,22 @@ export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; su
         ctx!.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size)
       }
 
-      ctx!.lineWidth = 1
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const d2 = dx * dx + dy * dy
-          if (d2 < MAX_CONN_DIST * MAX_CONN_DIST) {
-            const d = Math.sqrt(d2)
-            const a = (1 - d / MAX_CONN_DIST) * 0.07
-            ctx!.strokeStyle = `rgba(160,140,210,${a})`
-            ctx!.beginPath()
-            ctx!.moveTo(Math.floor(particles[i].x) + 1, Math.floor(particles[i].y) + 1)
-            ctx!.lineTo(Math.floor(particles[j].x) + 1, Math.floor(particles[j].y) + 1)
-            ctx!.stroke()
+      if (!IS_MOBILE) {
+        ctx!.lineWidth = 1
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x
+            const dy = particles[i].y - particles[j].y
+            const d2 = dx * dx + dy * dy
+            if (d2 < MAX_CONN_DIST * MAX_CONN_DIST) {
+              const d = Math.sqrt(d2)
+              const a = (1 - d / MAX_CONN_DIST) * 0.07
+              ctx!.strokeStyle = `rgba(160,140,210,${a})`
+              ctx!.beginPath()
+              ctx!.moveTo(Math.floor(particles[i].x) + 1, Math.floor(particles[i].y) + 1)
+              ctx!.lineTo(Math.floor(particles[j].x) + 1, Math.floor(particles[j].y) + 1)
+              ctx!.stroke()
+            }
           }
         }
       }
@@ -252,19 +258,21 @@ export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; su
 
       <div className="absolute inset-0 home-pixel-grid" />
 
-      <div
-        className="home-noise"
-        style={{
-          backgroundImage: `url(${noiseTile})`,
-          backgroundSize: '128px 128px',
-        }}
-      />
+      {!IS_MOBILE && (
+        <div
+          className="home-noise"
+          style={{
+            backgroundImage: `url(${noiseTile})`,
+            backgroundSize: '128px 128px',
+          }}
+        />
+      )}
 
-      <div className="absolute inset-0 home-scanlines" />
+      {!IS_MOBILE && <div className="absolute inset-0 home-scanlines" />}
 
       <div className="absolute inset-0 home-vignette" />
 
-      <div ref={glowRef} className="cursor-glow" />
+      {!IS_MOBILE && <div ref={glowRef} className="cursor-glow" />}
     </div>
   )
 }

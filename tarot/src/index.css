@@ -664,3 +664,22 @@ body {
   50% { transform: scaleX(0.4); }
 }
 
+/* Mobile performance: pause animations that run invisibly */
+@media (max-width: 640px) {
+  .card-glow-wrap::before {
+    animation: none;
+  }
+
+  .card-border-shimmer {
+    animation-play-state: paused;
+  }
+
+  .card-glow-wrap:hover .card-border-shimmer {
+    animation-play-state: running;
+  }
+
+  .home-orb {
+    animation: none;
+  }
+}
+
