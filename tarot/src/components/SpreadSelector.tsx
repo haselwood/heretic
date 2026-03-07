@@ -52,7 +52,7 @@ function SpreadCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'card-glow-wrap group relative px-3 py-6 sm:px-4 sm:py-10 border border-sigil/60 overflow-hidden no-underline',
+        'card-glow-wrap group relative px-3 py-4 sm:px-4 sm:py-10 border border-sigil/60 overflow-hidden no-underline',
         'bg-obsidian/50',
         'transition-all duration-300 text-left'
       )}
@@ -72,7 +72,7 @@ function SpreadCard({
           <span className="font-serif text-[20px] tracking-[0.01em] text-ghost group-hover:text-white transition-colors">
             {config.label}
           </span>
-          <p className="font-mono text-[16px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
+          <p className="font-mono text-[14px] sm:text-[13px] text-whisper group-hover:text-white transition-colors leading-tight">
             {config.description}
           </p>
         </div>
@@ -96,11 +96,11 @@ export function SpreadSelector() {
         </h1>
       </div>
 
-      <div className="space-y-[18px] sm:space-y-5 w-full max-w-[528px]">
+      <div className="space-y-3 sm:space-y-5 w-full max-w-[528px]">
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.14em] text-center">
           Optimize your aura
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3.5">
           {configs.map((config, i) => (
             <SpreadCard key={config.type} config={config} index={i} />
           ))}

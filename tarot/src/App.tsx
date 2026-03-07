@@ -19,11 +19,11 @@ function HomePage() {
   return (
     <>
       <HomeBg />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-[3vh] pb-12 sm:justify-center sm:py-12 px-4 min-h-screen">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-[3vh] pb-6 sm:justify-center sm:py-12 px-4 min-h-screen">
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
-        <footer className="pt-5 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
+        <footer className="pt-3 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
           <div className="flex items-center justify-center gap-3">
             <Link
               to="/guidebook/archetypes"
@@ -39,13 +39,13 @@ function HomePage() {
               The Oracle
             </Link>
           </div>
-          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono mt-4">
+          <p className="text-[11px] sm:text-[14px] text-whisper tracking-[0.08em] uppercase font-mono mt-2 sm:mt-4">
             64 cards &middot; 4 suits &middot; 0 venture backing
           </p>
           <p className="text-[12px] text-whisper/85 tracking-widest mt-2 text-center uppercase font-mono">
             Made by Heather Hex
           </p>
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-2 sm:mt-4">
             <PixelMoth />
           </div>
         </footer>
