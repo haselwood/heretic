@@ -204,15 +204,12 @@ function SpreadPage() {
         </main>
       </div>
 
-      {lightboxCard && (() => {
-        const idx = dealtCards.findIndex(d => d.card.id === lightboxCard.id)
-        return (
-          <Lightbox
-            card={lightboxCard}
-            onClose={() => setLightboxCard(null)}
-          />
-        )
-      })()}
+      {lightboxCard && (
+        <Lightbox
+          card={lightboxCard}
+          onClose={() => setLightboxCard(null)}
+        />
+      )}
     </>
   )
 }

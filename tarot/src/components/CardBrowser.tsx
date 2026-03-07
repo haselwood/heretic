@@ -198,16 +198,12 @@ export function CardBrowser() {
       </footer>
 
       {/* Lightbox */}
-      {lightboxCard && (() => {
-        const idx = currentSuit.cards.findIndex(c => c.id === lightboxCard.id)
-        const allCards = currentSuit.cards
-        return (
-          <Lightbox
-            card={lightboxCard}
-            onClose={() => setLightboxCard(null)}
-          />
-        )
-      })()}
+      {lightboxCard && (
+        <Lightbox
+          card={lightboxCard}
+          onClose={() => setLightboxCard(null)}
+        />
+      )}
     </div>
     </>
   )
