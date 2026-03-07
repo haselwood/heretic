@@ -27,13 +27,13 @@ export function Lightbox({ card, onClose }: LightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-8"
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-void/90 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 flex flex-col max-h-[90vh] overflow-y-auto border border-sigil/30 bg-obsidian/60 backdrop-blur-md"
+        className="relative z-10 flex flex-col w-full h-full sm:w-auto sm:h-auto max-h-full sm:max-h-[90vh] overflow-y-auto border-0 sm:border border-sigil/30 bg-obsidian sm:bg-obsidian/60 backdrop-blur-md"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button — top right */}
@@ -46,12 +46,12 @@ export function Lightbox({ card, onClose }: LightboxProps) {
           &times;
         </button>
 
-        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 p-6 sm:p-10">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-10 p-4 sm:p-10">
           <CardImage
             src={card.image}
             alt={card.name}
             suit={card.suit}
-            className="w-auto max-h-[50vh] sm:max-h-[75vh] max-w-[55vw] sm:max-w-[45vw] rounded-xl shadow-2xl shadow-black/50"
+            className="w-auto max-h-[40vh] sm:max-h-[75vh] max-w-full sm:max-w-[45vw] rounded-xl shadow-2xl shadow-black/50"
           />
 
           <div className="min-w-0 text-center sm:text-left break-words">
