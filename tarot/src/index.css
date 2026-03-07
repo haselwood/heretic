@@ -287,6 +287,27 @@ body {
   to { transform: translateZ(0) rotate(360deg); }
 }
 
+.shimmer-text {
+  background: linear-gradient(
+    105deg,
+    currentColor 0%,
+    currentColor 35%,
+    rgba(255, 255, 255, 0.9) 50%,
+    currentColor 65%,
+    currentColor 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-slide 12s ease-in-out infinite;
+}
+
+@keyframes shimmer-slide {
+  0%, 100% { background-position: 100% center; }
+  50% { background-position: 0% center; }
+}
+
 /* Title candlelight glow */
 .title-glow {
   text-shadow:

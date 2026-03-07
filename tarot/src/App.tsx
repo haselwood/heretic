@@ -29,7 +29,7 @@ function HomePage() {
               to="/guidebook/archetypes"
               className="font-mono text-[14px] text-white tracking-[0.055em] underline transition-all duration-200 hover:[text-shadow:0_0_8px_rgba(255,255,255,0.8),0_0_20px_rgba(255,255,255,0.4)]"
             >
-              Deck Guidebook
+              The Guidebook
             </Link>
             <span className="text-white/60 text-[7px]">◆</span>
             <Link

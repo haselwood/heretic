@@ -38,7 +38,7 @@ function generateNoiseTile(): string {
   return c.toDataURL('image/png')
 }
 
-export function HomeBg() {
+export function HomeBg({ noGlitch = false, suitColor }: { noGlitch?: boolean; suitColor?: string } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const [noiseTile] = useState(generateNoiseTile)
@@ -199,7 +199,7 @@ export function HomeBg() {
         }
       }
 
-      drawGlitch(t)
+      if (!noGlitch) drawGlitch(t)
 
       // Slow rolling VHS tracking band
       const bandY = ((t * 0.03) % (h + 200)) - 100
@@ -231,14 +231,22 @@ export function HomeBg() {
     }
   }, [])
 
+  const gradientStyle = suitColor ? {
+    background: `radial-gradient(ellipse at 30% 15%, ${suitColor}35 0%, transparent 55%), radial-gradient(ellipse at 75% 80%, ${suitColor}20 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, #0d0b14 0%, #0a0a0f 100%)`,
+  } : undefined
+
+  const orbStyle = (opacity: string) => suitColor ? {
+    background: `radial-gradient(circle, ${suitColor}${opacity} 0%, transparent 70%)`,
+  } : undefined
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none -z-1">
-      <div className="absolute inset-0 home-gradient" />
+      <div className="absolute inset-0 home-gradient transition-all duration-700" style={gradientStyle} />
 
-      <div className="home-orb home-orb-1" />
-      <div className="home-orb home-orb-2" />
-      <div className="home-orb home-orb-3" />
-      <div className="home-orb home-orb-4" />
+      <div className="home-orb home-orb-1 transition-all duration-700" style={orbStyle('40')} />
+      <div className="home-orb home-orb-2 transition-all duration-700" style={orbStyle('30')} />
+      <div className="home-orb home-orb-3 transition-all duration-700" style={orbStyle('28')} />
+      <div className="home-orb home-orb-4 transition-all duration-700" style={orbStyle('18')} />
 
       <canvas ref={canvasRef} className="absolute inset-0" />
 
