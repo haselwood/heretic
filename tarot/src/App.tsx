@@ -23,7 +23,7 @@ function HomePage() {
         <main className="flex flex-col items-center w-full max-w-[1200px]">
           <SpreadSelector />
         </main>
-        <footer className="pt-3 sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
+        <footer className="pt-[14px] sm:pt-10 text-center w-full max-w-[528px] px-2 sm:px-0">
           <div className="flex items-center justify-center gap-3">
             <Link
               to="/guidebook/archetypes"

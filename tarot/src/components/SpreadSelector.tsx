@@ -96,7 +96,7 @@ export function SpreadSelector() {
         </h1>
       </div>
 
-      <div className="space-y-3 sm:space-y-5 w-full max-w-[528px]">
+      <div className="space-y-[10px] sm:space-y-5 w-full max-w-[528px]">
         <p className="font-serif text-lg sm:text-xl text-white uppercase tracking-[0.14em] text-center">
           Optimize your aura
         </p>
