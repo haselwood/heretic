@@ -167,7 +167,7 @@ export default async function handler(req: Request): Promise<Response> {
           }
         }
       } catch {
-        controller.enqueue(encoder.encode('\n\n[The cosmos encountered an error.]'))
+        controller.enqueue(encoder.encode('\n\n[The oracle had a whoopsie.]'))
       } finally {
         controller.close()
       }
