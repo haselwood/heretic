@@ -58,19 +58,21 @@ export function CardBrowser() {
     <HomeBg noGlitch suitColor={SUIT_HEX[activeSuit]} />
     <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
       {/* Header */}
-      <div className="flex flex-col items-center gap-2 mb-4 pt-6 sm:gap-0 sm:mb-6 sm:pt-12 sm:flex-row sm:items-center sm:justify-between">
-        <ActionButton onClick={() => navigate('/')}>
-          &larr; Back
-        </ActionButton>
-        <h2
-          className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center"
-          style={{
-            textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
-          }}
-        >
-          The Guidebook
-        </h2>
-        <div className="hidden sm:block w-[85px]" />
+      <div className="mb-4 pt-6 sm:mb-6 sm:pt-12">
+        <div className="flex items-center justify-between sm:justify-between">
+          <ActionButton onClick={() => navigate('/')}>
+            &larr; Back
+          </ActionButton>
+          <h2
+            className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center flex-1"
+            style={{
+              textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
+            }}
+          >
+            The Guidebook
+          </h2>
+          <div className="w-[85px] hidden sm:block" />
+        </div>
       </div>
 
       {/* Suit tabs */}
@@ -90,7 +92,7 @@ export function CardBrowser() {
               key={key}
               to={`/guidebook/${SUIT_TO_SLUG[key]}`}
               className={cn(
-                'relative z-10 pt-[14px] pb-[8px] text-[16px] leading-none font-serif tracking-wider text-center no-underline',
+                'relative z-10 flex items-center justify-center h-[44px] text-[16px] leading-none font-serif tracking-wider text-center no-underline',
                 'transition-colors duration-200',
                 activeSuit === key
                   ? cn('shimmer-text', suitClass(key))
