@@ -8,8 +8,8 @@ export function OraclePage() {
   return (
     <>
       <HomeBg noGlitch />
-      <div className="relative z-10 flex flex-col items-center justify-start pt-6 pb-12 sm:justify-center sm:py-16 px-6 sm:px-4 min-h-screen">
-        <main className="flex flex-col items-center w-full max-w-[380px] text-center gap-4 px-2 sm:px-0 [&_p]:text-justify">
+      <div className="relative z-10 flex flex-col items-center justify-start pt-6 pb-12 sm:justify-center sm:py-16 px-4 min-h-screen">
+        <main className="flex flex-col items-center w-full max-w-[380px] text-center gap-4 [&_p]:text-justify">
           <ActionButton onClick={() => navigate('/')} className="w-full sm:w-auto">
             &larr; Back
           </ActionButton>
@@ -17,7 +17,7 @@ export function OraclePage() {
           <h1 className="title-glow font-serif text-[42px] sm:text-[56px] font-bold text-white tracking-[0.015em] mt-4">
             The Oracle
           </h1>
-          <div className="space-y-4">
+          <div className="space-y-4 px-[16px] sm:px-0">
             <p className="font-mono text-[14px] sm:text-[16px] text-phantom leading-relaxed">
               Huzzah, good visitor. I am Heather, a designer who wants to make beautifully ridiculous projets on the internet. Welcome to my world of luscious glows, unneccesary filigree, and a yearning for Geocities. I hope the Startup Arcana helps you find your path through the mists of corporate jargon and the dreaded Sunday Scaries. If you enjoyed this deck, come say hello.
               <br /><br />

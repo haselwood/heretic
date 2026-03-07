@@ -58,12 +58,12 @@ export function CardBrowser() {
     <HomeBg noGlitch suitColor={SUIT_HEX[activeSuit]} />
     <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
       {/* Header */}
-      <div className="mb-4 pt-6 sm:mb-6 sm:pt-12">
+      <div className="mb-[12px] pt-6 sm:mb-6 sm:pt-12">
         <ActionButton onClick={() => navigate('/')} className="w-full sm:w-auto">
           &larr; Back
         </ActionButton>
         <h2
-          className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center mt-4 sm:mt-5"
+          className="font-serif text-[28px] sm:text-4xl text-white tracking-wide font-bold transition-all duration-700 text-center mt-[18px] sm:mt-5"
           style={{
             textShadow: `0 0 12px ${SUIT_HEX[activeSuit]}B3, 0 0 35px ${SUIT_HEX[activeSuit]}80, 0 0 70px ${SUIT_HEX[activeSuit]}40`,
           }}
