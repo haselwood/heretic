@@ -1,5 +1,3 @@
-import Anthropic from '@anthropic-ai/sdk'
-
 interface CardPayload {
   name: string
   suit: string
@@ -69,25 +67,62 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response('No cards provided', { status: 400 })
   }
 
-  const client = new Anthropic({ apiKey })
   const prompt = buildPrompt(body)
 
-  const stream = await client.messages.stream({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 1024,
-    messages: [{ role: 'user', content: prompt }],
+  const anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1024,
+      stream: true,
+      messages: [{ role: 'user', content: prompt }],
+    }),
   })
 
+  if (!anthropicRes.ok || !anthropicRes.body) {
+    const errText = await anthropicRes.text().catch(() => 'Unknown error')
+    return new Response(`Anthropic API error: ${anthropicRes.status} ${errText}`, { status: 502 })
+  }
+
   const encoder = new TextEncoder()
+  const decoder = new TextDecoder()
+
   const readable = new ReadableStream({
     async start(controller) {
+      const reader = anthropicRes.body!.getReader()
+      let buffer = ''
+
       try {
-        for await (const event of stream) {
-          if (
-            event.type === 'content_block_delta' &&
-            event.delta.type === 'text_delta'
-          ) {
-            controller.enqueue(encoder.encode(event.delta.text))
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+
+          buffer += decoder.decode(value, { stream: true })
+          const lines = buffer.split('\n')
+          buffer = lines.pop() || ''
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue
+            const data = line.slice(6)
+            if (data === '[DONE]') continue
+
+            try {
+              const event = JSON.parse(data)
+              if (
+                event.type === 'content_block_delta' &&
+                event.delta?.type === 'text_delta' &&
+                event.delta?.text
+              ) {
+                controller.enqueue(encoder.encode(event.delta.text))
+              }
+            } catch {
+              // skip malformed JSON lines
+            }
           }
         }
       } catch {
@@ -101,7 +136,6 @@ export default async function handler(req: Request): Promise<Response> {
   return new Response(readable, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
-      'Transfer-Encoding': 'chunked',
       'Cache-Control': 'no-cache',
     },
   })
